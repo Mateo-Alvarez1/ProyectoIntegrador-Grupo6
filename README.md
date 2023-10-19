@@ -1,1 +1,1 @@
-# ProyectoIntegrador-Grupo6
+# ProyectoIntegrador - Grupo6
