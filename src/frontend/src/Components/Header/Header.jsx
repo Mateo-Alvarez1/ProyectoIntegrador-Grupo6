@@ -1,35 +1,19 @@
-// import { header } from "request/lib/hawk"
+import { Link } from "react-router-dom"
 import logo from "../../assets/logoPitchPlease.png"
-
-
+import Navbar from "./Navbar/Navbar.jsx"
+import './header.css'
 
 const Header = () => {
   return (
-    <>
     <header className="headerContainer">
         <div className="logoContainer">
-
-       
-        <img src={logo} alt="" className="logo" />
-
-        <h2 className="logoName">PitchPlease</h2>
-
+          <Link to='/' className="logolink">
+            <img src={logo} alt="" className="logo" />
+            <h2 className="logoName">Pitch Please</h2>
+          </Link>
         </div>
-
-      <div className="menuContainer">
-    <img src="" alt="menu hamburguesa" className="burgerMenu" />
-
-    <a className="registerButton">Iniciar Sesión</a>
-
-    <a className="registerButton">Crear Cuenta</a>
-    </div>
-
+        <Navbar/>
     </header>
-
-  
-    
-
-    </>
   )
 }
 
