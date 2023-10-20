@@ -1,0 +1,21 @@
+#categoriasContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    padding: 100px 0px;
+    justify-content: space-between;
+}
+
+
+.categoriasCardContainer{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    /* padding: 20px 0px; */
+}
+
+.categoriasCard{
+    background-color: #ffffff;
+    border-radius: 10px;
+
+}
