@@ -1,7 +1,7 @@
 :root{
 
-  --primaryColor:#4A5865;
-  --secondaryColor:#f0f0f0;
+  --primaryColor: #4A5865;
+  --secondaryColor: #f0f0f0;
 }
 
 
@@ -10,3 +10,8 @@
   margin: 0px;
   padding: 0px;
 }
+
+a {
+  text-decoration: none;
+}
+
