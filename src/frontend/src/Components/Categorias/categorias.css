@@ -17,5 +17,21 @@
 .categoriasCard{
     background-color: #ffffff;
     border-radius: 10px;
+}
 
+.categoriasCard:hover{
+    background-color: #F0F0F0;
+}
+
+.categoriasCard img {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.categoriasCard h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0px;
+    font-family: 'Roboto', sans-serif;
 }
