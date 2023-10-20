@@ -1,7 +1,7 @@
-import Guitarra from '../../assets/guitar.png'
-import Bajo from '../../assets/bass-guitar.png'
-import Piano from '../../assets/keyboard.png'
-import Bateria from '../../assets/drum-set.png'
+import Guitarra from "../../assets/GuitarraDanelectroSingle-Negra.jpg"
+import Piano from '../../assets/PianoDigitalKurzweil-88Notas-Bluetooth.jpg'
+import Bajo from '../../assets/BajoDanelectro-Withe.jpg'
+import Bateria from '../../assets/BateriaSonor-Vintage-Black.jpg'
 import './categorias.css'
 
 export const Categorias = () => {
@@ -33,15 +33,16 @@ export const Categorias = () => {
   return (
     <div id="categoriasContainer">
       <h1>Categorias</h1>
-      <div className="categoriasCardContainer">
-        {categorias.map((categoria) => (
-          <div className="categoriasCard" key={categoria.id}>
-            <h4>{categoria.nombre}</h4>
-            <img src={categoria.imagen} alt={categoria.nombre} />
-          </div>
-        ))}
-      </div>
+     <div className="categoriasCardContainer">
+     {
+          categorias.map( categoria => (
+            <div className="categoriasCard">
+              <img src={ categoria.imagen } alt={ categoria.nombre } />
+              <h4>{ categoria.nombre }</h4>
+            </div>
+        ))
+        }
+     </div>
     </div>
-  );
-
+  )
 }
