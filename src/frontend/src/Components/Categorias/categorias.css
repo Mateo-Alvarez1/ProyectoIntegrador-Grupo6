@@ -1,22 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+
+
 #categoriasContainer{
     display: flex;
     flex-direction: column;
     background-color: #F0F0F0;
     padding: 100px 0px;
-    justify-content: space-between;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#categoriasContainer h1{
+    padding-bottom: 50px;
+    font-weight: bold;
+    font-size: 40px;
+    color: #4f6073;
 }
 
 
 .categoriasCardContainer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     text-align: center;
-    /* padding: 20px 0px; */
 }
 
 .categoriasCard{
     background-color: #ffffff;
     border-radius: 10px;
+<<<<<<< HEAD
 }
 
 .categoriasCard:hover{
@@ -33,4 +46,25 @@
     font-size: 20px;
     font-weight: 600;
     margin: 10px 0px;
+=======
+    width: 22%;
+    box-shadow: 2px 2px 2px #c2c2c2;
+}
+
+.categoriasCard img{
+    border-radius: 10px;
+    width: 90%;
+    padding: 20px;
+}
+
+.categoriasCard h2{
+    padding: 20px 0px;
+    color: #4f6073;
+
+}
+
+.categoriasCard:hover{
+    transform: scale(1.05);
+    transition: all 0.5s;
+>>>>>>> 7b4c60c (buscador y categorias)
 }
