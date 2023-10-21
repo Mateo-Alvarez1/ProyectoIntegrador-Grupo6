@@ -1,11 +1,8 @@
 import Guitarra from "../../assets/GuitarraDanelectroSingle-Negra.jpg"
 import Piano from '../../assets/PianoDigitalKurzweil-88Notas-Bluetooth.jpg'
 import Bajo from '../../assets/BajoDanelectro-Withe.jpg'
-<<<<<<< HEAD
 import Bateria from '../../assets/BateriaSonor-Vintage-Black.jpg'
-=======
-import Bateria from '../../assets/BateriaSonor-Vintage-Black(1).jpg'
->>>>>>> 7b4c60c (buscador y categorias)
+
 import './categorias.css'
 
 export const Categorias = () => {
@@ -40,7 +37,7 @@ export const Categorias = () => {
       <div className="categoriasCardContainer">
      {
           categorias.map( categoria => (
-            <div className="categoriasCard">
+            <div className="categoriasCard" key={categoria.id} >
               <img src={ categoria.imagen } alt={ categoria.nombre } />
               <h2>{ categoria.nombre }</h2>
             </div>
