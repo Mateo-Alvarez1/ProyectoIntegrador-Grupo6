@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/brasika-display-trial');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 
 .headerContainer{
@@ -12,8 +13,6 @@
     position: sticky;
     top: 0;
 }
-
-/*     CONTAINER LOGO TEXTO*/
 
 
 .logoContainer{
@@ -28,6 +27,12 @@
     font-family: 'Brasika Display - Trial', sans-serif;
 }
 
+span {
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    font-size: small;
+    color: white;
+}
 
 .logo{
     width: 65px;
@@ -37,4 +42,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    span {
+        font-size: 10px;
+    }
 }

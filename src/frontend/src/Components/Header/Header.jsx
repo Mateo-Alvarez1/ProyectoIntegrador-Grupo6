@@ -8,8 +8,11 @@ const Header = () => {
     <header className="headerContainer">
         <div className="logoContainer">
           <Link to='/' className="logolink">
-            <img src={logo} alt="" className="logo" />
-            <h2 className="logoName">Pitch Please</h2>
+            <img src={logo} alt="logo" className="logo" />
+            <div>
+              <h2 className="logoName">Pitch Please</h2>
+              <span>Instrumentos musicales</span>
+            </div>
           </Link>
         </div>
         <Navbar/>
