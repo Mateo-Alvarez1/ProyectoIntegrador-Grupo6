@@ -42,15 +42,6 @@ return (
     <h1>Recomendaciones</h1>
     <p>¿Listos para hacer música?</p> 
     <br />
-    <p>
-      La música es el lenguaje universal que nos conecta a todos. Es la expresión
-      más pura de nuestras emociones y la banda sonora de la vida. En cada nota, en
-      cada acorde, se encuentra la promesa de aventuras sonoras ilimitadas. En
-      nuestro mundo de instrumentos de música, te invitamos a descubrir la magia
-      que yace en tus manos. Desde las suaves melodías de una guitarra acústica
-      hasta la potencia explosiva de una batería, cada instrumento es una puerta a
-      un viaje sin fin de creatividad y pasión.
-    </p>
     <div className="recomendacionesCardContainer">
       {recomendaciones.map((recomendacion) => (
         <div className="recomendacionesCard" key={recomendacion.id}>

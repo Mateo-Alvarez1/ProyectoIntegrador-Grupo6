@@ -8,10 +8,11 @@
 .welcome-title {
     overflow: hidden;
     white-space: nowrap;
-    font-size: 6rem;
+    font-size: 5rem;
     font-family: "Courier New";
     border-right: .10em solid var(--primaryColor);
     animation: typing 2s steps(12) 1s 1 normal both, blink 1s steps(1) infinite;
+    padding-bottom: 50px;
 }
 
 
@@ -20,7 +21,7 @@
         width: 0;
     }
     to {
-        width: 53%;
+        width: 30%;
     }
 }
 
