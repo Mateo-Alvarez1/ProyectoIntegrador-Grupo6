@@ -51,13 +51,6 @@ public class Instrumento {
         this.marca = marca;
     }
 
-    public HashSet<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(HashSet<Reserva> reservas) {
-        this.reservas = reservas;
-    }
 
     public Long getId() {
         return id;
@@ -89,5 +82,13 @@ public class Instrumento {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Set<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Set<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
