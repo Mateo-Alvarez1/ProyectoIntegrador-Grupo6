@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+#recomendacionesContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    padding: 100px 0px;
+    justify-content: space-between;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#recomendacionesContainer2{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    padding: 100px 0px;
+    justify-content: space-between;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#recomendacionesContainer h1 {
+    font-size: 40px;
+    text-align: center;
+    color:#4f6073 ;
+    padding-bottom: 20px;
+}
+
+#recomendacionesContainer p {
+    font-size: 20px;
+    text-align: center;
+    color:#000000 ;
+    padding-bottom: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    justify-content: space-between;
+}
+
+#recomendacionesContainer2 p {
+    font-size: 20px;
+    text-align: center;
+    color:#000000 ;
+    padding-bottom: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    justify-content: space-between;
+    margin: 0, 200%
+}
+
+.recomendacionesCardContainer{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px 0px;
+    align-items: center;
+}
+
+.recomendacionesCardContainer2{
+    margin-top: -10%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px 0px;
+    align-items: center;
+}
+
+.recomendacionesCard{
+    background-color: #ffffff;
+    border-radius: 50px;
+    height: 22%;
+    width: 22%;
+    padding: 20px 0px;
+    box-shadow: 2px 2px 2px #e0dfdf;
+}
+
+
+.recomendacionesCard:hover{
+    transform: scale(1.05);
+    transition: all 1s;
+}
+
+.recomendacionesCard img{
+    padding: 20px;
+    width: 60%;
+}
+
+.recomendacionesCard h2{
+    color:#4f6073 ;
+    padding: 20px 0px;
+}
+
+.recomendacionesCard h3{
+    color:#000000 ;
+    padding: 20px 0px;
+}
+
+@media (max-width:420px) {
+
+    #recomendacionesContainer h1 {
+        font-size: 30px;
+    }
+
+
+    .recomendacionesCardContainer{
+        flex-direction: column;
+        align-items: center;
+        height: 1400px;
+    }
+    
+    .recomendacionesCardContainer2{
+        flex-direction: column;
+        align-items: center;
+        height: 1400px;
+        margin-top: -70%;
+    }
+
+    .recomendacionesCard{
+        width: 250px;
+    }
+
+}

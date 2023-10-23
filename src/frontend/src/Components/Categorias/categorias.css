@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+#categoriasContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    padding: 100px 0px;
+    justify-content: space-between;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#categoriasContainer h1 {
+    font-size: 40px;
+    text-align: center;
+    color:#4f6073 ;
+    padding-bottom: 20px;
+}
+
+
+.categoriasCardContainer{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.categoriasCard{
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 22%;
+    box-shadow: 2px 2px 2px #e0dfdf;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.categoriasCard:hover{
+    transform: scale(1.05);
+    transition: all 0.5s;
+}
+
+
+.categoriasCard img{
+    padding: 20px;
+    width: 90%;
+}
+
+.categoriasCard h2{
+    color:#4f6073 ;
+    padding: 20px 0px;
+}
+
+
+@media (max-width:420px) {
+
+    #categoriasContainer h1 {
+        font-size: 30px;
+    }
+
+
+    .categoriasCardContainer{
+        flex-direction: column;
+        align-items: center;
+        height: 1400px;
+    }
+    
+
+    .categoriasCard{
+        width: 250px;
+    }
+
+}
