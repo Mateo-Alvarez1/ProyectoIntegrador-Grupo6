@@ -14,9 +14,6 @@
     animation: typing 2s steps(12) 1s 1 normal both, blink 1s steps(1) infinite;
 }
 
-.welcome-container p {
-
-}
 
 @keyframes typing {
     from {
