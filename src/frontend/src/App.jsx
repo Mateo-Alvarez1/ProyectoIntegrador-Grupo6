@@ -21,10 +21,7 @@ function App() {
       <Footer/>
 
 
-     {/* <Routes>*/}
-        { /* <Route path="/" element={} /> */ }
-       {/* <Route path="/admin" element={<Admin/>} />*/}
-     {/* </Routes>*/}
+  
 
     </>
   )

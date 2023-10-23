@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "nombre": "Amplificador Stagg para Guitarra 40watts Distorsion",
+        "categoria": "Amplificadores",
+        "precio": 50, 
+        "marca": "Stagg",
+        "modelo": "40watts"
+    },
+    {
+        "id": 2,
+        "nombre": "Guitarra Clasica Yamaha 10",
+        "categoria": "Guitarras",
+        "precio": 35,
+        "marca": "Yamaha",
+        "modelo": "10"
+    },
+    {
+        "id": 3,
+        "nombre": "Guitarra Eléctrica Gibson Les Paul Classic Sunburst",
+        "categoria": "Guitarras",
+        "precio": 70,
+        "marca": "Gibson",
+        "modelo": "Les Paul Classic Sunburst"
+    },
+    {
+        "id": 4,
+        "nombre": "Piano Digital Casio CDP-130",
+        "categoria": "Pianos",
+        "precio": 60,
+        "marca": "Casio",
+        "modelo": "CDP-130"
+    },
+    {
+        "id": 5,
+        "nombre": "LTD B-10 Bajo Eléctrico",
+        "categoria": "Bajos",
+        "precio": 60,
+        "marca": "LTD",
+        "modelo": "B-10"
+    },
+    {
+        "id": 6,
+        "nombre": "Batería Pearl EXL725F C248",
+        "categoria": "Baterias",
+        "precio": 86,
+        "marca": "Pearl",
+        "modelo": "EXL725F C248"
+    }
+]
