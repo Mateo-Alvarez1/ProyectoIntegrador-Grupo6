@@ -1,0 +1,34 @@
+.welcome-container {
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    padding-top: 6rem;
+}
+
+.welcome-title {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 6rem;
+    font-family: "Courier New";
+    border-right: .10em solid var(--primaryColor);
+    animation: typing 2s steps(12) 1s 1 normal both, blink 1s steps(1) infinite;
+}
+
+.welcome-container p {
+
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 53%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}

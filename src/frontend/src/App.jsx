@@ -1,16 +1,18 @@
 import './App.css'
 import './Components/Header/header.css'
 import Header from './Components/Header/Header'
-import { Categorias } from './Components/Categorias/Categorias'
-import { Buscador } from './Components/Buscador/Buscador'
+import { Route, Routes } from 'react-router-dom'
+import Home from './routes/Home/Home'
 
 function App() {
 
   return (
     <>
       <Header/>
-      {/* <Buscador/> */}
-      <Categorias/>
+      <Routes>
+        <Route path='/' element={<Home/>}/> 
+        <Route path='*' element={<h2>Page Not Found</h2>}/>
+      </Routes>
     </>
   )
 }

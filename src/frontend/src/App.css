@@ -1,7 +1,12 @@
 :root{
-
   --primaryColor: #4A5865;
   --secondaryColor: #f0f0f0;
+}
+
+body {
+  background-color: var(--secondaryColor);
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
 }
 
 
