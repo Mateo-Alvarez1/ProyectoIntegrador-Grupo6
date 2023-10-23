@@ -1,6 +1,7 @@
 package com.rentalInstruments.rentalInstruments.service;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class InstrumentoService implements InstrumentoInterface {
 
     @Autowired
@@ -28,8 +28,20 @@ public class InstrumentoService implements InstrumentoInterface {
         instrumento.setNombre(instrumentoDto.getNombre());
         instrumento.setPrecio(instrumentoDto.getPrecio());
         instrumento.setStock(instrumentoDto.getStock());
+        instrumento.setMarca(instrumentoDto.getMarca());
+        instrumento.setModelo(instrumentoDto.getModelo());
+
+        System.out.println(instrumentoDto.getModelo().getNumeroSerie());
+
+        crearNombreLista(instrumentoDto.getNombre() , instrumentoDto.getModelo().getNumeroSerie());
 
         instrumentoRepository.save(instrumento);
         return instrumento;
     }
+
+    private void crearNombreLista(String nombre , Integer numeroSerie){
+        String nombreLista = nombre + "-" + numeroSerie.toString();
+        System.out.println(nombreLista);
+    }
+
 }

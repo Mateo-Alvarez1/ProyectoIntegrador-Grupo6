@@ -1,10 +1,7 @@
 package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -14,12 +11,14 @@ import java.time.LocalDateTime;
 @Setter
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;@Column(nullable = false)
-
+    private Long id;
+    @Column(nullable = false)
     private LocalDateTime fechaInicio ;
     @Column(nullable = false)
     private LocalDateTime fechaDevolucion ;

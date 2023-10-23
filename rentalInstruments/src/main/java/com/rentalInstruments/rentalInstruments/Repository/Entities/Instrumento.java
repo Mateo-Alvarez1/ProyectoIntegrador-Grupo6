@@ -1,15 +1,13 @@
 package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 @Data
 @Builder
 @NoArgsConstructor
@@ -35,7 +33,31 @@ public class Instrumento {
 
     @OneToMany(mappedBy = "instrumento")
     @JsonIgnore
-    private HashSet<Reserva> reservas;
+    private Set<Reserva> reservas = new HashSet<>();
+
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public HashSet<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(HashSet<Reserva> reservas) {
+        this.reservas = reservas;
+    }
 
     public Long getId() {
         return id;
