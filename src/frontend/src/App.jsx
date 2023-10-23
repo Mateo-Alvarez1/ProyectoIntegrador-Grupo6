@@ -7,15 +7,7 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <h2>A</h2>
-      <h2>A</h2>
-      <h2>A</h2>
-      <h2>A</h2>
-      <h2>A</h2>
-      <h2>A</h2>
-      <h2>A</h2>
-      
+      <Header/> 
       <Footer/>
     </>
   )
