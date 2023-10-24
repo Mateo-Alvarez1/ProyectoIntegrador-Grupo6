@@ -5,7 +5,8 @@
         "categoria": "Amplificadores",
         "precio": 50, 
         "marca": "Stagg",
-        "modelo": "40watts"
+        "modelo": "40watts",
+        "imagen":"https://http2.mlstatic.com/D_NQ_NP_899051-MLA41443465350_042020-O.webp"
     },
     {
         "id": 2,
@@ -41,6 +42,37 @@
     },
     {
         "id": 6,
+        "nombre": "Batería Pearl EXL725F C248",
+        "categoria": "Baterias",
+        "precio": 86,
+        "marca": "Pearl",
+        "modelo": "EXL725F C248"
+    },
+    {
+        "id": 7,
+        "nombre": "Batería Pearl EXL725F C248",
+        "categoria": "Baterias",
+        "precio": 86,
+        "marca": "Pearl",
+        "modelo": "EXL725F C248"
+    },
+    {
+        "id": 8,
+        "nombre": "Batería Pearl EXL725F C248",
+        "categoria": "Baterias",
+        "precio": 86,
+        "marca": "Pearl",
+        "modelo": "EXL725F C248"
+    },
+    {
+        "id": 9,
+        "nombre": "Batería Pearl EXL725F C248",
+        "categoria": "Baterias",
+        "precio": 86,
+        "marca": "Pearl",
+        "modelo": "EXL725F C248"
+    },{
+        "id": 10,
         "nombre": "Batería Pearl EXL725F C248",
         "categoria": "Baterias",
         "precio": 86,

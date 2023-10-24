@@ -7,65 +7,27 @@ import SoportePuas from '../../assets/SoporteDePuas-ParaMicrofono.jpg'
 import EstucheGuitarra from '../../assets/EstucheStaggParaGuitarraAcustica.jpg'
 import PianoDigital from '../../assets/PianoDigitalKurzweil-88Notas-Bluetooth.jpg'
 import './recomendaciones.css'
+import productos from "../../utils/products.json" 
+import Card from '../Card/Card'
 
 export const Recomendaciones = () => {
 
-  const recomendaciones = [
-    {
-        id: Math.random() * 3 ,
-        nombre : 'Amplificador Stagg para Guitarra 40watts Distorsion' ,
-        imagen: Amplificador,
-        precio: 2699.99
-    },
-    {
-      id: Math.random() * 3 ,
-      nombre : 'Guitarra Clasica Yamaha 10' ,
-      imagen: GuitarraClasica,
-      precio: 7499.99
-  },
-  {
-    id: Math.random() * 3 ,
-    nombre : 'Microfono Condensed Artesia' ,
-    imagen: MicrofonoCondensed,
-    precio: 1549.99
-},
-{
-  id: Math.random() * 3 ,
-  nombre : 'Teclado Kurzweil' ,
-  imagen: PianoTeclado,
-  precio: 5999.99
-},  
-]
+
 
 return (
   <div id="recomendacionesContainer">
     <h1>Recomendaciones</h1>
     <p>¿Listos para hacer música?</p> 
-    <br />
-    <p>
-      La música es el lenguaje universal que nos conecta a todos. Es la expresión
-      más pura de nuestras emociones y la banda sonora de la vida. En cada nota, en
-      cada acorde, se encuentra la promesa de aventuras sonoras ilimitadas. En
-      nuestro mundo de instrumentos de música, te invitamos a descubrir la magia
-      que yace en tus manos. Desde las suaves melodías de una guitarra acústica
-      hasta la potencia explosiva de una batería, cada instrumento es una puerta a
-      un viaje sin fin de creatividad y pasión.
-    </p>
     <div className="recomendacionesCardContainer">
-      {recomendaciones.map((recomendacion) => (
-        <div className="recomendacionesCard" key={recomendacion.id}>
-          <h3>{recomendacion.nombre}</h3>
-          <p>Precio: ${recomendacion.precio}</p>
-          <img src={recomendacion.imagen} alt={recomendacion.nombre} />
-        </div>
-        
-      ))}
+    {productos.map((producto) => {
+          return <Card producto={producto} key={producto.id} />
+        })}
     </div>
   </div>
 )
 }
 
-export const Recomendaciones2 = () => {
+/*export const Recomendaciones2 = () => {
 const recomendaciones2 = [ 
 {
   id: Math.random() * 3 ,
@@ -110,4 +72,4 @@ const recomendaciones2 = [
     
   )
 
-}
+}*/

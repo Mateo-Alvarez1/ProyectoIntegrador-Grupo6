@@ -7,6 +7,8 @@ import { Buscador } from './Components/Buscador/Buscador'
 import { Recomendaciones } from './Components/Recomendaciones/recomendaciones'
 import { Route, Routes } from 'react-router-dom'
 import Admin from './pages/Admin/Admin'
+import Home from './routes/Home/Home'
+
 
 function App() {
 
@@ -15,13 +17,13 @@ function App() {
 
 
       <Header/>
-      <Buscador/> 
-      <Categorias/>
-      <Recomendaciones/>
+      <Routes>
+        <Route path='/' element={<Home/>}/> 
+        <Route path="admin" element={<Admin/>}/>
+        <Route path='*' element={<h2>Page Not Found</h2>}/>
+      </Routes>
+     
       <Footer/>
-
-
-  
 
     </>
   )
