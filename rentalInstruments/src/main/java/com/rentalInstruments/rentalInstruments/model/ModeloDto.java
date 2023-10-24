@@ -1,23 +1,16 @@
 package com.rentalInstruments.rentalInstruments.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class ModeloDto {
-    private Integer numeroSerie;
 
-    public Integer getNumeroSerie() {
-        return numeroSerie;
-    }
+    private String codigoStock;
 
-    public void setNumeroSerie(Integer numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
 }
 

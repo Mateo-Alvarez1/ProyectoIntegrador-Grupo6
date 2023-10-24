@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reserva {
@@ -28,6 +27,7 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "instrumento_id" , referencedColumnName = "id")
     private Instrumento instrumento;
+
 //  COMENTADO MOMENTANEAMENTE POR LA MISMA RAZON QUE LA DEPENDENCIA DEL SECURITY
 //    @ManyToOne
 //    @JoinColumn(name = "usuario_id" , referencedColumnName = "id")

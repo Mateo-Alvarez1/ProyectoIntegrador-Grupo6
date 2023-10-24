@@ -10,43 +10,21 @@ import java.util.HashSet;
 @Getter
 @Setter
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Modelo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
-    private Integer numeroSerie;
+    private String codigoStock;
+
     @OneToMany(mappedBy = "modelo")
     @JsonIgnore
     private HashSet<Instrumento> instrumentos;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public HashSet<Instrumento> getInstrumentos() {
-        return instrumentos;
-    }
-
-    public void setInstrumentos(HashSet<Instrumento> instrumentos) {
-        this.instrumentos = instrumentos;
-    }
-
-    public Integer getNumeroSerie() {
-        return numeroSerie;
-    }
-
-    public void setNumeroSerie(Integer numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
 }
 
