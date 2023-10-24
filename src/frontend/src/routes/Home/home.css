@@ -1,8 +1,9 @@
 .welcome-container {
-    margin: 0 auto;
-    display: grid;
-    place-items: center;
-    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
 }
 
 .welcome-title {
@@ -10,23 +11,16 @@
     white-space: nowrap;
     font-size: 5rem;
     font-family: "Courier New";
-    border-right: .10em solid var(--primaryColor);
-    animation: typing 2s steps(12) 1s 1 normal both, blink 1s steps(1) infinite;
     padding-bottom: 50px;
+    font-weight: 700;
 }
 
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 30%;
-    }
+.welcome-subtitle {
+    text-align: center;
 }
 
-@keyframes blink {
-    50% {
-        border-color: transparent;
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 10vw;
     }
 }

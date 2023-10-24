@@ -6,7 +6,7 @@
         "precio": 50, 
         "marca": "Stagg",
         "modelo": "40watts",
-        "imagen":"https://http2.mlstatic.com/D_NQ_NP_899051-MLA41443465350_042020-O.webp"
+        "imagen":"https://productos.mjmusic.com.ar/images/40GAREU.jpg"
     },
     {
         "id": 2,
@@ -14,7 +14,8 @@
         "categoria": "Guitarras",
         "precio": 35,
         "marca": "Yamaha",
-        "modelo": "10"
+        "modelo": "10",
+        "imagen": "https://f.fcdn.app/imgs/64bb5d/www.palaciodelamusica.com.uy/pmusuy/f851/original/catalogo/CG102-CG102_1/2000-2000/guitarra-clasica-yamaha-cg102-natural-guitarra-clasica-yamaha-cg102-natural.jpg"
     },
     {
         "id": 3,
@@ -22,7 +23,8 @@
         "categoria": "Guitarras",
         "precio": 70,
         "marca": "Gibson",
-        "modelo": "Les Paul Classic Sunburst"
+        "modelo": "Les Paul Classic Sunburst",
+        "imagen": "https://f.fcdn.app/imgs/86493d/woofer.com.uy/woofuy/64b8/original/catalogo/LPCS00HSNH1-LPCS00HSNH1_1/2000-2000/guitarra-electrica-gibson-les-paul-classic-sunburst-guitarra-electrica-gibson-les-paul-classic-sunburst.jpg"
     },
     {
         "id": 4,
@@ -30,7 +32,8 @@
         "categoria": "Pianos",
         "precio": 60,
         "marca": "Casio",
-        "modelo": "CDP-130"
+        "modelo": "CDP-130",
+        "imagen": "https://www.casio-intl.com/product/image/1425449138244/"
     },
     {
         "id": 5,
@@ -38,7 +41,8 @@
         "categoria": "Bajos",
         "precio": 60,
         "marca": "LTD",
-        "modelo": "B-10"
+        "modelo": "B-10",
+        "imagen": "https://sc1.musik-produktiv.com/pic-010104249xl/esp-ltd-b-10-blks.jpg"
     },
     {
         "id": 6,
@@ -46,7 +50,8 @@
         "categoria": "Baterias",
         "precio": 86,
         "marca": "Pearl",
-        "modelo": "EXL725F C248"
+        "modelo": "EXL725F C248",
+        "imagen": "https://www.tamtampercusion.com/15515-large_default/pearl-export-lacquer-fusion-exl725f-black-smoke.jpg"
     },
     {
         "id": 7,
