@@ -1,6 +1,7 @@
 import "./recomendaciones.css";
 import productos from "../../utils/products.json";
 import { useState } from "react";
+import ProductoCard from "../ProductoCard/ProductoCard";
 
 const Recomendaciones = () => {
   const [mixedProducts, setMixedProducts] = useState(shuffleArray(productos));
@@ -15,11 +16,7 @@ const Recomendaciones = () => {
       <p>¿Listos para hacer música?</p>
       <div className="recomendacionesCardContainer">
         {mixedProducts.map((producto) => {
-          return <div className="recomendacionesCard" key={producto.id}>
-            <h3>{producto.nombre}</h3>
-            <p>Precio: USD {producto.precio}</p>
-            <img src={producto.imagen} alt={producto.nombre} />
-          </div>;
+          return <ProductoCard producto={producto}/>;
         })}
       </div>
     </div>
