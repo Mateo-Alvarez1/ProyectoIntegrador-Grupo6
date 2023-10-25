@@ -19,5 +19,15 @@ public class InstrumentoDto {
     private Marca marca;
     private Modelo modelo;
     private Categoria categoria;
+
+    public InstrumentoDto(Double precio, Integer stock, Marca marca, Modelo modelo, Categoria categoria) {
+        this.precio = precio;
+        this.stock = stock;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.categoria = categoria;
+    }
 }
+
+
 

@@ -37,8 +37,9 @@ public class Instrumento {
     private Marca marca;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id" , referencedColumnName = "id")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
 
     @OneToMany(mappedBy = "instrumento")
     @JsonIgnore

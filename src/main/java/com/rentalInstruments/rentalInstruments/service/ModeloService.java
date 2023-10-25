@@ -16,7 +16,7 @@ public class ModeloService implements ModeloInterface{
     @Override
     public Modelo agregarModelo(ModeloDto modeloDto) {
         Modelo modelo = new Modelo();
-        modelo.setCodigoStock(modeloDto.getCodigoStock());
+        modelo.setNumeroSerie(modeloDto.getNumeroSerie());
 
         modeloRepository.save(modelo);
         return modelo;

@@ -19,7 +19,7 @@ public class Modelo {
     private Long id;
 
     @Column(nullable = false)
-    private String codigoStock;
+    private String numeroSerie;
 
     @OneToMany(mappedBy = "modelo")
     @JsonIgnore

@@ -21,7 +21,7 @@ public class Marca {
     private Long id;
     @Column(nullable = false)
     private String nombre;
-    @Column(nullable = false)
+    @Column
     private String paisOrigen;
     @OneToMany(cascade = CascadeType.ALL ,  mappedBy = "marca")
     @JsonIgnore
