@@ -5,26 +5,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Data
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Modelo {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String codigoStock;
+    private String nombre;
 
-    @OneToMany(mappedBy = "modelo")
+    @OneToMany(mappedBy = "categoria" , cascade = CascadeType.ALL)
     @JsonIgnore
-    private HashSet<Instrumento> instrumentos;
-
+    private Set<Instrumento> instrumentos = new HashSet<>();
 
 }
-

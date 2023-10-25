@@ -8,9 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class MarcaDto {
+public class CategoriaDto {
     private String nombre;
-    private String paisOrigen;
-
-
 }

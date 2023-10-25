@@ -1,14 +1,19 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
+import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
+import com.rentalInstruments.rentalInstruments.model.CategoriaDto;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import com.rentalInstruments.rentalInstruments.model.MarcaDto;
 import com.rentalInstruments.rentalInstruments.model.ModeloDto;
+import com.rentalInstruments.rentalInstruments.service.CategoriaService;
 import com.rentalInstruments.rentalInstruments.service.InstrumentoService;
 import com.rentalInstruments.rentalInstruments.service.MarcaService;
 import com.rentalInstruments.rentalInstruments.service.ModeloService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,19 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/instrumentos")
+@RequiredArgsConstructor
 public class InstrumentoController {
 
-    @Autowired
-    private InstrumentoService instrumentoService;
 
-    @Autowired
-    private MarcaService marcaService;
-
-    @Autowired
-    private ModeloService modeloService;
+    private final InstrumentoService instrumentoService;
+    private final MarcaService marcaService;
+    private final CategoriaService categoriaService;
+    private final ModeloService modeloService;
 
     @PostMapping
-    public ResponseEntity<Instrumento> agregarInstrumento(@RequestBody InstrumentoDto instrumentoDto){
+    public ResponseEntity<Instrumento> agregarInstrumento(@RequestBody InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
         return ResponseEntity.ok(instrumentoService.agregarInstrumento(instrumentoDto));
     }
 
@@ -40,8 +43,13 @@ public class InstrumentoController {
     }
 
     @PostMapping("/modelo")
-    public ResponseEntity<Modelo> agregarMarca(@RequestBody ModeloDto modeloDto){
+    public ResponseEntity<Modelo> agregarModelo(@RequestBody ModeloDto modeloDto){
         return ResponseEntity.ok(modeloService.agregarModelo(modeloDto));
+    }
+
+    @PostMapping("/categoria")
+    public ResponseEntity<Categoria> agregarCategoria(@RequestBody CategoriaDto categoriaDto){
+        return ResponseEntity.ok(categoriaService.agregarCategoria(categoriaDto));
     }
 
 }

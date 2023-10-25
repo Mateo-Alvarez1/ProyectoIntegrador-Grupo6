@@ -20,7 +20,6 @@
 //@Getter
 //@Setter
 //@Data
-//@Builder
 //@NoArgsConstructor
 //@AllArgsConstructor
 //public class Usuario implements UserDetails {
