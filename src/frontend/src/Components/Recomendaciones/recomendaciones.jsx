@@ -16,7 +16,7 @@ const Recomendaciones = () => {
       <p>¿Listos para hacer música?</p>
       <div className="recomendacionesCardContainer">
         {mixedProducts.map((producto) => {
-          return <ProductoCard producto={producto}/>;
+          return <ProductoCard producto={producto} key={producto.id}/>;
         })}
       </div>
     </div>

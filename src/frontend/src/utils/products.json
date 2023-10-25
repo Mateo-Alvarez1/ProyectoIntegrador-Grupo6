@@ -55,7 +55,7 @@
     },
     {
         "id": 7,
-        "nombre": "Batería Pearl EXL725F C248",
+        "nombre": "Guitarra Rolling Stones",
         "categoria": "Baterias",
         "precio": 86,
         "marca": "Pearl",
@@ -63,7 +63,7 @@
     },
     {
         "id": 8,
-        "nombre": "Batería Pearl EXL725F C248",
+        "nombre": "Teclado yamaha 4500",
         "categoria": "Baterias",
         "precio": 86,
         "marca": "Pearl",
@@ -71,14 +71,14 @@
     },
     {
         "id": 9,
-        "nombre": "Batería Pearl EXL725F C248",
+        "nombre": "Bajo pearls 3200",
         "categoria": "Baterias",
         "precio": 86,
         "marca": "Pearl",
         "modelo": "EXL725F C248"
     },{
         "id": 10,
-        "nombre": "Batería Pearl EXL725F C248",
+        "nombre": "Bateria A123",
         "categoria": "Baterias",
         "precio": 86,
         "marca": "Pearl",

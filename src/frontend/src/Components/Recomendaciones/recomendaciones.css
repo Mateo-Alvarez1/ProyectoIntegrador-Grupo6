@@ -70,6 +70,16 @@
     color:#000000 ;
     padding: 20px 0px;
     text-align: center;
+    font-size: 24px;
+}
+
+.cardLink{
+    color: white;
+    background-color:#a2b7c0 ;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--primaryColor) !important;
+    margin-top:10px
 }
 
 @media (max-width: 768px) {
