@@ -55,33 +55,38 @@
     },
     {
         "id": 7,
-        "nombre": "Guitarra Rolling Stones",
-        "categoria": "Baterias",
-        "precio": 86,
-        "marca": "Pearl",
-        "modelo": "EXL725F C248"
+        "nombre": "Micrófono Shure Beta 58a",
+        "categoria": "Micrófonos",
+        "precio": 20,
+        "marca": "Shure",
+        "modelo": "Beta 58a",
+        "imagen": "https://f.fcdn.app/imgs/c6af79/www.palaciodelamusica.com.uy/pmusuy/35fe/webp/catalogo/BETA58A-BETA58A_1/460x460/microfono-shure-beta-58a-microfono-shure-beta-58a.jpg"
     },
     {
         "id": 8,
-        "nombre": "Teclado yamaha 4500",
-        "categoria": "Baterias",
-        "precio": 86,
-        "marca": "Pearl",
-        "modelo": "EXL725F C248"
+        "nombre": "Guitarra Eléctrica Squier Bullet Strat Ht Sunburst",
+        "categoria": "Guitarras",
+        "precio": 65,
+        "marca": "Squier",
+        "modelo": "Bullet Strat Ht Sunburst",
+        "imagen": "https://f.fcdn.app/imgs/a755b9/www.palaciodelamusica.com.uy/pmusuy/7781/webp/catalogo/0371001532-0371001532_1/2000-2000/guitarra-electrica-squier-bullet-strat-ht-sunburst-guitarra-electrica-squier-bullet-strat-ht-sunburst.jpg"
     },
     {
         "id": 9,
-        "nombre": "Bajo pearls 3200",
-        "categoria": "Baterias",
-        "precio": 86,
-        "marca": "Pearl",
-        "modelo": "EXL725F C248"
-    },{
+        "nombre": "Bajo Eléctrico Squier Classic Vibe 60s Pbass 3ts",
+        "categoria": "Bajos",
+        "precio": 60,
+        "marca": "Squier",
+        "modelo": "Classic Vibe 60s Pbass 3ts",
+        "imagen": "https://f.fcdn.app/imgs/7bf891/www.palaciodelamusica.com.uy/pmusuy/dc18/webp/catalogo/0374510500-0374510500_1/2000-2000/bajo-electrico-squier-classic-vibe-60s-pbass-3ts-bajo-electrico-squier-classic-vibe-60s-pbass-3ts.jpg"
+    },
+    {
         "id": 10,
-        "nombre": "Bateria A123",
+        "nombre": "Bateria Tama Mbs42s Starclassic Performer Dark Cherry Fade S/hardware",
         "categoria": "Baterias",
-        "precio": 86,
-        "marca": "Pearl",
-        "modelo": "EXL725F C248"
+        "precio": 90,
+        "marca": "Tama",
+        "modelo": "Mbs42s Starclassic Performer Dark Cherry Fade S/hardware",
+        "imagen": "https://f.fcdn.app/imgs/1d0bbc/www.palaciodelamusica.com.uy/pmusuy/b224/webp/catalogo/MBS42SDCF-MBS42SDCF_1/2000-2000/bateria-tama-mbs42s-starclassic-performer-dark-cherry-fade-s-hardware-bateria-tama-mbs42s-starclassic-performer-dark-cherry-fade-s-hardware.jpg"
     }
 ]
