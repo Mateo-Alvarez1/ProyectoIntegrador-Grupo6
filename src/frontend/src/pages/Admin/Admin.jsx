@@ -9,7 +9,7 @@ const Admin = () => {
         <h2 className='admin-title'>Administración</h2>
         <p className='admin-p'>¿Qué quieres hacer hoy?</p>
         <div className='buttons'>
-            <Link className='add-product-button' to=""> {/* acá va el componente para agregar producto */}
+            <Link className='add-product-button' to="altaprod"> {/* acá va el componente para agregar producto */}
                 <button>Crear Producto</button>
             </Link>
             <button disabled className='unavailable-button'>Editar Producto</button>
