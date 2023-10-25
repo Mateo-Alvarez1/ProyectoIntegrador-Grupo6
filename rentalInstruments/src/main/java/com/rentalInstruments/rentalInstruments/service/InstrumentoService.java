@@ -38,9 +38,6 @@ public class InstrumentoService implements InstrumentoInterface {
         return instrumento;
     }
 
-//    public void validarNumeroSerie(String nombre , String numeroStock){
-//        if (instrumentoRepository.findByName())
-//    }
 
 
 
