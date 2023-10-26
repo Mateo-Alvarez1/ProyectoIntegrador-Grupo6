@@ -9,8 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 public class MarcaDto {
-    private String nombre;
-    private String paisOrigen;
 
+    private String nombre;
 
 }

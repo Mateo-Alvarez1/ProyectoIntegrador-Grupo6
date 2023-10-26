@@ -18,4 +18,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RNFE.getMessage());
     }
 
+    @ExceptionHandler({InvalidDataEntry.class})
+    private ResponseEntity<String> invalidDataEntry(InvalidDataEntry IDE){
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(IDE.getMessage());
+    }
+
 }
