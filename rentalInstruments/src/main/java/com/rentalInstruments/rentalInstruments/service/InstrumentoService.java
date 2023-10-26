@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.Optional;
 
 @Service
@@ -57,6 +58,8 @@ public class InstrumentoService implements InstrumentoInterface {
             instrumento.setStock(instrumento.getStock() + 1);
             instrumentoRepository.save(instrumento);
         }
+        log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
+        throw new ResolutionException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
 
 }

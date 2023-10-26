@@ -48,10 +48,9 @@ public class InstrumentoController {
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoriaDto));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<String> agregarStock(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerInstrumento(@PathVariable Long id) {
         instrumentoService.agregarStock(id);
-        return ResponseEntity.ok("Stock agregado correctamente");
+        return ResponseEntity.ok("Instrumento con id : " + id + "encontrado satisfactoriamente");
     }
-
 }

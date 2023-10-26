@@ -13,5 +13,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(OAE.getMessage());
     }
 
+    @ExceptionHandler({ResourceNotFoundException.class})
+    private ResponseEntity<String> resourceNotFound(ResourceNotFoundException RNFE){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RNFE.getMessage());
+    }
 
 }
