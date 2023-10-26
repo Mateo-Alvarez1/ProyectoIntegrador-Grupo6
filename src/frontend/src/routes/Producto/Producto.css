@@ -6,7 +6,34 @@
     padding: 20px 60px;
     background-color: #FFFFFF;
     margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.specsProducto{
+    width: 100%;
     
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 18px;
+    background-color: #FFFFFF;
+    gap: 10px;
+    font-weight: bold;
+height: 170px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    font-family:Helvetica, sans-serif
+}
+
+.specsProducto p{
+    margin-left: 20%;
+    font-size: 22px;
+}
+
+.specsProducto h2{
+    margin: auto;
+    font-size: 34px;
 }
 
 .textArrow{
@@ -25,7 +52,7 @@
    align-items: center;
    gap: 50px;
    height: 100%;
-   margin-bottom: 180px;
+   margin-bottom: 10px;
 }
 
 .containerImagenPrincipal{
@@ -41,6 +68,7 @@
 
 .containerImagenPrincipal img{
     border-radius: 25px;
+    width: 525px;
 }
 
 .containerSecundarias{
@@ -106,5 +134,9 @@
 
     .containerSecundarias1 img, .containerSecundarias2 img{
         width: 200px;
+    }
+
+    .subHeader h2{
+        font-size: 18px;
     }
 }
