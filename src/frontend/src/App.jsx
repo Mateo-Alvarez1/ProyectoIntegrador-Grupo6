@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Admin from './pages/Admin/Admin'
 import Home from './routes/Home/Home'
 import Producto from './routes/Producto/Producto'
-import AltaProd from './pages/Admin/AltaProd'
+import AltaProd from './pages/Admin/ProductoForm'
 
 
 function App() {
