@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> {
-
     Optional<Instrumento> findByNombre(String nombre);
-
 
 }

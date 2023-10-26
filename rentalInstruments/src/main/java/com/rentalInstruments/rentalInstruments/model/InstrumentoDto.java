@@ -3,6 +3,7 @@ package com.rentalInstruments.rentalInstruments.model;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
+import jakarta.annotation.Nullable;
 import lombok.*;
 
 
@@ -13,6 +14,8 @@ import lombok.*;
 @Getter
 @Setter
 public class InstrumentoDto {
+    @Nullable
+    private Long id;
     private String nombre;
     private Double precio;
     private Integer stock;

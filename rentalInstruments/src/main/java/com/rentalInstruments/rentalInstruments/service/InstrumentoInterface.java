@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface InstrumentoInterface {
     Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists;
+    void agregarStock(Long id);
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,11 +20,11 @@ public class Modelo {
     private Long id;
 
     @Column(nullable = false)
-    private String codigoStock;
+    private String numeroSerie;
 
     @OneToMany(mappedBy = "modelo")
     @JsonIgnore
-    private HashSet<Instrumento> instrumentos;
+    private Set<Instrumento> instrumentos = new HashSet<>();
 
 
 }

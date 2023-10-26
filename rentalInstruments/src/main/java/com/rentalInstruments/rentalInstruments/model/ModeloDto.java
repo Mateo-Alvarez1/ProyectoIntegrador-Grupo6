@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 public class ModeloDto {
 
-    private String codigoStock;
+    private String numeroSerie;
 
 }
 

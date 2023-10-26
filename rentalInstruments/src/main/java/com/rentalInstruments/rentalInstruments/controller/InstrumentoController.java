@@ -14,12 +14,8 @@ import com.rentalInstruments.rentalInstruments.service.InstrumentoService;
 import com.rentalInstruments.rentalInstruments.service.MarcaService;
 import com.rentalInstruments.rentalInstruments.service.ModeloService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/instrumentos")
@@ -50,6 +46,12 @@ public class InstrumentoController {
     @PostMapping("/categoria")
     public ResponseEntity<Categoria> agregarCategoria(@RequestBody CategoriaDto categoriaDto){
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoriaDto));
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<String> agregarStock(@PathVariable Long id){
+        instrumentoService.agregarStock(id);
+        return ResponseEntity.ok("Stock agregado correctamente");
     }
 
 }

@@ -28,15 +28,15 @@ public class Instrumento {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "modelo_id" , referencedColumnName = "id")
+    @JoinColumn(name = "modelo_id" )
     private Modelo modelo;
 
     @ManyToOne
-    @JoinColumn(name = "marca_id" , referencedColumnName = "id")
+    @JoinColumn(name = "marca_id" )
     private Marca marca;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id" , referencedColumnName = "id")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     @OneToMany(mappedBy = "instrumento")
