@@ -11,7 +11,10 @@ const Header = () => {
         <div className="logoContainer">
           <Link to='/' className="logolink">
             <img src={logo} alt="" className="logo" />
-            <h2 className="logoName">Pitch Please</h2>
+            <div>
+              <h2 className="logoName">Pitch Please</h2>
+              <span>Reserva tu sonido</span>
+            </div>
           </Link>
         </div>
         <Navbar/>

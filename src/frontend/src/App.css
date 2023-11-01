@@ -3,17 +3,18 @@
   --secondaryColor: #f0f0f0;
 }
 
-body {
-  background-color: var(--secondaryColor);
-  font-family: 'Roboto', sans-serif;
-  height: 100vh;
-}
-
-
 *{
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+}
+
+body {
+  background-color: var(--secondaryColor);
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
