@@ -1,5 +1,6 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
@@ -26,5 +27,14 @@ public class InstrumentoController {
     public ResponseEntity<?> obtenerInstrumento(@PathVariable Long id) throws ResourceNotFoundException {
         instrumentoService.agregarStock(id);
         return ResponseEntity.ok("Instrumento con id : " + id + "encontrado satisfactoriamente");
+    }
+
+    @PutMapping("/editar-categoria")
+    public ResponseEntity<String> CambiarCategoria(@RequestBody Instrumento instrumento , @RequestBody Categoria categoria) throws ResourceNotFoundException {
+        Long instrumentoId = instrumento.getId();
+        Long nuevaCategoriaId = categoria.getId();
+
+        instrumentoService.editarCategoria(instrumentoId, nuevaCategoriaId);
+        return ResponseEntity.ok("Has cambiado la categoría exitosamente");
     }
 }

@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.Optional;
 
 @Service
@@ -72,5 +71,25 @@ public class InstrumentoService implements InstrumentoInterface {
         log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
         throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
+    public void editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
 
+        if (instrumentoBuscado.isPresent()) {
+            Instrumento instrumento = instrumentoBuscado.get();
+            Optional<Categoria> nuevaCategoriaOptional = categoriaRepository.findById(nuevaCategoriaId);
+
+            if (nuevaCategoriaOptional.isPresent()) {
+                Categoria nuevaCategoria = nuevaCategoriaOptional.get();
+                instrumento.setCategoria(nuevaCategoria);
+                instrumentoRepository.save(instrumento);
+            } else {
+            log.error("No se encuentra el instrumento con id: " + instrumentoId + " en la base de datos");
+            throw new ResourceNotFoundException("No se encontró el instrumento con ID: " + instrumentoId);
+        }
+            } else {
+                log.error("No se encuentra la categoria con id: " + nuevaCategoriaId + " en la base de datos");
+                throw new ResourceNotFoundException("No se encontró la  categoría con ID: " + nuevaCategoriaId);
+            }
+
+    }
 }
