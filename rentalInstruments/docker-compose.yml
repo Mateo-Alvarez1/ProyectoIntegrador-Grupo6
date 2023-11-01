@@ -1,25 +1,21 @@
-version: '3.8'
-
 services:
   db:
-    container_name: mysql_container
     image: mysql:8.2
+    container_name: mysql_container
     environment:
       MYSQL_DATABASE: 1023c01_GRUPO6
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: 1023c01_GRUPO6
       MYSQL_PASSWORD: Vo7tahh4
     networks:
-      - database
+      - integrador
     ports:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
     restart: unless-stopped
-
 networks:
-  database:
+  integrador:
     driver: bridge
-
 volumes:
   mysql:
