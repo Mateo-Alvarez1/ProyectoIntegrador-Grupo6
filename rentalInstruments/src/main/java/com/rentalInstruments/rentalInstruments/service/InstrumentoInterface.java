@@ -8,5 +8,5 @@ import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 public interface InstrumentoInterface {
     Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists;
     void agregarStock(Long id) throws ResourceNotFoundException;
-    void editarCategoria (Long id , Long nuevaCategoriaId) throws ResourceNotFoundException;
+    Instrumento editarCategoria (Long instrumentoid , Long nuevaCategoriaId) throws ResourceNotFoundException;
 }

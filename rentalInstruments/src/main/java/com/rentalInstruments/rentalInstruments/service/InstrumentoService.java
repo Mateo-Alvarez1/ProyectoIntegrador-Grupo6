@@ -30,7 +30,7 @@ public class InstrumentoService implements InstrumentoInterface {
     @Override
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
 
-        if ( instrumentoRepository.findByNombre(instrumentoDto.getNombre()).isPresent()){
+        if (instrumentoRepository.findByNombre(instrumentoDto.getNombre()).isPresent()) {
             log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
             throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getNombre() + " ya se encuentra registrado");
         }
@@ -63,7 +63,7 @@ public class InstrumentoService implements InstrumentoInterface {
     @Override
     public void agregarStock(Long id) throws ResourceNotFoundException {
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
-        if (instrumentoOptional.isPresent()){
+        if (instrumentoOptional.isPresent()) {
             Instrumento instrumento = instrumentoOptional.get();
             instrumento.setStock(instrumento.getStock() + 1);
             instrumentoRepository.save(instrumento);
@@ -71,25 +71,45 @@ public class InstrumentoService implements InstrumentoInterface {
         log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
         throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
-    public void editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
+
+    /* public Instrumento editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
+         Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
+
+         if (instrumentoBuscado.isPresent()) {
+             Instrumento instrumento = instrumentoBuscado.get();
+             instrumento.setCategoria(instrumento.getCategoria());
+             instrumentoRepository.save(instrumento);
+             return instrumento;
+         } else {
+             log.error("No se encuentra el instrumento con id: " + instrumentoId + " en la base de datos");
+             throw new ResourceNotFoundException("No se encontró el instrumento con ID: " + instrumentoId);
+         }
+     }*/
+
+
+    public Instrumento editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
         Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
 
         if (instrumentoBuscado.isPresent()) {
             Instrumento instrumento = instrumentoBuscado.get();
+
             Optional<Categoria> nuevaCategoriaOptional = categoriaRepository.findById(nuevaCategoriaId);
 
             if (nuevaCategoriaOptional.isPresent()) {
                 Categoria nuevaCategoria = nuevaCategoriaOptional.get();
                 instrumento.setCategoria(nuevaCategoria);
                 instrumentoRepository.save(instrumento);
+                return instrumento;
             } else {
+                throw new ResourceNotFoundException("No se encontró la nueva categoría con ID: " + nuevaCategoriaId);
+            }
+        } else {
             log.error("No se encuentra el instrumento con id: " + instrumentoId + " en la base de datos");
             throw new ResourceNotFoundException("No se encontró el instrumento con ID: " + instrumentoId);
         }
-            } else {
-                log.error("No se encuentra la categoria con id: " + nuevaCategoriaId + " en la base de datos");
-                throw new ResourceNotFoundException("No se encontró la  categoría con ID: " + nuevaCategoriaId);
-            }
-
     }
 }
+
+
+
+

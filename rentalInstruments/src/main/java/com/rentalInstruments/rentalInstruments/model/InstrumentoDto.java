@@ -3,7 +3,6 @@ package com.rentalInstruments.rentalInstruments.model;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
-import jakarta.annotation.Nullable;
 import lombok.*;
 
 
@@ -21,5 +20,6 @@ public class InstrumentoDto {
     private Marca marca;
     private Modelo modelo;
     private Categoria categoria;
+    private String caracteristica;
 }
 
