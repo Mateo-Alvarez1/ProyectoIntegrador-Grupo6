@@ -26,5 +26,4 @@ public class ImagenController {
     public ResponseEntity<Imagen> agregarImagen(@RequestBody ImagenDto imagenDto, @RequestParam Long instrumentoId) throws BadRequestException {
         return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
     }
-
 }

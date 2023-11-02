@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,7 +26,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     public final JwtService jwtService;
 
-    public String registrarUsuario(RegisterRequest registerRequest) throws ObjectAlreadyExists {
+    public String registrarUsuario(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
         if (usuarioRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             log.error("Ya se encuentra un usuario registrado con ese email");
             throw new ObjectAlreadyExists("Ya se encuentra registrado un usuario con ese email");
@@ -34,7 +36,7 @@ public class AuthenticationService {
                 .apellido(registerRequest.getApellido())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(Role.ROLE_USUARIO)
+                .role(role)
                 .build();
         usuarioRepository.save(usuario);
         return "Usuario registrado correctamente";
@@ -51,4 +53,6 @@ public class AuthenticationService {
                 .token(jwtService.generateToken(user))
                 .build();
     }
+
+
 }

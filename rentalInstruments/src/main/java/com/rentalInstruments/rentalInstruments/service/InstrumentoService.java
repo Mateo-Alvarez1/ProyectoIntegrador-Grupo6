@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.Optional;
 
 @Service
@@ -54,7 +53,8 @@ public class InstrumentoService implements InstrumentoInterface {
         instrumento.setMarca(marca);
         instrumento.setModelo(modelo);
         instrumento.setCategoria(categoria);
-        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie());
+        instrumento.setColor(instrumentoDto.getColor());
+        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie() + " " + instrumentoDto.getColor() );
 
         log.info("Instrumento persistido satisfactoriamente");
         instrumentoRepository.save(instrumento);
@@ -73,4 +73,19 @@ public class InstrumentoService implements InstrumentoInterface {
         throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
 
+
+    // DEVUELVA UN INSTRUMENTO
+    // RECIBA
+    public Instrumento editarCategoria(InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoDto.getId());
+
+        if (!instrumentoBuscado.isPresent()) {
+            log.error("El instrumento con id: " +instrumentoDto.getId() + " no se encuentra en la base de datos");
+            throw new ResourceNotFoundException("No existe un instrumento con ese id");
+        }
+        Instrumento instrumento = instrumentoBuscado.get();
+        instrumento.setCategoria(instrumentoDto.getCategoria());
+
+        log.info("Categoria actualizada correctamente");
+        return instrumento;
 }

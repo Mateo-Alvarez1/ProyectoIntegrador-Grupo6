@@ -10,8 +10,6 @@ import lombok.*;
 @Getter
 @Setter
 public class ImagenDto {
-
-    private String nombre;
     private String url;
     private Instrumento instrumento;
 

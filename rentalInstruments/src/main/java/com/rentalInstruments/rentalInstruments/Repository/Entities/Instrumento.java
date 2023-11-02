@@ -26,6 +26,9 @@ public class Instrumento {
     private Double precio;
 
     @Column(nullable = false)
+    private String color;
+
+    @Column(nullable = false)
     private Integer stock;
 
     @ManyToOne
@@ -36,8 +39,8 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
-    private List<Imagen> imagen;
+//    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
+//    private List<Imagen> imagen;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
