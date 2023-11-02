@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <div className="menuContainer">
         <div className={`navItems ${isOpen && "open"}`}>
-          <a className="registerButton">
+          <Link to={'/login'} className="registerButton">
             Iniciar Sesión
-          </a>
+          </Link>
           <Link to={`/signup`} className="registerButton">
             Crear Cuenta
           </Link>
