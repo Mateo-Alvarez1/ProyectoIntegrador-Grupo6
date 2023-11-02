@@ -12,7 +12,10 @@ const Admin = () => {
             <Link className='add-product-button' to="altaprod"> {/* acá va el componente para agregar producto */}
                 <button>Crear Producto</button>
             </Link>
-            <button disabled className='unavailable-button'>Editar Producto</button>
+            <Link className='add-product-button' to="editarprod"> {/* Que se pueda editar el producto desde aqui */}
+                <button>Editar Producto</button>
+            </Link>
+            
             <button disabled className='unavailable-button'>Eliminar Producto</button>
         </div>
     </section>
