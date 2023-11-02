@@ -3,6 +3,7 @@ package com.rentalInstruments.rentalInstruments.configuration;
 import com.rentalInstruments.rentalInstruments.service.JwtService;
 import jakarta.security.auth.message.config.AuthConfigProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,6 +20,7 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtFilter;
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf( csrf -> csrf.disable())

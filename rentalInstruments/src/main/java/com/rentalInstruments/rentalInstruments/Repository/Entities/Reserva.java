@@ -28,8 +28,7 @@ public class Reserva {
     @JoinColumn(name = "instrumento_id" , referencedColumnName = "id")
     private Instrumento instrumento;
 
-//  COMENTADO MOMENTANEAMENTE POR LA MISMA RAZON QUE LA DEPENDENCIA DEL SECURITY
-//    @ManyToOne
-//    @JoinColumn(name = "usuario_id" , referencedColumnName = "id")
-//    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id" , referencedColumnName = "id")
+    private Usuario usuario;
 }
