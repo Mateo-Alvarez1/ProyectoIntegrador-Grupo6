@@ -9,6 +9,7 @@ import Producto from './routes/Producto/Producto'
 import AltaProd from './pages/Admin/ProductoForm'
 import Login from './routes/Login/Login'
 import SignUp from './routes/SignUp/SignUp'
+import EditarProd from './pages/Admin/EditarProducto'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="admin" element={<Admin/>}/>
         <Route path="admin/altaprod" element={<AltaProd/>}/>
         <Route path="producto/:productoId" element={<Producto/>}/>
+        <Route path="admin/editarprod" element={<EditarProd/>}/>
         <Route path='*' element={<h2>Page Not Found</h2>}/>
       </Routes>
       <Footer/>
