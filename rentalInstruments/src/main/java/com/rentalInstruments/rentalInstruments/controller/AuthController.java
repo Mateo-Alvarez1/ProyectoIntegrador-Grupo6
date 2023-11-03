@@ -1,6 +1,7 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Role;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.model.AuthenticationRequest;
 import com.rentalInstruments.rentalInstruments.model.AuthenticationResponse;
 import com.rentalInstruments.rentalInstruments.model.RegisterRequest;
@@ -32,6 +33,10 @@ public class AuthController {
    @PostMapping("/autenticar")
     public ResponseEntity<AuthenticationResponse> AutenticarUsuario(@RequestBody AuthenticationRequest authenticationRequest) throws ObjectAlreadyExists {
         return ResponseEntity.ok(authenticationService.autenticarUsuario(authenticationRequest));
+    }
+    @PostMapping("/asignarRol")
+    public ResponseEntity<Usuario> asignarRolAdmin(@RequestBody String email) throws ObjectAlreadyExists {
+        return ResponseEntity.ok(authenticationService.asignarRolAdmin(email));
     }
 
 
