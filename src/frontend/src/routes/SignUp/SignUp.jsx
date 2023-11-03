@@ -77,7 +77,7 @@ const SignUp = () => {
     
   return (
     <div className='formContainer'>
-        <h1>Crear Cuenta</h1>
+        <h1 className='signUpTitle'>Crear Cuenta</h1>
         <form
           className='signUpForm'
           onSubmit={handleSubmit}
@@ -154,7 +154,8 @@ const SignUp = () => {
             Crear Cuenta
           </button>
           <div className='loginAccess'>
-            <p>¿Ya tienes una cuenta? 
+            <p>¿Ya tienes una cuenta? </p>
+            <p>
             <Link className='loginLink' to='/login'>
               Inicia sesión
             </Link>

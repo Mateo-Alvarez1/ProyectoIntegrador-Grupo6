@@ -1,5 +1,5 @@
 import React from 'react'
-import './Input.css'
+import styles from './Input.module.css'
 
 const Input = ({state, setState, label, type, id, name, error, placeholder, regex, executeFunction}) => {
 
@@ -22,12 +22,12 @@ const Input = ({state, setState, label, type, id, name, error, placeholder, rege
     };
 
   return (
-    <div className='inputContainer'>
-        <label className='inputLabel' htmlFor={name}>
+    <div className={styles.inputContainer}>
+        <label className={styles.inputLabel} htmlFor={name}>
             {label}
         </label>
         <input 
-            className={`input ${state.valid === 'false' ? 'inputError' : ''}`} 
+            className={`${styles.input} ${state.valid === 'false' ? styles.inputError : ''}`} 
             type={type}
             id={id}
             name={name}
@@ -37,7 +37,7 @@ const Input = ({state, setState, label, type, id, name, error, placeholder, rege
             onBlur={validation}
         />
         {state.valid === 'false' && (
-            <span className='errorMsg'>{error}</span>
+            <span className={styles.errorMessage}>{error}</span>
         )}
     </div>
   )

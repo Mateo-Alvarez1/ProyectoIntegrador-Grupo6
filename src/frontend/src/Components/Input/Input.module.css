@@ -1,0 +1,38 @@
+.inputContainer {
+    margin-bottom: 1px;
+    width: 100%;
+}
+
+.inputLabel {
+    font-size: 12px;
+    color: #4f6073;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputError {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid rgb(180, 37, 37);
+}
+
+.errorMessage {
+    font-size: 12px;
+    color: rgb(180, 37, 37);
+    display: flex;
+    justify-content: flex-end;
+}
