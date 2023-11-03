@@ -11,4 +11,5 @@ import java.util.Optional;
 @Transactional
 public interface CategoriaRepository extends JpaRepository<Categoria , Long> {
     Optional<Categoria> findById(Long id);
+    Optional<Categoria> findByName(String nombre);
 }
