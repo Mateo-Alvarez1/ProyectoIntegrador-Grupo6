@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom'
 import './admin.css'
+import { useState } from 'react'
+import ProductoList from '../../Components/ProductoList/ProductoList'
+import ProductoForm from './ProductoForm.jsx'
 
 const Admin = () => {
+  
+  const [listarProductos, setListarProductos] = useState(null)
+  const [crearProducto, setCrearProducto] = useState(null)
+
+  const mostrarListaProductos = () => {
+    setListarProductos(true)
+    setCrearProducto(false)
+  }
+
+  const mostrarCrearProducto = () => {
+    setCrearProducto(true)
+    setListarProductos(false)
+  }
+
   return (
     <>
     <div className='responsive-warning'>¡Oops! Esta página no está disponible para dispositivos móviles.</div>
@@ -9,15 +26,14 @@ const Admin = () => {
         <h2 className='admin-title'>Administración</h2>
         <p className='admin-p'>¿Qué quieres hacer hoy?</p>
         <div className='buttons'>
-            <Link className='add-product-button' to="altaprod"> {/* acá va el componente para agregar producto */}
-                <button>Crear Producto</button>
-            </Link>
-            <Link className='add-product-button' to="editarprod"> {/* Que se pueda editar el producto desde aqui */}
+            <button onClick={mostrarListaProductos} className='product-button'>Listar Productos</button>
+            <button onClick={mostrarCrearProducto} className='product-button'>Crear Producto</button>
+            <Link className='product-button' to="editarprod"> {/* Que se pueda editar el producto desde aqui */}
                 <button>Editar Producto</button>
             </Link>
-            
-            <button disabled className='unavailable-button'>Eliminar Producto</button>
         </div>
+        {listarProductos && <ProductoList/>}
+        {crearProducto && <ProductoForm/>}
     </section>
     </>
   )

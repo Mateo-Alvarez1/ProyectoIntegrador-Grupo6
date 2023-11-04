@@ -15,7 +15,7 @@ const SignUp = () => {
 
     // estado para el mensaje de error
     const [isFormValid, setIsFormValid] = useState(false);
-    // const [error, setError] = useState('');
+    const [error, setError] = useState('');
 
     // navegación y context (para el logeo del usuario creado)
     // const navigate = useNavigate();
@@ -62,6 +62,13 @@ const SignUp = () => {
         userPassword.valid === 'true' &&
         userPasswordConfirmation.valid === 'true'
       );
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSubmit(e);
+      }
     };
 
     const handleSubmit = async (e) => {
@@ -150,7 +157,7 @@ const SignUp = () => {
                   : 'Los datos son incorrectos. Verificalos y volvé a intentar'}
             </p>
           )} */}
-          <button type='submit' className='submitButton'>
+          <button type='submit' className='submitButton' onKeyDown={handleKeyDown}>
             Crear Cuenta
           </button>
           <div className='loginAccess'>
