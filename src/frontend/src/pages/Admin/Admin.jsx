@@ -1,21 +1,31 @@
-import { Link } from 'react-router-dom'
 import './admin.css'
 import { useState } from 'react'
 import ProductoList from '../../Components/ProductoList/ProductoList'
-import ProductoForm from './ProductoForm.jsx'
+import ProductoForm from './ProductoForm/ProductoForm.jsx'
+import EditarProducto from './EditarProducto/EditarProducto.jsx'
 
 const Admin = () => {
   
   const [listarProductos, setListarProductos] = useState(null)
   const [crearProducto, setCrearProducto] = useState(null)
+  const [editarProducto, setEditarProducto] = useState(null)
+  // const [listarUsuarios, setListarUsuarios] = useState(null)
 
   const mostrarListaProductos = () => {
     setListarProductos(true)
     setCrearProducto(false)
+    setEditarProducto(false)
   }
 
   const mostrarCrearProducto = () => {
     setCrearProducto(true)
+    setListarProductos(false)
+    setEditarProducto(false)
+  }
+
+  const mostrarEditarProducto = () => {
+    setEditarProducto(true)
+    setCrearProducto(false)
     setListarProductos(false)
   }
 
@@ -28,12 +38,14 @@ const Admin = () => {
         <div className='buttons'>
             <button onClick={mostrarListaProductos} className='product-button'>Listar Productos</button>
             <button onClick={mostrarCrearProducto} className='product-button'>Crear Producto</button>
-            <Link className='product-button' to="editarprod"> {/* Que se pueda editar el producto desde aqui */}
-                <button>Editar Producto</button>
-            </Link>
+            <button onClick={mostrarEditarProducto} className='product-button'>Editar Producto</button>
+        </div>
+        <div className='buttons'>
+          <button className='product-button'>Mostrar Usuarios</button>
         </div>
         {listarProductos && <ProductoList/>}
         {crearProducto && <ProductoForm/>}
+        {editarProducto && <EditarProducto/>}
     </section>
     </>
   )
