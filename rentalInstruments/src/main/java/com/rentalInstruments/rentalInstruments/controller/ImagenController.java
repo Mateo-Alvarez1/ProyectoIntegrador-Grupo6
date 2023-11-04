@@ -1,4 +1,4 @@
-package com.rentalInstruments.rentalInstruments.controller;
+/*package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Imagen;
 import com.rentalInstruments.rentalInstruments.exceptions.BadRequestException;
@@ -26,4 +26,4 @@ public class ImagenController {
     public ResponseEntity<Imagen> agregarImagen(@RequestBody ImagenDto imagenDto, @RequestParam Long instrumentoId) throws BadRequestException {
         return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
     }
-}
+}*/
