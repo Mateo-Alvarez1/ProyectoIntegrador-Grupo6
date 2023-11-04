@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,13 +31,16 @@ public class InstrumentoService implements InstrumentoInterface {
     @Override
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
 
-        if (instrumentoRepository.findByNombre(instrumentoDto.getNombre()).isPresent()) {
+        Optional<Instrumento> i=instrumentoRepository.findByNombre(instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor());
+        if (i.isPresent()){
+
             log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
-            throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getNombre() + " ya se encuentra registrado");
+            throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor() + " ya se encuentra registrado");
         }
 
         Marca marca = new Marca();
         marca.setNombre(instrumentoDto.getMarca().getNombre());
+        marca.setPaisOrigen(instrumentoDto.getMarca().getPaisOrigen());
         marcaRepository.save(marca);
 
         Modelo modelo = new Modelo();
@@ -53,7 +57,8 @@ public class InstrumentoService implements InstrumentoInterface {
         instrumento.setMarca(marca);
         instrumento.setModelo(modelo);
         instrumento.setCategoria(categoria);
-        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie());
+        instrumento.setColor(instrumentoDto.getColor());
+        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie() + " " + instrumentoDto.getColor() );
 
         log.info("Instrumento persistido satisfactoriamente");
         instrumentoRepository.save(instrumento);
@@ -71,6 +76,7 @@ public class InstrumentoService implements InstrumentoInterface {
         log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
         throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
+<<<<<<< HEAD
 
     /* public Instrumento editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
          Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
@@ -107,9 +113,89 @@ public class InstrumentoService implements InstrumentoInterface {
             log.error("No se encuentra el instrumento con id: " + instrumentoId + " en la base de datos");
             throw new ResourceNotFoundException("No se encontró el instrumento con ID: " + instrumentoId);
         }
+=======
+
+    @Override
+    public Instrumento buscar(Long id)throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoOptional= instrumentoRepository.findById(id);
+                if(instrumentoOptional.isPresent()){
+                    Instrumento instrumento = instrumentoOptional.get();
+                    return instrumento;
+                }
+
+                log.error("No existe un instrumento creado con el id: "+id);
+        throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
+    }
+
+    @Override
+    public List<Instrumento> buscarTodos() throws ResourceNotFoundException {
+        List<Instrumento> instrumentos= instrumentoRepository.findAll();
+        if (instrumentos.isEmpty()) {
+            log.error("No existen instrumentos en la BD");
+            throw new ResourceNotFoundException("No existe ningún instrumento en la BD");
+        } else {
+            return instrumentos;
+        }
+    }
+
+    @Override
+    public void eliminar(Long id) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoOptional= instrumentoRepository.findById(id);
+        if(instrumentoOptional.isPresent()){
+            instrumentoRepository.deleteById(id);
+        }
+        else{
+            log.error("No existe instrumento con el id: "+id);
+            throw new ResourceNotFoundException("No existe el instrumento a borrar");
+        }
+
+>>>>>>> bac1b2a90cacb49f9f2724f155687fa6d5389a9e
+    }
+
+    @Override
+    public Instrumento modificar(Long id, Instrumento nuevoInstrumento) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
+        if (instrumentoOptional.isPresent()) {
+            Instrumento instrumentoExistente = instrumentoOptional.get();
+
+            instrumentoExistente.setNombre(nuevoInstrumento.getMarca()+ " "+ nuevoInstrumento.getModelo() + " " + nuevoInstrumento.getColor());
+            instrumentoExistente.setStock(nuevoInstrumento.getStock());
+            instrumentoExistente.setPrecio(nuevoInstrumento.getPrecio());
+            instrumentoExistente.setCategoria(nuevoInstrumento.getCategoria());
+            instrumentoExistente.setModelo(nuevoInstrumento.getModelo());
+            instrumentoExistente.setMarca(nuevoInstrumento.getMarca());
+            instrumentoExistente.setColor(nuevoInstrumento.getColor());
+
+
+            Instrumento instrumentoModificado = instrumentoRepository.save(instrumentoExistente);
+
+            return instrumentoModificado;
+        } else {
+            throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
+        }
+    }
+
+
+    // DEVUELVA UN INSTRUMENTO
+    // RECIBA
+    public Instrumento editarCategoria(InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoDto.getId());
+
+        if (!instrumentoBuscado.isPresent()) {
+            log.error("El instrumento con id: " +instrumentoDto.getId() + " no se encuentra en la base de datos");
+            throw new ResourceNotFoundException("No existe un instrumento con ese id");
+        }
+        Instrumento instrumento = instrumentoBuscado.get();
+        instrumento.setCategoria(instrumentoDto.getCategoria());
+
+        log.info("Categoria actualizada correctamente");
+        return instrumento;
     }
 }
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> bac1b2a90cacb49f9f2724f155687fa6d5389a9e

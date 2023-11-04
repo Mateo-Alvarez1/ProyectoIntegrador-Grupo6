@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,9 @@ public class Instrumento {
     private Double precio;
 
     @Column(nullable = false)
+    private String color;
+
+    @Column(nullable = false)
     private Integer stock;
 
     @ManyToOne
@@ -34,6 +38,9 @@ public class Instrumento {
     @ManyToOne
     @JoinColumn(name = "marca_id" )
     private Marca marca;
+
+//    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
+//    private List<Imagen> imagen;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")

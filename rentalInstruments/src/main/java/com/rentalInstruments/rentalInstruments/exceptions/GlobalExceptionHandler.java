@@ -23,4 +23,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(IDE.getMessage());
     }
 
+    @ExceptionHandler({BadRequestException.class})
+    private ResponseEntity<String> badRequest(BadRequestException BRE){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BRE.getMessage());
+    }
+
 }

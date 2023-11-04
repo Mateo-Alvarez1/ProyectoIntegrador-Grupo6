@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> {
+    @Query("select i from Instrumento i where i.nombre = ?1")
     Optional<Instrumento> findByNombre(String nombre);
 
 }
