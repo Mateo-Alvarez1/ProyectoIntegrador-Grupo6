@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+#recomendacionesContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    padding: 100px 0px;
+    justify-content: space-between;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+
+#recomendacionesContainer h1 {
+    font-size: 40px;
+    text-align: center;
+    color:#4f6073 ;
+    padding-bottom: 20px;
+}
+
+#recomendacionesContainer p {
+    font-size: 20px;
+    text-align: center;
+    color:#000000 ;
+    padding-bottom: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+
+
+.recomendacionesCardContainer{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin: auto;
+}
+
+.recomendacionesCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 10px 30px;
+    box-shadow: 2px 2px 2px #e0dfdf;
+    min-height: 474px;
+}
+
+
+.recomendacionesCard:hover{
+    transform: scale(1.05);
+    transition: all 1s;
+}
+
+.recomendacionesCard img{
+    padding: 20px;
+    width: 60%;
+}
+
+.recomendacionesCard h2{
+    color:#4f6073 ;
+    padding: 20px 0px;
+}
+
+.recomendacionesCard h3{
+    color:#000000 ;
+    padding: 20px 0px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.cardLink{
+    color: white;
+    background-color:#a2b7c0 ;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--primaryColor) !important;
+    margin-top:10px
+}
+
+@media (max-width: 768px) {
+
+    #recomendacionesContainer h1 {
+        font-size: 30px;
+    }
+
+    .recomendacionesCardContainer{
+        grid-template-columns: 1fr;
+    }
+
+    .recomendacionesCard{
+        width: 250px;
+    }
+
+}
