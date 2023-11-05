@@ -76,7 +76,7 @@ public class InstrumentoService implements InstrumentoInterface {
         log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
         throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
     }
-<<<<<<< HEAD
+
 
     /* public Instrumento editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
          Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
@@ -93,27 +93,7 @@ public class InstrumentoService implements InstrumentoInterface {
      }*/
 
 
-    public Instrumento editarCategoria(Long instrumentoId, Long nuevaCategoriaId) throws ResourceNotFoundException {
-        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoId);
 
-        if (instrumentoBuscado.isPresent()) {
-            Instrumento instrumento = instrumentoBuscado.get();
-
-            Optional<Categoria> nuevaCategoriaOptional = categoriaRepository.findById(nuevaCategoriaId);
-
-            if (nuevaCategoriaOptional.isPresent()) {
-                Categoria nuevaCategoria = nuevaCategoriaOptional.get();
-                instrumento.setCategoria(nuevaCategoria);
-                instrumentoRepository.save(instrumento);
-                return instrumento;
-            } else {
-                throw new ResourceNotFoundException("No se encontró la nueva categoría con ID: " + nuevaCategoriaId);
-            }
-        } else {
-            log.error("No se encuentra el instrumento con id: " + instrumentoId + " en la base de datos");
-            throw new ResourceNotFoundException("No se encontró el instrumento con ID: " + instrumentoId);
-        }
-=======
 
     @Override
     public Instrumento buscar(Long id)throws ResourceNotFoundException {
@@ -149,7 +129,7 @@ public class InstrumentoService implements InstrumentoInterface {
             throw new ResourceNotFoundException("No existe el instrumento a borrar");
         }
 
->>>>>>> bac1b2a90cacb49f9f2724f155687fa6d5389a9e
+
     }
 
     @Override
@@ -193,9 +173,3 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> bac1b2a90cacb49f9f2724f155687fa6d5389a9e
