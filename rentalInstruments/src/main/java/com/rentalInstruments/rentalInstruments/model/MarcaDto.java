@@ -11,6 +11,5 @@ import lombok.*;
 public class MarcaDto {
 
     private String nombre;
-    private String paisOrigen;
 
 }

@@ -102,19 +102,12 @@ public class InstrumentoService implements InstrumentoInterface {
     @Override
     public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
 
-        String nombre = instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor();
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
-        Optional<Instrumento> instrumentoOptional1 =instrumentoRepository.findByNombre(nombre);
 
         if (!instrumentoOptional.isPresent()) {
             log.error("El instrumento no se encontro en la base de datos");
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
-
-        if (instrumentoOptional1.get().equals(nombre) ){
-            //
-        }
-
 
 
         Instrumento instrumento = instrumentoOptional.get();
@@ -132,19 +125,29 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 
 
-    public Instrumento editarCategoria(Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
-        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(id);
+    public Instrumento editarCategoria(Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
 
-        if (!instrumentoBuscado.isPresent()) {
+        Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
+
+        if (!instrumentoOptional.isPresent()) {
             log.error("El instrumento con id: " + instrumentoDto.getId() + " no se encuentra en la base de datos");
             throw new ResourceNotFoundException("No existe un instrumento con ese id");
         }
-        Instrumento instrumento = instrumentoBuscado.get();
-        instrumento.setCategoria(instrumentoDto.getCategoria());
+        Instrumento instrumento = instrumentoOptional.get();
+
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        if(!categoriaOptional.isPresent()){
+            Categoria categoria = new Categoria();
+            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
+            categoriaRepository.save(categoria);
+            instrumento.setCategoria(categoria);
+        }else{
+            instrumento.setCategoria(categoriaOptional.get());
+        }
 
         log.info("Categoria actualizada correctamente");
         instrumentoRepository.save(instrumento);
-        return instrumento;
+        return instrumentoOptional.get();
     }
 
     private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){

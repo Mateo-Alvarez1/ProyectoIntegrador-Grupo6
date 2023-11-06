@@ -71,8 +71,7 @@ public class InstrumentoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
-        instrumentoService.modificar(id , instrumentoDto);
-        return  ResponseEntity.ok("Instrumento con id: " + id + " modificado correctamente");
+        return  ResponseEntity.ok( instrumentoService.modificar(id , instrumentoDto));
     }
 
 
@@ -84,7 +83,7 @@ public class InstrumentoController {
 
 
     @PutMapping("/categoria/{id}")
-    public ResponseEntity<?> CambiarCategoria(@PathVariable Long id , @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
+    public ResponseEntity<?> CambiarCategoria(@PathVariable Long id , @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
         return ResponseEntity.ok(instrumentoService.editarCategoria(id ,instrumentoDto));
     }
 
