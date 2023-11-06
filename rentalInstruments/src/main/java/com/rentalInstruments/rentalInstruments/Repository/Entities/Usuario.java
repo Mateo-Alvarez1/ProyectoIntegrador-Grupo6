@@ -33,8 +33,6 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String apellido;
     @Column(nullable = false)
-    private Integer dni;
-    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;

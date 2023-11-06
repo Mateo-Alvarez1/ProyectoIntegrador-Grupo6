@@ -30,11 +30,14 @@ public class InstrumentoService implements InstrumentoInterface {
 
     @Override
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
+<<<<<<< HEAD
         Optional<Instrumento> i=instrumentoRepository.findByNombre(instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor());
         if (i.isPresent()){
             log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
             throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor() + " ya se encuentra registrado");
         }
+=======
+>>>>>>> 7660d8c (comment error classes)
 
         Marca marca = new Marca();
         marca.setNombre(instrumentoDto.getMarca().getNombre());
@@ -56,7 +59,14 @@ public class InstrumentoService implements InstrumentoInterface {
         instrumento.setModelo(modelo);
         instrumento.setCategoria(categoria);
         instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie() + " " + instrumentoDto.getColor() );
+        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie() + " " + instrumentoDto.getColor());
+
+
+        if (instrumentoRepository.findByNombre(instrumento.getNombre()).isPresent()) {
+            log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
+            throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getNombre() + " ya se encuentra registrado");
+        }
+
 
         log.info("Instrumento persistido satisfactoriamente");
         instrumentoRepository.save(instrumento);
@@ -66,7 +76,7 @@ public class InstrumentoService implements InstrumentoInterface {
     @Override
     public void agregarStock(Long id) throws ResourceNotFoundException {
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
-        if (instrumentoOptional.isPresent()){
+        if (instrumentoOptional.isPresent()) {
             Instrumento instrumento = instrumentoOptional.get();
             instrumento.setStock(instrumento.getStock() + 1);
             instrumentoRepository.save(instrumento);
@@ -141,7 +151,7 @@ public class InstrumentoService implements InstrumentoInterface {
         Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoDto.getId());
 
         if (!instrumentoBuscado.isPresent()) {
-            log.error("El instrumento con id: " +instrumentoDto.getId() + " no se encuentra en la base de datos");
+            log.error("El instrumento con id: " + instrumentoDto.getId() + " no se encuentra en la base de datos");
             throw new ResourceNotFoundException("No existe un instrumento con ese id");
         }
         Instrumento instrumento = instrumentoBuscado.get();

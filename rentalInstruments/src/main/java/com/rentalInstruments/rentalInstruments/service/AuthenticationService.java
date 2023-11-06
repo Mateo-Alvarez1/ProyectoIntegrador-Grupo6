@@ -48,7 +48,8 @@ public class AuthenticationService {
         return "Usuario registrado correctamente";
     }
 
-    public AuthenticationResponse autenticarUsuario(AuthenticationRequest authenticationRequest) {
+    // TODO -> REVISAR AUTH
+    public AuthenticationResponse autenticar(AuthenticationRequest authenticationRequest) {
         authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getEmail(),
                 authenticationRequest.getPassword()

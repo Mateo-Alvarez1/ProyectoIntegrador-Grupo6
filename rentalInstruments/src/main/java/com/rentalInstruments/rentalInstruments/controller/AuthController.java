@@ -31,8 +31,8 @@ public class AuthController {
     }
 
    @PostMapping("/autenticar")
-    public ResponseEntity<AuthenticationResponse> AutenticarUsuario(@RequestBody AuthenticationRequest authenticationRequest) throws ObjectAlreadyExists {
-        return ResponseEntity.ok(authenticationService.autenticarUsuario(authenticationRequest));
+    public ResponseEntity<AuthenticationResponse> autenticar(@RequestBody AuthenticationRequest authenticationRequest) throws ObjectAlreadyExists {
+        return ResponseEntity.ok(authenticationService.autenticar(authenticationRequest));
     }
     @PostMapping("/asignarRol")
     public ResponseEntity<Usuario> asignarRolAdmin(@RequestBody String email) throws ObjectAlreadyExists {
