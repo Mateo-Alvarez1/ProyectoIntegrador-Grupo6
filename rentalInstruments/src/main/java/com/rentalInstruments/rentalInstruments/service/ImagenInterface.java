@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*package com.rentalInstruments.rentalInstruments.service;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Imagen;
@@ -13,7 +13,7 @@ public interface ImagenInterface {
     List<Imagen> listarImagenes();
 
 }*/
-=======
+
 //package com.rentalInstruments.rentalInstruments.service;
 //
 //import com.rentalInstruments.rentalInstruments.Repository.Entities.Imagen;
@@ -28,4 +28,3 @@ public interface ImagenInterface {
 //    List<Imagen> listarImagenes();
 //
 //}
->>>>>>> 7660d8c (comment error classes)

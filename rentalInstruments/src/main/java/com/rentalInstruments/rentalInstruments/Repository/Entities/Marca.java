@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Marca {
 
     @Id
@@ -26,5 +27,6 @@ public class Marca {
     @OneToMany(cascade = CascadeType.ALL ,  mappedBy = "marca")
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();
+
 
 }

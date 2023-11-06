@@ -32,7 +32,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     public final JwtService jwtService;
 
-    public String registrarUsuario(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
+    public String registrar(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
         if (usuarioRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             log.error("Ya se encuentra un usuario registrado con ese email");
             throw new ObjectAlreadyExists("Ya se encuentra registrado un usuario con ese email");

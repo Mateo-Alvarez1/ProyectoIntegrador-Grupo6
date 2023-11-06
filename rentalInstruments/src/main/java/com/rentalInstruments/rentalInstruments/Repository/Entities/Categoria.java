@@ -23,7 +23,7 @@ public class Categoria {
     @Column(nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "categoria" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria")
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();
 

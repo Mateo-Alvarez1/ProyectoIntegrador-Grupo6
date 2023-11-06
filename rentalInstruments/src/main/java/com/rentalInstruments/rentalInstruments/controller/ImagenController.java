@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Imagen;
@@ -28,7 +28,7 @@ public class ImagenController {
         return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
     }
 }*/
-=======
+
 //package com.rentalInstruments.rentalInstruments.controller;
 //
 ////import com.rentalInstruments.rentalInstruments.Repository.Entities.Imagen;
@@ -58,4 +58,4 @@ public class ImagenController {
 //        return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
 //    }
 //}
->>>>>>> 7660d8c (comment error classes)
+

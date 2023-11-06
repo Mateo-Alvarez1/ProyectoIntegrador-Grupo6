@@ -23,11 +23,11 @@ public class AuthController {
 
     @PostMapping("/registrar")
     public ResponseEntity<String> registrarUsuario(@RequestBody RegisterRequest registerRequest) throws ObjectAlreadyExists {
-        return ResponseEntity.ok(authenticationService.registrarUsuario(registerRequest , Role.ROLE_USUARIO ));
+        return ResponseEntity.ok(authenticationService.registrar(registerRequest , Role.ROLE_USUARIO ));
     }
     @PostMapping("/registrarAdmin")
     public ResponseEntity<String> registrarAdmin(@RequestBody RegisterRequest registerRequest) throws ObjectAlreadyExists {
-        return ResponseEntity.ok(authenticationService.registrarUsuario(registerRequest , Role.ROLE_ADMIN));
+        return ResponseEntity.ok(authenticationService.registrar(registerRequest , Role.ROLE_ADMIN));
     }
 
    @PostMapping("/autenticar")

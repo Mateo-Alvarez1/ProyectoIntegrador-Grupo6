@@ -14,6 +14,7 @@ import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,43 +31,18 @@ public class InstrumentoService implements InstrumentoInterface {
 
     @Override
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
-<<<<<<< HEAD
-        Optional<Instrumento> i=instrumentoRepository.findByNombre(instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor());
-        if (i.isPresent()){
+
+        Optional<Instrumento> instrumentoOptional =instrumentoRepository.findByNombre(instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor());
+        if (instrumentoOptional.isPresent()){
             log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
             throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor() + " ya se encuentra registrado");
         }
-=======
->>>>>>> 7660d8c (comment error classes)
 
-        Marca marca = new Marca();
-        marca.setNombre(instrumentoDto.getMarca().getNombre());
-        marca.setPaisOrigen(instrumentoDto.getMarca().getPaisOrigen());
-        marcaRepository.save(marca);
-
-        Modelo modelo = new Modelo();
-        modelo.setNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
-        modeloRepository.save(modelo);
-
-        Categoria categoria = new Categoria();
-        categoria.setNombre(instrumentoDto.getCategoria().getNombre());
-        categoriaRepository.save(categoria);
-
-        Instrumento instrumento = new Instrumento();
+        Instrumento instrumento =  instanciasMCM(instrumentoDto);
         instrumento.setPrecio(instrumentoDto.getPrecio());
         instrumento.setStock(instrumentoDto.getStock());
-        instrumento.setMarca(marca);
-        instrumento.setModelo(modelo);
-        instrumento.setCategoria(categoria);
         instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(marca.getNombre() + " " + modelo.getNumeroSerie() + " " + instrumentoDto.getColor());
-
-
-        if (instrumentoRepository.findByNombre(instrumento.getNombre()).isPresent()) {
-            log.error("Se intento ingresar un instrumento con un nombre ya persistido: " + instrumentoDto.getNombre());
-            throw new ObjectAlreadyExists("El instrumento con nombre " + instrumentoDto.getNombre() + " ya se encuentra registrado");
-        }
-
+        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
 
         log.info("Instrumento persistido satisfactoriamente");
         instrumentoRepository.save(instrumento);
@@ -80,9 +56,11 @@ public class InstrumentoService implements InstrumentoInterface {
             Instrumento instrumento = instrumentoOptional.get();
             instrumento.setStock(instrumento.getStock() + 1);
             instrumentoRepository.save(instrumento);
+        }else{
+            log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
+            throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
         }
-        log.error("No se encuentra el instumento con id: " + id + " en la base de datos");
-        throw new ResourceNotFoundException("El instrumento con id: " + id + " no se encuentra en la base de datos");
+
     }
 
     @Override
@@ -122,33 +100,40 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 
     @Override
-    public Instrumento modificar(Long id, Instrumento nuevoInstrumento) throws ResourceNotFoundException {
+    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
+
+        String nombre = instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor();
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
-        if (instrumentoOptional.isPresent()) {
-            Instrumento instrumentoExistente = instrumentoOptional.get();
+        Optional<Instrumento> instrumentoOptional1 =instrumentoRepository.findByNombre(nombre);
 
-            instrumentoExistente.setNombre(nuevoInstrumento.getMarca()+ " "+ nuevoInstrumento.getModelo() + " " + nuevoInstrumento.getColor());
-            instrumentoExistente.setStock(nuevoInstrumento.getStock());
-            instrumentoExistente.setPrecio(nuevoInstrumento.getPrecio());
-            instrumentoExistente.setCategoria(nuevoInstrumento.getCategoria());
-            instrumentoExistente.setModelo(nuevoInstrumento.getModelo());
-            instrumentoExistente.setMarca(nuevoInstrumento.getMarca());
-            instrumentoExistente.setColor(nuevoInstrumento.getColor());
-
-
-            Instrumento instrumentoModificado = instrumentoRepository.save(instrumentoExistente);
-
-            return instrumentoModificado;
-        } else {
+        if (!instrumentoOptional.isPresent()) {
+            log.error("El instrumento no se encontro en la base de datos");
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
+
+        if (instrumentoOptional1.get().equals(nombre) ){
+            //
+        }
+
+
+
+        Instrumento instrumento = instrumentoOptional.get();
+
+        instanciasMCM(instrumentoDto);
+
+        instrumento.setPrecio(instrumentoDto.getPrecio());
+        instrumento.setStock(instrumentoDto.getStock());
+        instrumento.setColor(instrumentoDto.getColor());
+        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+
+        log.info("Instrumento modificado correctamente");
+        instrumentoRepository.save(instrumento);
+        return instrumento;
     }
 
 
-    // DEVUELVA UN INSTRUMENTO
-    // RECIBA
-    public Instrumento editarCategoria(InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
-        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(instrumentoDto.getId());
+    public Instrumento editarCategoria(Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoBuscado = instrumentoRepository.findById(id);
 
         if (!instrumentoBuscado.isPresent()) {
             log.error("El instrumento con id: " + instrumentoDto.getId() + " no se encuentra en la base de datos");
@@ -158,7 +143,37 @@ public class InstrumentoService implements InstrumentoInterface {
         instrumento.setCategoria(instrumentoDto.getCategoria());
 
         log.info("Categoria actualizada correctamente");
+        instrumentoRepository.save(instrumento);
         return instrumento;
+    }
+
+    private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){
+
+        Instrumento instrumento = new Instrumento();
+
+        Optional <Marca> marcaOptional= marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
+        instrumento.setMarca(marcaOptional.orElseGet( () -> {
+            Marca marca = new Marca();
+            marca.setNombre(instrumentoDto.getMarca().getNombre());
+            return marcaRepository.save(marca);
+        }));
+
+        Optional <Modelo> modeloOptional= modeloRepository.findByNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+        instrumento.setModelo(modeloOptional.orElseGet( () -> {
+            Modelo modelo = new Modelo();
+            modelo.setNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+            return modeloRepository.save(modelo);
+        }));
+
+        Optional <Categoria> categoriaOptional= categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        instrumento.setCategoria( categoriaOptional.orElseGet(() -> {
+            Categoria categoria = new Categoria();
+            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
+            return categoriaRepository.save(categoria);
+        }));
+
+        return instrumento;
+
     }
 }
 

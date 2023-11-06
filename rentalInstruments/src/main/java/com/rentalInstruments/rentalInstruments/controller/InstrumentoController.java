@@ -70,29 +70,22 @@ public class InstrumentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody Instrumento nuevoInstrumento) {
-        try {
-            Instrumento instrumentoModificado = instrumentoService.modificar(id, nuevoInstrumento);
-
-            return ResponseEntity.ok(instrumentoModificado); // Devolver el instrumento modificado en la respuesta
-        } catch (ResourceNotFoundException ex) {
-            // Manejar la excepción si el instrumento no se encuentra en la base de datos
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Instrumento no encontrado con ID: " + id);
-        }
+    public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
+        instrumentoService.modificar(id , instrumentoDto);
+        return  ResponseEntity.ok("Instrumento con id: " + id + " modificado correctamente");
     }
 
 
-    @GetMapping("/stock/{id}")
-    public ResponseEntity<?> obtenerInstrumento(@PathVariable Long id) throws ResourceNotFoundException {
+    @PostMapping("/stock/{id}")
+    public ResponseEntity<?> agregarStock(@PathVariable Long id) throws ResourceNotFoundException {
         instrumentoService.agregarStock(id);
-        return ResponseEntity.ok("Instrumento con id : " + id + "encontrado satisfactoriamente");
+        return ResponseEntity.ok("Instrumento con id: " + id + " encontrado satisfactoriamente");
     }
 
 
-    @PutMapping("/categoria")
-    public ResponseEntity<?> CambiarCategoria(@RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
-        return ResponseEntity.ok(instrumentoService.editarCategoria(instrumentoDto));
+    @PutMapping("/categoria/{id}")
+    public ResponseEntity<?> CambiarCategoria(@PathVariable Long id , @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException {
+        return ResponseEntity.ok(instrumentoService.editarCategoria(id ,instrumentoDto));
     }
 
 

@@ -31,18 +31,18 @@ public class Instrumento {
     @Column(nullable = false)
     private Integer stock;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "modelo_id" )
     private Modelo modelo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
 //    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
 //    private List<Imagen> imagen;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 

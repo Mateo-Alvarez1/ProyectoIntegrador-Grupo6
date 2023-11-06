@@ -17,9 +17,9 @@ public interface InstrumentoInterface {
     void eliminar(Long id) throws ResourceNotFoundException;
 
 
-    Instrumento modificar(Long id, Instrumento nuevoInstrumento) throws ResourceNotFoundException;
+    Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists;
 
     void agregarStock(Long id) throws ResourceNotFoundException;
 
-    Instrumento editarCategoria (InstrumentoDto instrumentoDto) throws ResourceNotFoundException;
+    Instrumento editarCategoria (Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException;
 }
