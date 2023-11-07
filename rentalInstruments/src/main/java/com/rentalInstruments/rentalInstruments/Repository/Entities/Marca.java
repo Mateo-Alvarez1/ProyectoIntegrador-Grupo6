@@ -22,8 +22,6 @@ public class Marca {
     private Long id;
     @Column(nullable = false)
     private String nombre;
-    @Column
-    private String paisOrigen;
     @OneToMany(cascade = CascadeType.ALL ,  mappedBy = "marca")
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();

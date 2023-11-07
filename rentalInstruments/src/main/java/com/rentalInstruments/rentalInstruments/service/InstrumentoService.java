@@ -8,6 +8,7 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.MarcaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.ModeloRepository;
+import com.rentalInstruments.rentalInstruments.exceptions.BadRequestException;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
@@ -100,7 +101,7 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 
     @Override
-    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
+    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists, BadRequestException {
 
         String nombre = instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor();
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
@@ -111,24 +112,23 @@ public class InstrumentoService implements InstrumentoInterface {
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
 
-        if (instrumentoOptional1.get().equals(nombre) ){
-            //
-        }
+
+            Instrumento instrumento = instrumentoOptional.get();
+            instanciasMCM(instrumentoDto);
+
+            instrumento.setPrecio(instrumentoDto.getPrecio());
+            instrumento.setStock(instrumentoDto.getStock());
+            instrumento.setColor(instrumentoDto.getColor());
+            instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+
+            log.info("Instrumento modificado correctamente");
+            instrumentoRepository.save(instrumento);
+            return  instrumento;
 
 
 
-        Instrumento instrumento = instrumentoOptional.get();
 
-        instanciasMCM(instrumentoDto);
 
-        instrumento.setPrecio(instrumentoDto.getPrecio());
-        instrumento.setStock(instrumentoDto.getStock());
-        instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
-
-        log.info("Instrumento modificado correctamente");
-        instrumentoRepository.save(instrumento);
-        return instrumento;
     }
 
 

@@ -5,12 +5,15 @@ import lombok.*;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+/*@AllArgsConstructor*/
 @Getter
 @Setter
 public class MarcaDto {
 
     private String nombre;
-    private String paisOrigen;
 
+
+    public MarcaDto(String nombre) {
+        this.nombre = nombre;
+    }
 }
