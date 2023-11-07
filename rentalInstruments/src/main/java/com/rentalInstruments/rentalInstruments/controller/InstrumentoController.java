@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/instrumentos")
 @RequiredArgsConstructor
+@CrossOrigin
 public class InstrumentoController {
 
 

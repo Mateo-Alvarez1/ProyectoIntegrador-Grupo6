@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("api/v1/instrumentos/**").permitAll();
                     auth.requestMatchers("api/v1/auth/**").permitAll();
+                    auth.requestMatchers("api/v1/auth/logout").permitAll();
                     auth.requestMatchers("/v2/api-docs").permitAll();
                     auth.requestMatchers("/swagger-resources").permitAll();
                     auth.requestMatchers("/swagger-resources/**").permitAll();
@@ -41,7 +42,12 @@ public class SecurityConfig {
                     auth.anyRequest().authenticated();
                 }).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtFilter , UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter , UsernamePasswordAuthenticationFilter.class)
+                .logout( logout -> {
+                    logout.logoutUrl("api/v1/auth/logout");
+                    logout.logoutSuccessUrl("/");
+                });
+
         return http.build();
     }
 

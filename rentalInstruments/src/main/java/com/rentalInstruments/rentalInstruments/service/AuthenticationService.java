@@ -17,10 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     public final JwtService jwtService;
 
-    public String registrar(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
+    public Usuario registrar(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
         if (usuarioRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             log.error("Ya se encuentra un usuario registrado con ese email");
             throw new ObjectAlreadyExists("Ya se encuentra registrado un usuario con ese email");
@@ -44,22 +42,29 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(role)
                 .build();
+
         usuarioRepository.save(usuario);
-        return "Usuario registrado correctamente";
+
+        return usuario;
     }
 
-    // TODO -> REVISAR AUTH
+
     public AuthenticationResponse autenticar(AuthenticationRequest authenticationRequest) {
+
         authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getEmail(),
                 authenticationRequest.getPassword()
         ));
+
         var user = usuarioRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+        System.out.println(user);
+        var token = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()
-                .token(jwtService.generateToken(user))
+                .token(token)
                 .build();
     }
+
 
 
 
