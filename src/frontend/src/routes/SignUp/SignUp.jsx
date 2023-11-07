@@ -10,13 +10,13 @@ const SignUp = () => {
   const [userLastName, setUserLastName] = useState({ value: "", valid: null });
   const [userEmail, setUserEmail] = useState({ value: "", valid: null });
   const [userPassword, setUserPassword] = useState({ value: "", valid: null });
-  const [userPasswordConfirmation, setUserPasswordConfirmation] = useState({
-    value: "",
-    valid: null,
-  });
+  // const [userPasswordConfirmation, setUserPasswordConfirmation] = useState({
+  //   value: "",
+  //   valid: null,
+  // });
 
   // estado para el mensaje de error
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState("");
 
   // navegación y context (para el logeo del usuario creado)
@@ -31,14 +31,14 @@ const SignUp = () => {
   };
 
   // validar contraseña(s)
-  const validatePasswords = () => {
-    const isValid =
-      userPassword.value.length > 0 &&
-      userPassword.value === userPasswordConfirmation.value;
-    setUserPasswordConfirmation((prevState) => {
-      return { ...prevState, valid: isValid.toString() }; //
-    });
-  };
+  // const validatePasswords = () => {
+  //   const isValid =
+  //     userPassword.value.length > 0 &&
+  //     userPassword.value === userPasswordConfirmation.value;
+  //   setUserPasswordConfirmation((prevState) => {
+  //     return { ...prevState, valid: isValid.toString() }; //
+  //   });
+  // };
 
   // validar que los inputs no estén vacíos
   const validateInputs = () => {
@@ -47,10 +47,10 @@ const SignUp = () => {
       { value: userLastName.value, setValue: setUserLastName },
       { value: userEmail.value, setValue: setUserEmail },
       { value: userPassword.value, setValue: setUserPassword },
-      {
-        value: userPasswordConfirmation.value,
-        setValue: setUserPasswordConfirmation,
-      },
+      // {
+      //   value: userPasswordConfirmation.value,
+      //   setValue: setUserPasswordConfirmation,
+      // },
     ];
 
     inputFields.forEach(({ value, setValue }) => {
@@ -66,17 +66,18 @@ const SignUp = () => {
       userName.valid === "true" &&
       userLastName.valid === "true" &&
       userEmail.valid === "true" &&
-      userPassword.valid === "true" &&
-      userPasswordConfirmation.valid === "true"
+      userPassword.valid === "true" 
+      // &&
+      // userPasswordConfirmation.valid === "true"
     );
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSubmit(e);
-    }
-  };
+  // const handleKeyDown = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     handleSubmit(e);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +116,7 @@ const SignUp = () => {
   
           if (loginResponse.ok) {
             const data = await loginResponse.json();
-            login({ ...data, redirect: false });
+            login({ ...data, redirect: false }); // TODO implementar login en el context 
             navigate("/");
           } else {
             handleRegistrationError("Error al autenticar al usuario.");
@@ -195,7 +196,7 @@ const SignUp = () => {
             placeholder="Ingrese su contraseña"
             regex={regex.password}
           />
-          <Input
+          {/* <Input
             state={userPasswordConfirmation}
             setState={setUserPasswordConfirmation}
             label="Confirmar contraseña"
@@ -205,7 +206,7 @@ const SignUp = () => {
             error="Las contraseñas no coinciden, intentelo de nuevo."
             placeholder="Confirme su contraseña"
             executeFunction={validatePasswords}
-          />
+          />*/}
         </div>
         {isFormValid === false && (
           <p className="errorMsgForm">
@@ -217,7 +218,6 @@ const SignUp = () => {
         <button
           type="submit"
           className="submitButton"
-          onKeyDown={handleKeyDown}
         >
           Crear Cuenta
         </button>
