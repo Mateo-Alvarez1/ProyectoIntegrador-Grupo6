@@ -1,14 +1,14 @@
 import { createContext, useState } from 'react'
 
-const userContext = () => {
+export const userContext = createContext(undefined)
+const Provider = userContext.Provider
 
-    const userContext = createContext(undefined)
+const UserContextProvider = ({children}) => {
 
     // acá se inicializa el estado del usuario con el jwt 
-    const Context = ({ children }) => {
-        const [userJwt, setUserJwt] = useState(null) // en el null va el jwt traido del localstorage
-        const [user, setUser] = useState(null) // en el null va el usuario traido del localstorage (parseado)
-    }
+    const [userJwt, setUserJwt] = useState(null) // en el null va el jwt traido del localstorage
+    const [user, setUser] = useState(null) // en el null va el usuario traido del localstorage (parseado)
+    
 
     const login = (user) => {
         // acá se guarda el jwt en el localstorage
@@ -22,12 +22,10 @@ const userContext = () => {
     }
 
   return (
-    <userContext.Provider value={{user, userJwt, login, logout}}>
-        {/* children */}
-    </userContext.Provider>
+    <Provider value={{user, userJwt, login, logout}}>
+        {children}
+    </Provider>
   )
 }
 
-export default userContext
-
-export const useUserContext = () => userContext(userContext)
+export default UserContextProvider;
