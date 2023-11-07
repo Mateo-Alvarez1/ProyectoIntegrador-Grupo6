@@ -39,14 +39,12 @@ public class InstrumentoController {
     }
 
 
-
     @GetMapping
-    public ResponseEntity<?> buscarTodos(){
-        try{
-            List<Instrumento> instrumentoList= instrumentoService.buscarTodos();
-            return  ResponseEntity.ok(instrumentoList);
-        }
-        catch (ResourceNotFoundException ex){
+    public ResponseEntity<?> buscarTodos() {
+        try {
+            List<Instrumento> instrumentoList = instrumentoService.buscarTodos();
+            return ResponseEntity.ok(instrumentoList);
+        } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existen instrumentos en la base de datos");
         }
@@ -86,15 +84,15 @@ public class InstrumentoController {
         instrumentoService.agregarStock(id);
         return ResponseEntity.ok("Instrumento con id : " + id + "encontrado satisfactoriamente");
     }
+}
 
 
-    @PutMapping("/editar-categoria")
+    /*@PutMapping("/editar-categoria")
     public ResponseEntity<String> CambiarCategoria(@PathVariable  Long instrumentoId , @PathVariable  Long nuevaCategoriaId) throws ResourceNotFoundException {
-        instrumentoService.editarCategoria(instrumentoId, nuevaCategoriaId);
+        instrumentoService.editarCategoria(instrumentoDto,  InstrumentoDto);
         return ResponseEntity.ok("Has cambiado la categoría exitosamente");
 
-    }
-
+    }*-/
 
 //    @GetMapping
 //    public ResponseEntity<List<Imagen>> listarImagenes(){
@@ -108,3 +106,4 @@ public class InstrumentoController {
 
 
 }
+     */
