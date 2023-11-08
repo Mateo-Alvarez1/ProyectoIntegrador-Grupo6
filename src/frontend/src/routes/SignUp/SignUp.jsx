@@ -102,9 +102,10 @@ const SignUp = () => {
           },
         });
   
+      
         if (response.ok) {
           const loginResponse = await fetch(`http://localhost:8080/api/v1/auth/autenticar`, {
-            method: "POST",
+          method: "POST",
             body: JSON.stringify({
               email: userEmail.value,
               password: userPassword.value,
@@ -116,7 +117,8 @@ const SignUp = () => {
   
           if (loginResponse.ok) {
             const data = await loginResponse.json();
-            login({ ...data, redirect: false }); // TODO implementar login en el context 
+            console.log(data);
+            login({ ...data }); 
             navigate("/");
           } else {
             handleRegistrationError("Error al autenticar al usuario.");

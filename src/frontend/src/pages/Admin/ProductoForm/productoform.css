@@ -43,6 +43,8 @@ margin-bottom: 10px;
 
 .button:hover {
 background-color: #0069d9;
+transform: scale(1.04);
+transition: all .5s;
 }
 
 .titulo{

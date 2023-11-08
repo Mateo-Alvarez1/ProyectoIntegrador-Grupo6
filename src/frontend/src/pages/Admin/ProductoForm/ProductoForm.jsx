@@ -57,7 +57,17 @@ const ProductoForm = () => {
     };
 
     agregarProducto(producto);
+    limpiarform()
   };
+
+  const limpiarform = () =>  {
+    setMarca("")
+    setModelo("")
+    setColor("")
+    setPrecio("")
+    setStock("")
+    setCategoria("")
+  }
 
   return (
     <form className="form" onSubmit={handleFormSubmit}>
