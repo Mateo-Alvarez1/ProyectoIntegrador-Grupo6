@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -58,7 +59,7 @@ public class AuthenticationService {
 
         var user = usuarioRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
         System.out.println(user);
-        var token = jwtService.generateToken(user);
+        var token = jwtService.generateToken(new HashMap<>() , user , user.getNombre() , user.getApellido() , user.getRole());
 
         return AuthenticationResponse.builder()
                 .token(token)
@@ -66,17 +67,12 @@ public class AuthenticationService {
     }
 
 
-
-
-    //         REVISAR
     // TODO -> QUITAR ROLE_ADMIN
 
-    public Usuario asignarRolAdmin(String userEmail) throws ObjectAlreadyExists {
+    public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
 
-        // TRAEMOS EL CONTEXTO ACTUAL DE CONFIGURACION
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        var user = usuarioRepository.findByEmail(userEmail).orElseThrow( () -> new UsernameNotFoundException("El usuario no se encuentra"));
+        var user = usuarioRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("El usuario no se encuentra"));
+        System.out.println(user);
 
         if (user.getRole() == Role.ROLE_ADMIN){
             log.error("El usuario ya tiene el rol de administrador");
@@ -87,16 +83,7 @@ public class AuthenticationService {
         log.info("Rol asignado correctamente");
         usuarioRepository.save(user);
 
-        //ASIGNAR NUEVO ROL A LA LISTA DE AUTORIDADES
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-
-        //GENERAR NUEVO OBJETO AUTHENTICATION CON LAS AUTORITIES ACTUALIZADAS
-        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), authorities);
-
-        //ACTUALIZAR CONTEXTO
-        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
         log.info("Rol asignado correctamente");
         return user;
     }
