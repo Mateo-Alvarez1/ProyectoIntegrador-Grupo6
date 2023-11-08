@@ -57,6 +57,34 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+
+.containerTable {
+    width: 100%;
+    margin: 0 auto;
+    margin: -500px 0px 500px 0px;
+  }
+  
+  .usersTable {
+    text-align: center;
+  }
+  
+  th {
+    text-align: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    color: #4f6073;
+    font-size: 20px;
+  }
+  
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+
+
+
 @media (max-width: 600px) {
 
     .admin-body {

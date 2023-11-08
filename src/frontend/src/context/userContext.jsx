@@ -9,16 +9,13 @@ const UserContextProvider = ({children}) => {
     const [userJwt, setUserJwt] = useState(localStorage.getItem('token')) // en el null va el jwt traido del localstorage
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) // en el null va el usuario traido del localstorage (parseado)
 
-     console.log(user);
-    console.log(userJwt);
 
     const login = (user) => {
         // acá se setea y se guarda el jwt en el localstorage
         setUserJwt(user.token)
-        console.log(user.token);
         let token = user.token
         let payload = JSON.parse(atob(token.split(".")[1]))
-        console.log(payload);
+      
 
         localStorage.setItem('token', JSON.stringify(user.token))
 

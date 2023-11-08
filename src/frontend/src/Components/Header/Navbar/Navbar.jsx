@@ -7,11 +7,26 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const { user  , userJwt , logout } = useContext(userContext)
+
   const token = userJwt;
-  //console.log(user);
+
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const iniciales = (user) => {
+    if (user !== undefined) {
+      let nombreCompleto = [user.nombre , user.apellido];
+      let nombreModificado = nombreCompleto[0].split("")
+      let apellidoModificado = nombreCompleto[1].split("")
+      let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase()
+      return iniciales;
+    }else{
+      return '';
+    }
+  } 
+ 
+
 
   return (
     <div className="menuContainer">
@@ -19,8 +34,10 @@ const Navbar = () => {
             {
               token !== null ? 
                 <div className='containerLogout'>
-                    <p>{user.nombre + " " + user.apellido}</p>
-                    <button onClick={() => logout}>Cerrar sesion</button>
+                    <a onClick={() => logout}>Cerrar sesion</a>
+                  <div className='avatar'>
+                    <p>{iniciales(user)}</p>
+                  </div>
                 </div>
           
               :

@@ -64,7 +64,7 @@ const Login = () => {
         if (response.ok) {
           const user = await response.json();
           login(user);
-          navigate('/home');
+          navigate('/');
         }
     }
       catch (error) {
