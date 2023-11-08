@@ -2,6 +2,7 @@ package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
+import com.rentalInstruments.rentalInstruments.exceptions.BadRequestException;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/instrumentos")
+@CrossOrigin
 @RequiredArgsConstructor
 @CrossOrigin
 public class InstrumentoController {
@@ -71,8 +73,13 @@ public class InstrumentoController {
     }
 
     @PutMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
         return  ResponseEntity.ok( instrumentoService.modificar(id , instrumentoDto));
+=======
+    public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists, BadRequestException {
+        return  ResponseEntity.ok(instrumentoService.modificar(id , instrumentoDto));
+>>>>>>> 4f50c7c389b03ad5af2caf12b3d5cc59d9117616
     }
 
 

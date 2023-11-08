@@ -8,6 +8,7 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.MarcaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.ModeloRepository;
+import com.rentalInstruments.rentalInstruments.exceptions.BadRequestException;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
@@ -100,7 +101,7 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 
     @Override
-    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
+    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists, BadRequestException {
 
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
 
@@ -109,19 +110,26 @@ public class InstrumentoService implements InstrumentoInterface {
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
 
+<<<<<<< HEAD
+=======
 
-        Instrumento instrumento = instrumentoOptional.get();
+            Instrumento instrumento = instrumentoOptional.get();
+            instanciasMCM(instrumentoDto);
 
-        instanciasMCM(instrumentoDto);
+            instrumento.setPrecio(instrumentoDto.getPrecio());
+            instrumento.setStock(instrumentoDto.getStock());
+            instrumento.setColor(instrumentoDto.getColor());
+            instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
 
-        instrumento.setPrecio(instrumentoDto.getPrecio());
-        instrumento.setStock(instrumentoDto.getStock());
-        instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+            log.info("Instrumento modificado correctamente");
+            instrumentoRepository.save(instrumento);
+            return  instrumento;
 
-        log.info("Instrumento modificado correctamente");
-        instrumentoRepository.save(instrumento);
-        return instrumento;
+
+>>>>>>> 4f50c7c389b03ad5af2caf12b3d5cc59d9117616
+
+
+
     }
 
 

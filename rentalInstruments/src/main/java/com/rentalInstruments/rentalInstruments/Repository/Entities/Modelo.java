@@ -26,6 +26,8 @@ public class Modelo {
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();
 
-
+    public Modelo(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
 }
 

@@ -22,7 +22,10 @@ public class Marca {
     private Long id;
     @Column(nullable = false)
     private String nombre;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f50c7c389b03ad5af2caf12b3d5cc59d9117616
     @OneToMany(cascade = CascadeType.ALL ,  mappedBy = "marca")
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();

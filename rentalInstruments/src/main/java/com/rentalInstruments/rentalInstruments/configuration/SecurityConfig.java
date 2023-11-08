@@ -38,7 +38,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/v3/api-docs.yaml").permitAll();
                     auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/webjars/springfox-swagger-ui/**").permitAll();
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
                 }).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter , UsernamePasswordAuthenticationFilter.class)
