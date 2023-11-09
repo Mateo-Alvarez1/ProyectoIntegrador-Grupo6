@@ -3,10 +3,11 @@ import { userContext } from "../../context/userContext"
 import logo from '../../assets/ppl.png'
 import arrow from "../../assets/arrow.svg";
 import styles from './PerfilUsuario.module.css'
-import { Link, Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const PerfilUsuario = () => {
 
+    const navigate = useNavigate()
     const userContextResults = useContext(userContext)
     const token = userContextResults.userJwt;
 
@@ -20,15 +21,16 @@ const PerfilUsuario = () => {
     <>
         <div className='subHeader'>
         <h2>Tu Perfil:</h2>
-        <Link to="/" className='textArrow'>
+        <p onClick={() => navigate(-1)} className='textArrow' style={{cursor: "pointer"}}>
           Volver para atrás <img src={arrow} alt="" />
-        </Link>
+        </p>
       </div>
         <div className={styles.userContainer}>
             <div>
                 <img src={logo} width={250} />
             </div>
-            <div>
+            <div className={styles.dataContainer}>
+                <div className={styles.row}>
                 <label>
                     Nombre: 
                     <input type="text" id="nombre" value={`${user.nombre}`} disabled/>
@@ -37,11 +39,17 @@ const PerfilUsuario = () => {
                     Apellido: 
                     <input type="text" id="apellido" value={`${user.apellido}`} disabled/>
                 </label>
-                <label>
-                    Email: 
-                    <input type="text" id="nombre" value={`${user.email}`} disabled/>
-                </label>
-                <p>Rol: {user.rol}</p>
+                </div>
+                <div className={styles.row}>
+                    <label>
+                        Email: 
+                        <input type="text" id="nombre" value={`${user.email}`} disabled/>
+                    </label>
+                    <label>
+                        Rol: 
+                        <input type="text" id="nombre" value={`${user.rol}`} disabled/>
+                    </label>
+                </div>
             </div>
         </div>
     </>
