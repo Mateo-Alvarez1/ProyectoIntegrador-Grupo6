@@ -2,31 +2,49 @@ import { useContext, useState } from 'react'
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../../context/userContext';
+import { useEffect } from 'react';
 
 const Navbar = () => {
 
+  const userContextResult = useContext(userContext);
+  console.log("Datos del usuario en Navbar:", userContextResult.user);
+
   const [isOpen, setIsOpen] = useState(false);
-  const userContextResult = useContext(userContext)
+  // const userContextResult = useContext(userContext)
   const navigate = useNavigate();
 
   const token = userContextResult.userJwt;
   const user = userContextResult.user;
 
+  const [initials, setInitials] = useState('');
+
+  useEffect(() => {
+    if (user && user.nombre && user.apellido) {
+      let nombreCompleto = [user.nombre, user.apellido];
+      let nombreModificado = nombreCompleto[0].split('');
+      let apellidoModificado = nombreCompleto[1].split('');
+      let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase();
+      setInitials(iniciales);
+    } else {
+      setInitials('');
+    }
+  }, [user]);
+
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const iniciales = (user) => {
-    if (user !== undefined) {
-      let nombreCompleto = [user.nombre , user.apellido];
-      let nombreModificado = nombreCompleto[0].split("")
-      let apellidoModificado = nombreCompleto[1].split("")
-      let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase()
-      return iniciales;
-    }else{
-      return '';
-    }
-  } 
+  // const iniciales = (user) => {
+  //   if (user && user.nombre && user.apellido) {
+  //     let nombreCompleto = [user.nombre , user.apellido];
+  //     let nombreModificado = nombreCompleto[0].split("")
+  //     let apellidoModificado = nombreCompleto[1].split("")
+  //     let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase()
+  //     return iniciales;
+  //   }else{
+  //     return '';
+  //   }
+  // } 
  
 
 
@@ -44,7 +62,7 @@ const Navbar = () => {
                       </p>
                   <div className='avatar'>
                     <Link to='/profile'>
-                      <p>{iniciales(user)}</p>
+                      <p>{initials}</p>
                     </Link>
                   </div>
                 </div>
