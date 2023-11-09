@@ -6,7 +6,7 @@
 //import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 //import jakarta.persistence.*;
 //import lombok.*;
-//
+//import org.springframework.data.annotation.Id;
 //@Entity
 //@Getter
 //@Setter
@@ -14,16 +14,16 @@
 //@NoArgsConstructor
 //@AllArgsConstructor
 //@Table(name = "imagenes")
-////@JsonIdentityInfo(
-////        generator = ObjectIdGenerators.PropertyGenerator.class,
-////        property = "id",
-////        scope = Imagen.class
-////)
+//@JsonIdentityInfo(
+//       generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id",
+//       scope = Imagen.class
+//)
 //@JsonIgnoreProperties(value = "instrumento")
 //public class Imagen {
 //
 //    @Id
-//    @GeneratedValue (strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 //    private String url;
 //

@@ -20,11 +20,10 @@
 //public class ImagenService implements ImagenInterface{
 //
 //    @Autowired
-//    ImagenRepository imagenRepository;
+//   ImagenRepository imagenRepository;
 //
 //    @Autowired
 //    InstrumentoRepository instrumentoRepository;
-//
 //
 //
 //    @Override

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,8 +38,7 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-//    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
-//    private List<Imagen> imagen;
+//   private List<Imagen> imagen;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "categoria_id")
