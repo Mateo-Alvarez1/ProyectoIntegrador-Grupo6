@@ -1,7 +1,6 @@
 package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +21,7 @@ public class Marca {
     private Long id;
     @Column(nullable = false)
     private String nombre;
+
     @OneToMany(cascade = CascadeType.ALL ,  mappedBy = "marca")
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();

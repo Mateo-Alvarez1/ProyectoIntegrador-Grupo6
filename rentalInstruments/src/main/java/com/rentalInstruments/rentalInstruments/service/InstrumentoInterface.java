@@ -22,5 +22,5 @@ public interface InstrumentoInterface {
 
     void agregarStock(Long id) throws ResourceNotFoundException;
 
-    Instrumento editarCategoria (Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException;
+    Instrumento editarCategoria (Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists;
 }

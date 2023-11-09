@@ -1,5 +1,4 @@
 package com.rentalInstruments.rentalInstruments.configuration;
-
 import com.rentalInstruments.rentalInstruments.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

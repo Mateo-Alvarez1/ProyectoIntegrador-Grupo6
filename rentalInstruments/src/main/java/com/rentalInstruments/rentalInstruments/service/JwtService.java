@@ -1,6 +1,7 @@
 package com.rentalInstruments.rentalInstruments.service;
 
 
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,8 +19,9 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+        // TODO ->  GUARDARLA EN HASHI CORP VAULT
+    private static final String SECRET_KEY = "4efd5661a628ab10f6a7ce68a110f031fa1a4b5aa88c2fed180088b878524481";
 
-    private static final String SECRET_KEY = "98398582cffe363fe587f909f82910c9";
 
 
     public String extractUsername(String token) {
@@ -40,22 +42,28 @@ public class JwtService {
                 .getBody();
     }
 
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>() , userDetails );
+    public String generateToken(UserDetails userDetails , String nombre, String apellido , Role role){
+        return generateToken(new HashMap<>() , userDetails , nombre ,apellido ,role);
     }
 
 
     public String generateToken(
             Map<String , Object> extraClaims ,
-            UserDetails userDetails
+            UserDetails userDetails ,
+            String nombre,
+            String apellido ,
+            Role role
     ){
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
+                .claim("nombre" , nombre)
+                .claim("apellido" , apellido)
+                .claim("role" , role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 3))
-                .signWith(getSigninKey() , SignatureAlgorithm.ES256)
+                .signWith(getSigninKey() , SignatureAlgorithm.HS256)
                 .compact();
     }
 

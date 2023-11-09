@@ -29,6 +29,6 @@ public class Reserva {
     private Instrumento instrumento;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id" , referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }

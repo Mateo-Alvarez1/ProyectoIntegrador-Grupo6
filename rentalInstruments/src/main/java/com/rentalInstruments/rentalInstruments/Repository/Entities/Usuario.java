@@ -1,6 +1,7 @@
 package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,9 +34,12 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "usuario" ,fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
+
+
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
 
