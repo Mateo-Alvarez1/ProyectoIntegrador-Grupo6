@@ -90,15 +90,5 @@ public class InstrumentoController {
 
 
 
-//    @GetMapping
-//    public ResponseEntity<List<Imagen>> listarImagenes(){
-//        return ResponseEntity.ok(imagenService.listarImagenes());
-//    }
-//
-//    @PostMapping("/{instrumentoId}") // /api/v1/imagenes/1
-//    public ResponseEntity<Imagen> agregarImagen(@RequestBody ImagenDto imagenDto, @RequestParam Long instrumentoId) throws BadRequestException {
-//        return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
-//    }
-
 
 }

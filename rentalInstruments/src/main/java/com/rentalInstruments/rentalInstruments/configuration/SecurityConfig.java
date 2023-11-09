@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("api/v1/instrumentos/**").permitAll();
                     auth.requestMatchers("api/v1/auth/**").permitAll();
+                    auth.requestMatchers("/file/**").permitAll();
                     auth.requestMatchers("api/v1/usuarios/**").permitAll();
                     auth.requestMatchers("/v2/api-docs").permitAll();
                     auth.requestMatchers("/swagger-resources").permitAll();
