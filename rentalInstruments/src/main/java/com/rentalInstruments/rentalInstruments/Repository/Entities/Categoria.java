@@ -27,8 +27,4 @@ public class Categoria {
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();
 
-
-    public Categoria(String nombre) {
-        this.nombre = nombre;
-    }
 }

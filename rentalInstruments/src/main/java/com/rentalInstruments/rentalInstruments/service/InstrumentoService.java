@@ -8,14 +8,12 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.MarcaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.ModeloRepository;
-import com.rentalInstruments.rentalInstruments.exceptions.BadRequestException;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +21,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class InstrumentoService implements InstrumentoInterface {
+public class InstrumentoService implements IInstrumentoService {
 
     private final InstrumentoRepository instrumentoRepository;
     private final MarcaRepository marcaRepository;
@@ -101,7 +99,7 @@ public class InstrumentoService implements InstrumentoInterface {
     }
 
     @Override
-    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists, BadRequestException {
+    public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
 
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
 
@@ -110,26 +108,19 @@ public class InstrumentoService implements InstrumentoInterface {
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
 
-<<<<<<< HEAD
-=======
 
-            Instrumento instrumento = instrumentoOptional.get();
-            instanciasMCM(instrumentoDto);
+        Instrumento instrumento = instrumentoOptional.get();
 
-            instrumento.setPrecio(instrumentoDto.getPrecio());
-            instrumento.setStock(instrumentoDto.getStock());
-            instrumento.setColor(instrumentoDto.getColor());
-            instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+        instanciasMCM(instrumentoDto);
 
-            log.info("Instrumento modificado correctamente");
-            instrumentoRepository.save(instrumento);
-            return  instrumento;
+        instrumento.setPrecio(instrumentoDto.getPrecio());
+        instrumento.setStock(instrumentoDto.getStock());
+        instrumento.setColor(instrumentoDto.getColor());
+        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
 
-
->>>>>>> 4f50c7c389b03ad5af2caf12b3d5cc59d9117616
-
-
-
+        log.info("Instrumento modificado correctamente");
+        instrumentoRepository.save(instrumento);
+        return instrumento;
     }
 
 

@@ -39,9 +39,6 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-//    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
-//    private List<Imagen> imagen;
-
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
@@ -49,6 +46,9 @@ public class Instrumento {
     @OneToMany(mappedBy = "instrumento")
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
+
+    //    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
+    //    private List<Imagen> imagen;
 
 
 }
