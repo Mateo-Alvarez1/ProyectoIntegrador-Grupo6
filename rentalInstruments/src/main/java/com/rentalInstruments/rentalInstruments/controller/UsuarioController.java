@@ -1,9 +1,8 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
-import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import com.rentalInstruments.rentalInstruments.model.UsuarioDto;
 import com.rentalInstruments.rentalInstruments.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +19,13 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
 private UsuarioService usuarioService;
-@PostMapping
+    @PostMapping
+    public ResponseEntity<UsuarioDto> crearUsuario(@RequestBody UsuarioDto usuarioDto) throws ObjectAlreadyExists {
 
-public ResponseEntity<UsuarioDto> crearUsuario(@RequestBody UsuarioDto usuarioDto)throws ObjectAlreadyExists{
+        Usuario usuario = usuarioService.DtoAUsuario(usuarioDto);
 
-        return ResponseEntity.ok(usuarioService.crearUsuario(usuarioDto));
-
+        UsuarioDto usuarioCreado = usuarioService.crearUsuario(usuario);
+        return ResponseEntity.ok(usuarioCreado);
     }
 @GetMapping
     public ResponseEntity<List<UsuarioDto>> listarTodos() throws ResourceNotFoundException {
