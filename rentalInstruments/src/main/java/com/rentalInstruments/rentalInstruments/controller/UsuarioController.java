@@ -21,9 +21,7 @@ public class UsuarioController {
 private UsuarioService usuarioService;
     @PostMapping
     public ResponseEntity<UsuarioDto> crearUsuario(@RequestBody UsuarioDto usuarioDto) throws ObjectAlreadyExists {
-
         Usuario usuario = usuarioService.DtoAUsuario(usuarioDto);
-
         UsuarioDto usuarioCreado = usuarioService.crearUsuario(usuario);
         return ResponseEntity.ok(usuarioCreado);
     }

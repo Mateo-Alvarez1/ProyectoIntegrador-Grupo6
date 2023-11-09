@@ -34,6 +34,7 @@ public class UsuarioService {
         UsuarioDto usuarioDto = new UsuarioDto();
         usuarioDto.setId(usuario.getId());
         usuarioDto.setNombre(usuario.getNombre());
+        usuarioDto.setApellido(usuario.getApellido());
         usuarioDto.setEmail(usuario.getEmail());
         usuarioDto.setPassword(usuario.getPassword());
         return usuarioDto;
@@ -43,6 +44,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setId(usuarioDto.getId());
         usuario.setNombre(usuarioDto.getNombre());
+        usuario.setApellido(usuarioDto.getApellido());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setPassword(usuarioDto.getPassword());
         // Puedes establecer más propiedades según sea necesario

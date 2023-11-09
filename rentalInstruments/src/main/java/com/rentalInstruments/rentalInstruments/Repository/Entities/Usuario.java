@@ -2,19 +2,15 @@ package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -37,10 +33,9 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario" ,fetch = FetchType.LAZY)
     @JsonIgnore
-    private HashSet<Reserva> reservas;
-
+    private Set<Reserva> reservas = new HashSet<>();
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
 
