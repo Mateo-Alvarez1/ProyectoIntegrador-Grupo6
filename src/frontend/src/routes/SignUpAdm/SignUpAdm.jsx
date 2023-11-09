@@ -144,7 +144,7 @@ const SignUpAdm = () => {
 
   return (
     <div className="formContainer">
-      <h1 className="signUpTitle">Crear Cuenta</h1>
+      <h1 className="signUpTitle">Crear Cuenta</h1><br/><h3 className="signUpTitle" style={{marginTop:"-30px" , fontSize:"25px"}}>Administrador</h3>
       <form
         className="signUpForm"
         onSubmit={handleSubmit}

@@ -4,7 +4,8 @@
 
 .admin-body {
     background-color: #F0F0F0;
-    margin-bottom: 620px;
+    margin-bottom: 200px;
+    padding-top: 100px;
 }
 
 .admin-title {
@@ -34,6 +35,8 @@
 .product-button {
     background-color: #ffffff;
     border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
     width: 22%;
     box-shadow: 2px 2px 2px #e0dfdf;
 }
@@ -59,9 +62,11 @@
 
 
 .containerTable {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
-    margin: -500px 0px 500px 0px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 100px;
   }
   
   .usersTable {
@@ -80,6 +85,18 @@
   td {
     padding: 10px;
     border: 1px solid #ddd;
+  }
+
+
+  .role_button{
+    padding: 10px;
+    width: 60%;
+    border-radius: 5px;
+  }
+
+  .role_button:hover{
+    transform: scale(1.05);
+    transition: all .5s;
   }
 
 

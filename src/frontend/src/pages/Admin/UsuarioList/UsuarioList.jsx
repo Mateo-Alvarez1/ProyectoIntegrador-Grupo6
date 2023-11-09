@@ -1,6 +1,7 @@
 
 //import { useState } from "react";
 
+
 const UsuarioList = ({ listarUsuarios }) => {
 
     const agregarRol = () => {
@@ -46,12 +47,12 @@ const UsuarioList = ({ listarUsuarios }) => {
             <td>{user.nombre}</td>
             <td>{user.apellido}</td>
             <td>{user.email}</td>
-            <td>{user.rol}</td>
+            <td>{user.role}</td>
             <td>
-                <button onClick={() => agregarRol}>Agregar Rol</button>
+                <button className="role_button" onClick={() => agregarRol}>Agregar Rol</button>
             </td>
             <td>
-                <button onClick={() => quitarRol}>Quitar Rol</button>
+                <button className="role_button"  onClick={() => quitarRol}>Quitar Rol</button>
             </td>
         </tr>
         ))}

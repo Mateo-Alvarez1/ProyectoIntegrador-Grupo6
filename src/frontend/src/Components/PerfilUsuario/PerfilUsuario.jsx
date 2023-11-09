@@ -4,7 +4,6 @@ import logo from '../../assets/ppl.png'
 import arrow from "../../assets/arrow.svg";
 import styles from './PerfilUsuario.module.css'
 import { Link, Navigate } from "react-router-dom";
-
 const PerfilUsuario = () => {
 
     const userContextResults = useContext(userContext)
