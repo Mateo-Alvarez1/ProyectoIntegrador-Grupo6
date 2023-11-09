@@ -6,6 +6,7 @@ import EditarProducto from './EditarProducto/EditarProducto.jsx'
 import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { userContext } from '../../context/userContext.jsx'
+import UsuarioList from './UsuarioList/UsuarioList.jsx'
 //import { Redirect } from "react-router-dom";
 
 const Admin = () => {
@@ -51,7 +52,7 @@ const Admin = () => {
       console.log(error);
   }
 }
-  if(!token || user.rol !== "ROLE_ADMIN"){
+  if(user.rol !== "ROLE_ADMIN"){
     
     return <Navigate to="/"/>
     
@@ -75,33 +76,9 @@ const Admin = () => {
         {listarProductos && <ProductoList/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
-    </section>
-    {
-      listarUsuarios.length > 0 &&(
-      <table className='containerTable' >
-        <thead>
-          <tr className='usersTable'>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Email</th>
-            <th scope="col">Rol</th>
-          </tr>
-        </thead>
-        <tbody >
-          {listarUsuarios.map((user) => (
-            <tr className='usersTable' key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.nombre}</td>
-              <td>{user.apellido}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios}/>}
+    </section> 
       
-      )}
       
     </>
   );
