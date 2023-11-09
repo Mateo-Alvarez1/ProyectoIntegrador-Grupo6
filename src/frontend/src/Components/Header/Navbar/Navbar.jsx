@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../../context/userContext';
 
 const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-  const { user  , userJwt , logout } = useContext(userContext)
+  const userContextResult = useContext(userContext)
+  const navigate = useNavigate();
 
-  const token = userJwt;
+  const token = userContextResult.userJwt;
+  const user = userContextResult.user;
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
@@ -34,9 +36,16 @@ const Navbar = () => {
             {
               token !== null ? 
                 <div className='containerLogout'>
-                    <a onClick={() => logout}>Cerrar sesion</a>
+                    <p onClick={() => {
+                      userContextResult.logout()
+                      navigate('/')}} 
+                      className='logoutButton'>
+                        Cerrar sesion
+                      </p>
                   <div className='avatar'>
-                    <p>{iniciales(user)}</p>
+                    <Link to='/profile'>
+                      <p>{iniciales(user)}</p>
+                    </Link>
                   </div>
                 </div>
           
@@ -48,7 +57,7 @@ const Navbar = () => {
                 <Link to={`/signup`} className="registerButton">
                   Crear Cuenta
                 </Link>
-                </>
+              </>
           
             }
         
