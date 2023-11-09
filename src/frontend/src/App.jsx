@@ -8,6 +8,7 @@ import Home from './routes/Home/Home'
 import Producto from './routes/Producto/Producto'
 import Login from './routes/Login/Login'
 import SignUp from './routes/SignUp/SignUp'
+import SignUpAdm from './routes/SignUpAdm/SignUpAdm'
 import PerfilUsuario from './Components/PerfilUsuario/PerfilUsuario'
 
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/signupadm' element={<SignUpAdm/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path="/admin" element={<Admin/>}/>
         <Route path='/profile' element={<PerfilUsuario/>}/>

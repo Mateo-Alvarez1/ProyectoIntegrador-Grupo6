@@ -16,6 +16,10 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(userContext);
 
+  const context = useContext(userContext)
+  
+  const user = context.user
+
   const regex = {
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // mínimo 8 caracteres, al menos una letra y un número
@@ -62,8 +66,8 @@ const Login = () => {
         })
 
         if (response.ok) {
-          const user = await response.json();
-          login(user);
+          const user = await response.json();        
+          login(user);          
           navigate('/');
         }
     }

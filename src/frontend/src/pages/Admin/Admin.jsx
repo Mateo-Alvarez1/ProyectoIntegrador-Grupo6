@@ -3,13 +3,25 @@ import { useState } from 'react'
 import ProductoList from '../../Components/ProductoList/ProductoList'
 import ProductoForm from './ProductoForm/ProductoForm.jsx'
 import EditarProducto from './EditarProducto/EditarProducto.jsx'
+import { Navigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { userContext } from '../../context/userContext.jsx'
+import UsuarioList from './UsuarioList/UsuarioList.jsx'
+//import { Redirect } from "react-router-dom";
 
 const Admin = () => {
   
+
   const [listarProductos, setListarProductos] = useState(null)
   const [crearProducto, setCrearProducto] = useState(null)
   const [editarProducto, setEditarProducto] = useState(null)
   const [listarUsuarios, setListarUsuarios] = useState([])
+  //const navigate  = useNavigate()
+  const context = useContext(userContext)
+  const token = context.userjwt
+  const user = context.user
+
+
 
 
   const mostrarListaProductos = () => {
@@ -37,13 +49,18 @@ const Admin = () => {
       console.log(data);
       setListarUsuarios(data)
   }catch(error){
-
+      console.log(error);
   }
 }
-
+  if(user.rol !== "ROLE_ADMIN"){
+    
+    return <Navigate to="/"/>
+    
+    
+  }
 
   return (
-    <>
+    <>    
     <div className='responsive-warning'>¡Oops! Esta página no está disponible para dispositivos móviles.</div>
     <section className='admin-body'>
         <h2 className='admin-title'>Administración</h2>
@@ -59,36 +76,12 @@ const Admin = () => {
         {listarProductos && <ProductoList/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
-    </section>
-    {
-      listarUsuarios.length > 0 &&
-      <table className='containerTable' >
-        <thead>
-          <tr className='usersTable'>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Email</th>
-            <th scope="col">Rol</th>
-          </tr>
-        </thead>
-        <tbody >
-          {listarUsuarios.map((user) => (
-            <tr className='usersTable' key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.nombre}</td>
-              <td>{user.apellido}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    }
-
-    
+        {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios}/>}
+    </section> 
+      
+      
     </>
-  )
-}
+  );
+      }
 
 export default Admin

@@ -7,6 +7,10 @@
     margin-bottom: 125px;
 }
 
+.textArrow img{
+    border-radius: 15px;
+}
+
 .dataContainer {
     display: flex;
     flex-direction: column;
@@ -45,3 +49,4 @@ input:disabled {
     }
     
 }
+

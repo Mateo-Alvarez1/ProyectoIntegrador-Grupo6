@@ -4,7 +4,6 @@ import logo from '../../assets/ppl.png'
 import arrow from "../../assets/arrow.svg";
 import styles from './PerfilUsuario.module.css'
 import { Navigate, useNavigate } from "react-router-dom";
-
 const PerfilUsuario = () => {
 
     const navigate = useNavigate()
