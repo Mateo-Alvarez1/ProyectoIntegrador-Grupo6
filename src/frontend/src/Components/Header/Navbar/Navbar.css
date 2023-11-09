@@ -31,7 +31,8 @@
     margin-right: 40px;
     padding: 20px;
 }
-.containerLogout p{
+
+.avatar p{
     font-size: 18px;
     color: #4A5865;
 }
@@ -47,18 +48,18 @@ padding-top: 10px;
 cursor: pointer;
 }
 
-.containerLogout a{
-  color: #ff0000;
-  font-size: 18px;
-  font-weight: bold;
-  padding-top: 10px;
-  cursor: pointer;
+.logoutButton {
+    color: white;
+    cursor: pointer;
 }
+
 
 .containerLogout button:hover{
     transform: scale(1.05);
     transition: all .5s;
 }
+
+
 
 @media screen and (max-width: 768px) {
     .registerButton {
