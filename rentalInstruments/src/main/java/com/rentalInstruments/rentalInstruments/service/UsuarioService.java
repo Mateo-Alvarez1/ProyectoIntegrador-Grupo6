@@ -6,7 +6,9 @@ import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundExcept
 import com.rentalInstruments.rentalInstruments.model.UsuarioDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +18,25 @@ import java.util.List;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-
+public UsuarioDto crearUsuario (Usuario usuario){
+        Usuario usuarioRegistrado = usuarioRepository.save (usuario);
+    if(usuarioRegistrado.isPresent(){
+        return ResponseEntity.ok(turnoService.guardarTurno(turno));
+    }else {
+        return ResponseEntity.badRequest().build();
+    }
+    return usuarioAUsuarioDTO(usuarioRegistrado);
+    }
     public List<UsuarioDto> listarTodos() throws ResourceNotFoundException {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
         List<UsuarioDto> usuarioDtoList = new ArrayList<>();
         for (Usuario usuario : listaUsuarios) {
-            usuarioDtoList.add(usuarioAusuarioDTO(usuario));
+            usuarioDtoList.add(usuarioAUsuarioDTO(usuario));
         }
         return usuarioDtoList;
     }
 
-    private UsuarioDto usuarioAusuarioDTO(Usuario usuario) {
+    private UsuarioDto usuarioAUsuarioDTO(Usuario usuario) {
 
         UsuarioDto usuarioDto = new UsuarioDto();
         usuarioDto.setId(usuario.getId());
@@ -36,4 +46,5 @@ public class UsuarioService {
         return usuarioDto;
 
     }
+
 }
