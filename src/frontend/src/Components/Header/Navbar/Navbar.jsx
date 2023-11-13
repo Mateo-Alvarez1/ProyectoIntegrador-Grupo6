@@ -7,18 +7,19 @@ import { useEffect } from 'react';
 const Navbar = () => {
 
   const userContextResult = useContext(userContext);
-  console.log("Datos del usuario en Navbar:", userContextResult.user);
+  console.log("Datos del usuario en Navbar: " + userContextResult.user);
 
   const [isOpen, setIsOpen] = useState(false);
-  // const userContextResult = useContext(userContext)
   const navigate = useNavigate();
 
   const token = userContextResult.userJwt;
   const user = userContextResult.user;
+  console.log('user traido del context: ' + user)
 
   const [initials, setInitials] = useState('');
 
   useEffect(() => {
+    console.log('user en useEffect: ' + user);
     if (user && user.nombre && user.apellido) {
       let nombreCompleto = [user.nombre, user.apellido];
       let nombreModificado = nombreCompleto[0].split('');

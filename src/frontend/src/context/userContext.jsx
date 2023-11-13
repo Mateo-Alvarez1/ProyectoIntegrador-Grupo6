@@ -1,20 +1,21 @@
 import { createContext, useState } from 'react'
 
-export const userContext = createContext(undefined)
+export const userContext = createContext()
 const Provider = userContext.Provider
 
 const UserContextProvider = ({children}) => {
 
     // acá se inicializa el estado del usuario con el jwt 
-    const [userJwt, setUserJwt] = useState(localStorage.getItem('token')) // en el null va el jwt traido del localstorage
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) // en el null va el usuario traido del localstorage (parseado)
+    const [userJwt, setUserJwt] = useState(localStorage.getItem('token')) 
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) 
     console.log("token inicial: " + userJwt);
 
-    const login = (user) => {
+
+    const login = async (user) => {
         // acá se setea y se guarda el jwt en el localstorage
         setUserJwt(user.token)
         let token = user.token
-        let payload = JSON.parse(atob(token.split(".")[1]))
+        let payload = JSON.parse(atob(token.split(".")[1])) //
         console.log("payload: " + payload);
       
 
@@ -22,6 +23,7 @@ const UserContextProvider = ({children}) => {
 
         // y se setea el estado del usuario
         setUser(user)
+        console.log('usuario:' + user)
         localStorage.setItem('user', JSON.stringify(
         {
           nombre: payload.nombre,

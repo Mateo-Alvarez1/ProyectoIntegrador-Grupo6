@@ -62,9 +62,11 @@ const Login = () => {
         })
 
         if (response.ok) {
-          const user = await response.json();        
-          login(user);          
-          navigate('/');
+          const user = await response.json();  
+          if (typeof user == 'object') {
+            login(user); 
+            navigate('/');
+          }               
         }
     }
       catch (error) {

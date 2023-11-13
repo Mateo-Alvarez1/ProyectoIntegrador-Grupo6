@@ -8,11 +8,13 @@ const Home = () => {
   return (
     <>
     <div className='welcome-container'>
-      <TypeIt className="welcome-title" element={"h2"}>¡Bienvenido!</TypeIt> 
-      <p className='welcome-subtitle'>En Pitch Please podrás alquilar el instrumento que estás buscando.</p> 
+      <div className='welcome-title-and-subtitle'>
+        <TypeIt className="welcome-title" element={"h2"}>¡Bienvenido!</TypeIt> 
+        <p className='welcome-subtitle'>En Pitch Please podrás alquilar el instrumento que estás buscando.</p>
+      </div>
+      <Buscador/>
     </div>
     
-    <Buscador/>
     <Categorias/>
     <Recomendaciones/>
     </>
