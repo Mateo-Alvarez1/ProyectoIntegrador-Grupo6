@@ -83,6 +83,31 @@ public class AuthenticationService {
         log.info("Rol asignado correctamente");
         return user;
     }
+//public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
+//    var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+//    System.out.println(user);
+//
+//    // Verificar si el usuario ya tiene el rol de administrador después de asignarlo
+//    if (user.getRole() != Role.ROLE_ADMIN) {
+//        user.setRole(Role.ROLE_ADMIN);
+//
+//        // Intentar guardar el cambio en el repositorio
+//        try {
+//            user = usuarioRepository.save(user);
+//            log.info("Rol asignado correctamente");
+//        } catch (Exception e) {
+//            log.error("Error al asignar el rol de administrador: " + e.getMessage());
+//            // En caso de error al guardar, lanzar una excepción
+//            throw new ObjectAlreadyExists("Error al asignar el rol de administrador");
+//        }
+//    } else {
+//        log.error("El usuario ya tiene el rol de administrador");
+//        throw new ObjectAlreadyExists("El usuario ya tiene el rol admin");
+//    }
+//
+//    return user;
+//}
+
     // TODO -> QUITAR ROLE_ADMIN
 //    public Usuario quitarRolAdmin(String email) throws ObjectAlreadyExists {
 //        var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
