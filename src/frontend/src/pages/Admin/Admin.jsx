@@ -1,5 +1,5 @@
 import './admin.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProductoList from '../../Components/ProductoList/ProductoList'
 import ProductoForm from './ProductoForm/ProductoForm.jsx'
 import EditarProducto from './EditarProducto/EditarProducto.jsx'
@@ -20,6 +20,9 @@ const Admin = () => {
   const context = useContext(userContext)
   const token = context.userjwt
   const user = context.user
+
+
+
 
 
 

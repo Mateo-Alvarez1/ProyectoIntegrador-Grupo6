@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./productoform.css";
 import { useDropzone } from "react-dropzone";
 import Producto from "../../../routes/Producto/Producto";
@@ -7,7 +7,6 @@ const ProductoForm = () => {
   const URL = "http://localhost:8080/api/v1/instrumentos";
 
   const URlIMG = "http://localhost:8080/file/upload";
-
 
 
 
@@ -30,9 +29,12 @@ const ProductoForm = () => {
       // Renombrar el archivo antes de enviarlo
       const nuevoNombre = `${marca}-${modelo}-${color}-${i+1}`;
       const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
+      setImagenes([...imagenes,nuevoNombre])
+      
   
       const formData = new FormData();
       formData.append("file", archivoRenombrado);
+
   
       try {
         const response = await fetch(URlIMG, {
@@ -55,32 +57,6 @@ const ProductoForm = () => {
     }
   };
   
-
-
-
-
-
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-  const {
-    acceptedFiles,
-    getRootProps,
-    getInputProps,
-  } = useDropzone({
-    accept: "image/*", // Acepta solo imágenes
-    onDrop: (acceptedFiles) => {
-      // Maneja los archivos subidos (limitado a 5 archivos)
-      const filesToUpload = acceptedFiles.slice(0, 5);
-      setUploadedFiles(filesToUpload);
-    },
-  });
-
-  const [modelo, setModelo] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [marca, setMarca] = useState("");
-  const [color, setColor] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [stock, setStock] = useState("");
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -95,6 +71,7 @@ const ProductoForm = () => {
       categoria:{
         nombre:categoria
       },
+      imagenes,
       color,
       precio: parseFloat(precio),
       stock: parseInt(stock),
@@ -104,8 +81,6 @@ const ProductoForm = () => {
 
       // HAY QUE CAMBIAR DESPUES PORQUE CREA LAS IMAGENES INDEPENDIENTEMENTE DE SI EL OBJETO SE GUARDA O NO
       enviarImagenes();
-
-
 
     agregarProducto(producto);
     //limpiarform();
@@ -119,6 +94,32 @@ const ProductoForm = () => {
     setStock("")
     setCategoria("")
   }
+
+  const [modelo, setModelo] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [marca, setMarca] = useState("");
+  const [color, setColor] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [stock, setStock] = useState("");
+  const[imagenes, setImagenes]= useState([])
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const {
+    acceptedFiles,
+    getRootProps,
+    getInputProps,
+  } = useDropzone({
+    accept: "image/*", // Acepta solo imágenes
+    onDrop: (acceptedFiles) => {
+      // Maneja los archivos subidos (limitado a 5 archivos)
+      const filesToUpload = acceptedFiles.slice(0, 5);
+      setUploadedFiles(filesToUpload);
+    },
+  });
+
+
+  useEffect(() => {
+    console.log("Imágenes actualizadas:", imagenes);
+  }, [imagenes]);
 
   return (
     <form className="form" onSubmit={handleFormSubmit}>
