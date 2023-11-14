@@ -1,9 +1,15 @@
 import { useState } from "react";
 import "./productoform.css";
 import { useDropzone } from "react-dropzone";
+import Producto from "../../../routes/Producto/Producto";
 
 const ProductoForm = () => {
   const URL = "http://localhost:8080/api/v1/instrumentos";
+
+  const URlIMG = "http://localhost:8080/file/upload";
+
+
+
 
   const agregarProducto = (producto) => {
     fetch(URL, {
@@ -15,6 +21,44 @@ const ProductoForm = () => {
       .then((data) => console.log(data))
       .catch((error) => console.error("Error al enviar la solicitud:", error));
   };
+
+
+  const enviarImagenes = async () => {
+    for (let i = 0; i < uploadedFiles.length; i++) {
+      const file = uploadedFiles[i];
+  
+      // Renombrar el archivo antes de enviarlo
+      const nuevoNombre = `${marca}-${modelo}-${color}-${i+1}`;
+      const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
+  
+      const formData = new FormData();
+      formData.append("file", archivoRenombrado);
+  
+      try {
+        const response = await fetch(URlIMG, {
+          method: "POST",
+          body: formData,
+        });
+  
+        const data = await response.text();
+        console.log(data);
+  
+        if (response.ok) {
+          console.log(`Imagen ${i + 1} creada correctamente`);
+        } else {
+          console.error(`Error al crear la imagen ${i + 1}:`, data.message);
+        }
+      } catch (error) {
+        console.error(`Error al enviar la imagen ${i + 1}:`, error);
+        // Puedes manejar el error de la manera que prefieras (por ejemplo, mostrando un mensaje al usuario)
+      }
+    }
+  };
+  
+
+
+
+
 
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const {
@@ -56,8 +100,15 @@ const ProductoForm = () => {
       stock: parseInt(stock),
     };
 
+      console.log(uploadedFiles);
+
+      // HAY QUE CAMBIAR DESPUES PORQUE CREA LAS IMAGENES INDEPENDIENTEMENTE DE SI EL OBJETO SE GUARDA O NO
+      enviarImagenes();
+
+
+
     agregarProducto(producto);
-    limpiarform()
+    //limpiarform();
   };
 
   const limpiarform = () =>  {
@@ -119,7 +170,7 @@ const ProductoForm = () => {
         <input type="file" {...getInputProps()} className="fileInput" />
         <div></div>
         <div className="buttonContainer">
-          <button>Seleccionar Archivo</button>
+          <button type="button">Seleccionar Archivo</button>
           <p>
             {uploadedFiles.length === 0
               ? "Sin imágenes cargadas"
@@ -130,21 +181,7 @@ const ProductoForm = () => {
         </div>
       </div>
 
-      {uploadedFiles.length > 0 && (
-        <div>
-          <h3>Imágenes Cargadas:</h3>
-          <div className="imageContainerForm">
-            {uploadedFiles.map((file, index) => (
-              <div key={index} className="uploaded-image">
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={`Uploaded ${index}`}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+   
       <button className="button" type="submit">
         Agregar producto
       </button>

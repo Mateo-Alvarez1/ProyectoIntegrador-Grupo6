@@ -28,18 +28,21 @@ const Admin = () => {
     setListarProductos(true)
     setCrearProducto(false)
     setEditarProducto(false)
+    setListarUsuarios([])
   }
 
   const mostrarCrearProducto = () => {
     setCrearProducto(true)
     setListarProductos(false)
     setEditarProducto(false)
+    setListarUsuarios([])
   }
 
   const mostrarEditarProducto = () => {
     setEditarProducto(true)
     setCrearProducto(false)
     setListarProductos(false)
+    setListarUsuarios([])
   }
 
   const userData=async () => {
@@ -48,6 +51,9 @@ const Admin = () => {
       const data = await response.json();
       console.log(data);
       setListarUsuarios(data)
+      setEditarProducto(false)
+      setCrearProducto(false)
+      setListarProductos(false)
   }catch(error){
       console.log(error);
   }
@@ -73,10 +79,16 @@ const Admin = () => {
         <div className='buttons'>
           <button className='product-button' onClick={userData}>Mostrar Usuarios</button>
         </div>
+        
         {listarProductos && <ProductoList/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
         {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios}/>}
+        {!listarProductos && !crearProducto && !editarProducto && !(listarUsuarios.length > 0) && (
+    <div style={{ marginBottom: '362px' }}>
+
+    </div>
+  )}
     </section> 
       
       
