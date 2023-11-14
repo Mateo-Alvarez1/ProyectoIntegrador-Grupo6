@@ -1,6 +1,4 @@
 package com.rentalInstruments.rentalInstruments.controller;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Role;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.model.AuthenticationRequest;
@@ -33,11 +31,14 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> autenticar(@RequestBody AuthenticationRequest authenticationRequest){
         return ResponseEntity.ok(authenticationService.autenticar(authenticationRequest));
     }
-    @PostMapping("/asignar")
-    public ResponseEntity<Usuario> asignarRolAdmin(@RequestBody String email) throws ObjectAlreadyExists {
+    @PostMapping("/asignar/{email}")
+    public ResponseEntity<Usuario> asignarRolAdmin(@PathVariable String email) throws ObjectAlreadyExists {
         return ResponseEntity.ok(authenticationService.asignarRolAdmin(email));
     }
 
-
+    @PostMapping("/quitar/{email}")
+    public ResponseEntity<Usuario> quitarRolAdmin(@PathVariable String email) throws ObjectAlreadyExists {
+        return ResponseEntity.ok(authenticationService.quitarRolAdmin(email));
+    }
 
 }
