@@ -21,7 +21,6 @@ const Login = () => {
     password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // mínimo 8 caracteres, al menos una letra y un número
   };
 
-
   // const setUser = (user) => {
   //   setUserContext(user);
   //};
@@ -64,7 +63,7 @@ const Login = () => {
         if (response.ok) {
           const user = await response.json();  
           if (typeof user == 'object') {
-            login(user); 
+            login({...user}); 
             navigate('/');
           }               
         }

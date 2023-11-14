@@ -7,53 +7,36 @@ import { useEffect } from 'react';
 const Navbar = () => {
 
   const userContextResult = useContext(userContext);
-  console.log("Datos del usuario en Navbar: " + userContextResult.user);
 
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const token = userContextResult.userJwt;
   const user = userContextResult.user;
-  console.log('user traido del context: ' + user)
 
-  const [initials, setInitials] = useState('');
+  const [initials, setInitials] = useState();
 
   useEffect(() => {
-    console.log('user en useEffect: ' + user);
     if (user && user.nombre && user.apellido) {
       let nombreCompleto = [user.nombre, user.apellido];
       let nombreModificado = nombreCompleto[0].split('');
       let apellidoModificado = nombreCompleto[1].split('');
       let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase();
       setInitials(iniciales);
-    } else {
-      setInitials('');
     }
   }, [user]);
+
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
   };
-
-  // const iniciales = (user) => {
-  //   if (user && user.nombre && user.apellido) {
-  //     let nombreCompleto = [user.nombre , user.apellido];
-  //     let nombreModificado = nombreCompleto[0].split("")
-  //     let apellidoModificado = nombreCompleto[1].split("")
-  //     let iniciales = (nombreModificado[0] + apellidoModificado[0]).toUpperCase()
-  //     return iniciales;
-  //   }else{
-  //     return '';
-  //   }
-  // } 
- 
 
 
   return (
     <div className="menuContainer">
         <div className={`navItems ${isOpen && "open"}`}>
             {
-              token !== null ? 
+              token !== null && user !== '' ? 
                 <div className='containerLogout'>
                     <p onClick={() => {
                       userContextResult.logout()
