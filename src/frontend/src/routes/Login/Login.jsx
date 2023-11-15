@@ -3,7 +3,7 @@ import Input from "../../Components/Input/Input";
 import "./Login.css"
 import { useNavigate } from "react-router";
 import { userContext } from "../../context/userContext";
-//import { setUserContext } from "../../context/userContext"; 
+
 
 const Login = () => {
   // estados para los campos
@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
     
   const navigate = useNavigate();
-  const { login } = useContext(userContext);
+  const { login, setUserAlert } = useContext(userContext);
 
   const regex = {
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -63,7 +63,8 @@ const Login = () => {
         if (response.ok) {
           const user = await response.json();  
           if (typeof user == 'object') {
-            login({...user}); 
+            login({...user});
+            setUserAlert(true);
             navigate('/');
           }               
         }

@@ -80,11 +80,18 @@ const Producto = () => {
       <div className='specsProducto'>
       {producto && (
             <>
-                  <h2>Especificaciones técnicas</h2>
+              <h2>Especificaciones técnicas</h2>
 
               <p>Categoría: {producto.categoria}</p>
               <p>Precio: USD {producto.precio}</p>
               <p>Marca: {producto.marca}</p>
+              <p>Caracteristicas:</p>
+              <div className='caracteristicas'>
+                <ul>
+                  <li>Color: {producto.color}</li>
+                  <li>Stock: {producto.stock}</li>
+                </ul>
+              </div>
             </>
           )}
       </div>

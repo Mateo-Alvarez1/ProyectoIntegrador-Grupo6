@@ -8,9 +8,8 @@ const UserContextProvider = ({children}) => {
     // acá se inicializa el estado del usuario con el jwt 
     const [userJwt, setUserJwt] = useState(localStorage.getItem('token')) 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) 
-    console.log('token inicial: ' + userJwt);
-    console.log('user inicial: ' + user);
 
+    const [userAlert, setUserAlert] = useState(false);
 
     const login = async (user) => {
       
@@ -62,7 +61,7 @@ const UserContextProvider = ({children}) => {
     }
 
   return (
-    <Provider value={{user, userJwt, login, logout}}>
+    <Provider value={{user, userJwt, login, logout, userAlert, setUserAlert}}>
         {children}
     </Provider>
   )

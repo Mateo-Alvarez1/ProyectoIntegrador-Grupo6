@@ -20,7 +20,7 @@
     background-color: #FFFFFF;
     gap: 10px;
     font-weight: bold;
-height: 170px;
+    height: 300px;
     padding-top: 20px;
     padding-bottom: 30px;
     font-family:Helvetica, sans-serif
@@ -35,6 +35,20 @@ height: 170px;
     margin: auto;
     font-size: 34px;
 }
+
+.caracteristicas {
+    margin-left: 20%;
+    font-size: 22px;
+}
+
+.caracteristicas ul {
+    list-style: none;
+    font-size: 17px;
+}
+
+.caracteristicas ul li:before {
+    content: '✓ ';
+  }
 
 .textArrow{
     font-size: 16px;
