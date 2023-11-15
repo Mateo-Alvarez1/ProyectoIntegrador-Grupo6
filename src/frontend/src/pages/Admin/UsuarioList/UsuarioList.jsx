@@ -1,5 +1,27 @@
+import { useEffect } from "react";
+const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
 
-const UsuarioList = ({ listarUsuarios }) => {
+
+    
+
+    const actualizarLista= ()=>{
+        fetch(`http://localhost:8080/api/v1/usuarios/listar`)
+        .then(response=>response.json()).
+        then(data=>setListarUsuarios(data));
+       
+    }
+
+
+    useEffect(()=>{
+
+        fetch(`http://localhost:8080/api/v1/usuarios/listar`)
+        .then(response=>response.json()).
+        then(data=>setListarUsuarios(data));
+       
+    
+        
+      },[listarUsuarios])
+
 
     const agregarRol = (email) => {
         fetch(`http://localhost:8080/api/v1/auth/asignar/${email}`, {
@@ -8,6 +30,10 @@ const UsuarioList = ({ listarUsuarios }) => {
             'Content-Type': 'application/json',
             },
         });
+        actualizarLista();
+
+        
+        
             
                 };
     
@@ -19,6 +45,8 @@ const UsuarioList = ({ listarUsuarios }) => {
         }
     
         });
+
+        actualizarLista();
     };
 
     return (

@@ -22,7 +22,7 @@ const Admin = () => {
   const user = context.user
 
 
-
+ 
 
 
 
@@ -86,7 +86,7 @@ const Admin = () => {
         {listarProductos && <ProductoList/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
-        {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios}/>}
+        {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios} setListarUsuarios={setListarUsuarios}/>}
         {!listarProductos && !crearProducto && !editarProducto && !(listarUsuarios.length > 0) && (
     <div style={{ marginBottom: '362px' }}>
 
