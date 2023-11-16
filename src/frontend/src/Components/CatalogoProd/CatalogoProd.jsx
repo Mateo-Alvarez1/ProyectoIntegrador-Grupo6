@@ -2,7 +2,7 @@ import productos from "../../utils/products.json";
 import ProductoCard from '../ProductoCard/ProductoCard';
 import styles from "./ProductoList.module.css";
 
-const ProductoList = () => {
+const CatalogoProd = () => {
 
   return (
       <div className={styles.productContainer}>
@@ -13,4 +13,4 @@ const ProductoList = () => {
   )
 }
 
-export default ProductoList
+export default CatalogoProd
