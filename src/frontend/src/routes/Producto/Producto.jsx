@@ -5,11 +5,14 @@ import "./Producto.css";
 import Productos from "../../utils/products.json";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Puntuacion from "../../Components/Puntuación/Puntuacion";
 
 const Producto = () => {
   const [producto, setProducto] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [puntuacion, setPuntuacion] = useState(0);
   const { productoId } = useParams();
+
 
   useEffect(() => {
     const foundProduct = Productos.find((product) => product.id == productoId);
@@ -80,24 +83,21 @@ const Producto = () => {
       <div className='specsProducto'>
       {producto && (
             <>
-              <h2>Especificaciones técnicas</h2>
+                  <h2>Especificaciones técnicas</h2>
 
               <p>Categoría: {producto.categoria}</p>
               <p>Precio: USD {producto.precio}</p>
               <p>Marca: {producto.marca}</p>
-              <p>Caracteristicas:</p>
-              <div className='caracteristicas'>
-                <ul>
-                  <li>Color: {producto.color}</li>
-                  <li>Stock: {producto.stock}</li>
-                </ul>
-              </div>
+              
             </>
           )}
       </div>
-
+      <div className="puntuacion-container">
+      <Puntuacion onPuntuacionSubmit={setPuntuacion} />
+      </div>
     </>
   );
 };
 
 export default Producto;
+
