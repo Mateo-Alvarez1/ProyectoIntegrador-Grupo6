@@ -6,6 +6,8 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -24,5 +26,6 @@ public class InstrumentoDto {
     private Modelo modelo;
 //    private List<Imagen> imagen;
     private Categoria categoria;
+    private List<String> imagenes= new ArrayList<>();
 }
 

@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -67,13 +70,10 @@ public class AuthenticationService {
     }
 
 
-    // TODO -> QUITAR ROLE_ADMIN
-
     public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
 
         var user = usuarioRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("El usuario no se encuentra"));
-        System.out.println(user);
-
+        System.out.println("hola desde asignar");
         if (user.getRole() == Role.ROLE_ADMIN){
             log.error("El usuario ya tiene el rol de administrador");
             throw new ObjectAlreadyExists("El usuario ya tiene el role admin");
@@ -83,10 +83,34 @@ public class AuthenticationService {
         log.info("Rol asignado correctamente");
         usuarioRepository.save(user);
 
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                user.getUsername(), user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
 
         log.info("Rol asignado correctamente");
         return user;
     }
+
+    public Usuario quitarRolAdmin(String email) {
+        var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+
+        if (user.getRole() != Role.ROLE_ADMIN) {
+            log.error("El usuario no tiene el rol de administrador");
+            return null;
+        }
+
+        user.setRole(Role.ROLE_USUARIO);
+        log.info("Rol de administrador eliminado correctamente");
+        usuarioRepository.save(user);
+
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                user.getUsername(), user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+        return user;
+    }
+
 
 
 }

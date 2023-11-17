@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,8 +48,7 @@ public class Instrumento {
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
 
-    //    @OneToMany (mappedBy = "instrumento", cascade = CascadeType.ALL)
-    //    private List<Imagen> imagen;
+    private List<String> imagenes = new ArrayList<>();
 
 
 }
