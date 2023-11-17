@@ -23,7 +23,7 @@ public class Categoria {
     @Column(nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Instrumento> instrumentos = new HashSet<>();
 

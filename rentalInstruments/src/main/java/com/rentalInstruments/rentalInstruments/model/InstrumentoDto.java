@@ -24,7 +24,6 @@ public class InstrumentoDto {
     private Integer stock;
     private Marca marca;
     private Modelo modelo;
-//    private List<Imagen> imagen;
     private Categoria categoria;
     private List<String> imagenes= new ArrayList<>();
 }

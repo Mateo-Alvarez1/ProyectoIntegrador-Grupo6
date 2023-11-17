@@ -32,15 +32,15 @@ public class Instrumento {
     @Column(nullable = false)
     private Integer stock;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "modelo_id" )
     private Modelo modelo;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
@@ -48,7 +48,6 @@ public class Instrumento {
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
 
-    private List<String> imagenes = new ArrayList<>();
 
 
 }

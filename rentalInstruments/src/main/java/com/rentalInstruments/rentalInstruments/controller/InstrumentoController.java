@@ -7,6 +7,7 @@ import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundExcept
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import com.rentalInstruments.rentalInstruments.service.InstrumentoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,13 +17,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/instrumentos")
-@RequiredArgsConstructor
 @CrossOrigin
 public class InstrumentoController {
 
 
-    private final InstrumentoService instrumentoService;
-//    private final ImagenService imagenService;
+    @Autowired
+    private InstrumentoService instrumentoService;
 
     @PostMapping
     public ResponseEntity<Instrumento> agregarInstrumento(@RequestBody InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
@@ -83,10 +83,7 @@ public class InstrumentoController {
     }
 
 
-    @PutMapping("/categoria/{id}")
-    public ResponseEntity<?> CambiarCategoria(@PathVariable Long id , @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
-        return ResponseEntity.ok(instrumentoService.editarCategoria(id ,instrumentoDto));
-    }
+
 
 
 

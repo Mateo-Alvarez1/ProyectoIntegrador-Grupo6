@@ -14,4 +14,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria , Long> {
 
     @Query("SELECT c FROM Categoria c WHERE c.nombre = ?1")
     Optional<Categoria> findByNombre(String nombre);
+
+    //@Query("DELETE FROM Categoria c WHERE c.nombre = ?1")
+    void deleteByNombre(String nombre);
+
 }

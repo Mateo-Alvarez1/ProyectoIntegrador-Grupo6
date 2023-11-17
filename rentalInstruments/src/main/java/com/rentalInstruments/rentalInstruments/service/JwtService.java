@@ -18,9 +18,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-
-        // TODO ->  GUARDARLA EN HASHI CORP VAULT
-    private static final String SECRET_KEY = "4efd5661a628ab10f6a7ce68a110f031fa1a4b5aa88c2fed180088b878524481";
+    private static final String SECRET_KEY = "${secretKey}";
 
 
 

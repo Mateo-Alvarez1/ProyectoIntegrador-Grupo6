@@ -13,20 +13,26 @@ import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundExcept
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class InstrumentoService implements IInstrumentoService {
 
-    private final InstrumentoRepository instrumentoRepository;
-    private final MarcaRepository marcaRepository;
-    private final ModeloRepository modeloRepository;
-    private final CategoriaRepository categoriaRepository;
+    @Autowired
+    private  InstrumentoRepository instrumentoRepository;
+    @Autowired
+
+    private  MarcaRepository marcaRepository;
+    @Autowired
+
+    private  ModeloRepository modeloRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Override
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
@@ -125,30 +131,7 @@ public class InstrumentoService implements IInstrumentoService {
     }
 
 
-    public Instrumento editarCategoria(Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
 
-        Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
-
-        if (!instrumentoOptional.isPresent()) {
-            log.error("El instrumento con id: " + instrumentoDto.getId() + " no se encuentra en la base de datos");
-            throw new ResourceNotFoundException("No existe un instrumento con ese id");
-        }
-        Instrumento instrumento = instrumentoOptional.get();
-
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
-        if(!categoriaOptional.isPresent()){
-            Categoria categoria = new Categoria();
-            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
-            categoriaRepository.save(categoria);
-            instrumento.setCategoria(categoria);
-        }else{
-            instrumento.setCategoria(categoriaOptional.get());
-        }
-
-        log.info("Categoria actualizada correctamente");
-        instrumentoRepository.save(instrumento);
-        return instrumentoOptional.get();
-    }
 
     private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){
 

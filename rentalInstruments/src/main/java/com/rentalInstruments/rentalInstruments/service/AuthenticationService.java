@@ -9,6 +9,7 @@ import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,15 +27,18 @@ import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class AuthenticationService {
-
-    private final UsuarioRepository usuarioRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    public final JwtService jwtService;
-    private final EmailSender emailSender;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    public JwtService jwtService;
+    @Autowired
+    private EmailSender emailSender;
 
     public Usuario registrar(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
         if (usuarioRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
