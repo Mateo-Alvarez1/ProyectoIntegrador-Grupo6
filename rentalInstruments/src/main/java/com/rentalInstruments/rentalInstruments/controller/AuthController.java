@@ -1,6 +1,4 @@
 package com.rentalInstruments.rentalInstruments.controller;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Role;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.model.AuthenticationRequest;
@@ -42,7 +40,6 @@ public class AuthController {
     public ResponseEntity<Usuario> quitarRolAdmin(@PathVariable String email) throws ObjectAlreadyExists {
         return ResponseEntity.ok(authenticationService.quitarRolAdmin(email));
     }
-
 
 
 }
