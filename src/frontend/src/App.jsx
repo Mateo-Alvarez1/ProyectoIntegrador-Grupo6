@@ -9,7 +9,6 @@ import Producto from './routes/Producto/Producto'
 import Login from './routes/Login/Login'
 import SignUp from './routes/SignUp/SignUp'
 import SignUpAdm from './routes/SignUpAdm/SignUpAdm'
-import PerfilUsuario from './Components/PerfilUsuario/PerfilUsuario'
 import UserContextProvider from './context/userContext'
 
 
@@ -25,7 +24,6 @@ function App() {
           <Route path='/signupadm' element={<SignUpAdm/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path="/admin" element={<Admin/>}/>
-          <Route path='/profile' element={<PerfilUsuario/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
           <Route path='*' element={<h2>Page Not Found</h2>}/>
         </Routes>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import arrow from "../../assets/arrow.svg";
 import "./Producto.css";
-import Productos from "../../utils/products.json";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -27,14 +26,13 @@ const Producto = () => {
 
   useEffect(()=>{
     buscarInstrumento();
-  },[])
+  },[producto])
  
 
 
 
   return (
     <>
-
       <div className='subHeader'>
         {producto && <h2>{producto.nombre}</h2>}
         <Link to="/" className='textArrow'>

@@ -3,6 +3,7 @@ import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../../context/userContext';
 import { useEffect } from 'react';
+import UserModal from '../../Modal/UserModal';
 
 const Navbar = () => {
 
@@ -15,6 +16,15 @@ const Navbar = () => {
   const user = userContextResult.user;
 
   const [initials, setInitials] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     if (user && user.nombre && user.apellido) {
@@ -44,10 +54,8 @@ const Navbar = () => {
                       className='logoutButton'>
                         Cerrar sesion
                       </p>
-                  <div className='avatar'>
-                    <Link to='/profile'>
-                      <p>{initials}</p>
-                    </Link>
+                  <div className='avatar' >
+                      <p onClick={openModal}>{initials}</p>
                   </div>
                 </div>
           
@@ -64,6 +72,9 @@ const Navbar = () => {
             }
         
         </div>
+
+        {token !== null && user && (<UserModal isOpen={isModalOpen} closeModal={closeModal} user={user}/>)}
+
         <div className={`toggle ${isOpen && "open"}`} onClick={handleMenuToggle}>
           <span></span>          
           <span></span>          

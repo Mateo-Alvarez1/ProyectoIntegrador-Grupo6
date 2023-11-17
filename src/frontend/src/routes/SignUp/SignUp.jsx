@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import Input from "../../Components/Input/Input";
 import "./SignUp.css";
+import { Alert } from "@mui/material";
 
 const SignUp = () => {
   // estados para los campos del formulario
@@ -18,10 +19,11 @@ const SignUp = () => {
   // estado para el mensaje de error
   const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState("");
+  const [alert, setAlert] = useState(false);
 
   // navegación y context (para el logeo del usuario creado)
   const navigate = useNavigate();
-  const { login } = useContext(userContext);
+  const { login, setUserAlert } = useContext(userContext);
 
   // regex para validar el formulario
   const regex = {
@@ -119,6 +121,7 @@ const SignUp = () => {
             const data = await loginResponse.json();
             console.log(data);
             login({ ...data }); 
+            setUserAlert(true);
             navigate("/");
           } else {
             handleRegistrationError("Error al autenticar al usuario.");
@@ -143,6 +146,12 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    {alert && (
+      <Alert severity="success" onClose={() => setAlert(false)}>
+        ¡Cuenta creada con éxito!
+      </Alert>
+    )}
     <div className="formContainer">
       <h1 className="signUpTitle">Crear Cuenta</h1>
       <form
@@ -169,7 +178,7 @@ const SignUp = () => {
             type="text"
             id="userLastName"
             name="userLastName"
-            error="Solo se permiten letras y espacios."
+            error="Verifique la contraseña"
             placeholder="Ingrese su apellido"
             regex={regex.nameAndLastName}
           />
@@ -233,6 +242,7 @@ const SignUp = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
