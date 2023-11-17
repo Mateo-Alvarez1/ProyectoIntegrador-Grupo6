@@ -1,6 +1,6 @@
 import './admin.css'
 import { useState, useEffect } from 'react'
-import ProductoList from '../../Components/ProductoList/ProductoList'
+import ProductoList from './ProductoList/ProductoList'
 import ProductoForm from './ProductoForm/ProductoForm.jsx'
 import EditarProducto from './EditarProducto/EditarProducto.jsx'
 import { Navigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ import UsuarioList from './UsuarioList/UsuarioList.jsx'
 const Admin = () => {
   
 
-  const [listarProductos, setListarProductos] = useState(null)
+  const [listarProductos, setListarProductos] = useState([])
   const [crearProducto, setCrearProducto] = useState(null)
   const [editarProducto, setEditarProducto] = useState(null)
   const [listarUsuarios, setListarUsuarios] = useState([])
@@ -22,21 +22,29 @@ const Admin = () => {
   const user = context.user
 
 
- 
-
-
-
-
-  const mostrarListaProductos = () => {
-    setListarProductos(true)
-    setCrearProducto(false)
-    setEditarProducto(false)
-    setListarUsuarios([])
+  const productData=async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/instrumentos`)
+      const data = await response.json();
+      console.log(data);
+      setListarUsuarios(false)
+      setEditarProducto(false)
+      setCrearProducto(false)
+      setListarProductos(data)
+  }catch(error){
+      console.log(error);
   }
+}
+  // const mostrarListaProductos = () => {
+  //   setListarProductos(true)
+  //   setCrearProducto(false)
+  //   setEditarProducto(false)
+  //   setListarUsuarios([])
+  // }
 
   const mostrarCrearProducto = () => {
     setCrearProducto(true)
-    setListarProductos(false)
+    setListarProductos([])
     setEditarProducto(false)
     setListarUsuarios([])
   }
@@ -44,7 +52,7 @@ const Admin = () => {
   const mostrarEditarProducto = () => {
     setEditarProducto(true)
     setCrearProducto(false)
-    setListarProductos(false)
+    setListarProductos([])
     setListarUsuarios([])
   }
 
@@ -75,7 +83,7 @@ const Admin = () => {
         <h2 className='admin-title'>Administración</h2>
         <p className='admin-p'>¿Qué quieres hacer hoy?</p>
         <div className='buttons'>
-            <button onClick={mostrarListaProductos} className='product-button'>Listar Productos</button>
+            <button onClick={productData} className='product-button'>Listar Productos</button>
             <button onClick={mostrarCrearProducto} className='product-button'>Crear Producto</button>
             <button onClick={mostrarEditarProducto} className='product-button'>Editar Producto</button>
         </div>
@@ -83,7 +91,7 @@ const Admin = () => {
           <button className='product-button' onClick={userData}>Mostrar Usuarios</button>
         </div>
         
-        {listarProductos && <ProductoList/>}
+        {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
         {listarUsuarios.length > 0 && <UsuarioList listarUsuarios= {listarUsuarios} setListarUsuarios={setListarUsuarios}/>}

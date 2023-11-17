@@ -1,45 +1,46 @@
-import { useEffect } from "react";
-const ProductoList = ({ listarUsuarios, setListarUsuarios }) => {
+import { useEffect, useLocation } from "react";
+import { Navigate } from "react-router";
 
-
+const ProductoList = ({ listarProductos, setListarProductos }) => {
     
 
+
+    //const navigate = useNavigate();
+
     const actualizarLista= ()=>{
-        fetch(`http://localhost:8080/api/v1/usuarios/listar`)
+        fetch(`http://localhost:8080/api/v1/instrumentos`)
         .then(response=>response.json()).
-        then(data=>setListarUsuarios(data));
-       
+        then(data=>setListarProductos(data));
+    
     }
 
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        fetch(`http://localhost:8080/api/v1/usuarios/listar`)
-        .then(response=>response.json()).
-        then(data=>setListarUsuarios(data));
-       
+    //     fetch(`http://localhost:localhost/instrumentos`)
+    //     .then(response=>response.json()).
+    //     then(data=>setListarProductos(data));
+    
     
         
-      },[listarUsuarios])
+    // },[listarProductos])
 
 
-    const agregarRol = (email) => {
-        fetch(`http://localhost:8080/api/v1/auth/asignar/${email}`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        });
-        actualizarLista();
-
+    const editarProd = (id) => {        
+        <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
+        // fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //     'Content-Type': 'application/json',
+        //     },
+        // });
+        actualizarLista();     
         
-        
-            
                 };
     
-    const quitarRol = (email) => {
-        fetch(`http://localhost:8080/api/v1/auth/quitar/${email}`, {
-        method: 'POST',
+    const eliminarProd = (id) => {
+        fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         }
@@ -54,27 +55,22 @@ const ProductoList = ({ listarUsuarios, setListarUsuarios }) => {
     <thead>
         <tr className='usersTable'>
         <th scope="col">Id</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Email</th>
-        <th scope="col">Rol</th>
-        <th scope="col">Agregar Rol</th>
-        <th scope="col">Quitar Rol</th>
+        <th scope="col">Nombre</th>        
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
         </tr>
     </thead>
     <tbody >
-        {listarUsuarios.map((user) => (
-        <tr className='usersTable' key={user.id}>
-            <td>{user.id}</td>
-            <td>{user.nombre}</td>
-            <td>{user.apellido}</td>
-            <td>{user.email}</td>
-            <td>{user.role}</td>
+        {listarProductos.map((product) => (
+        <tr className='usersTable' key={product.id}>
+            <td>{product.id}</td>
+            <td>{product.nombre}</td>
+            
             <td>
-                <button className="role_button" onClick={() => agregarRol(user.email)}>Agregar Rol</button>
+                <button className="action_button" onClick={() => editarProd(product.id)}>Editar</button>
             </td>
             <td>
-                <button className="role_button"  onClick={() => quitarRol(user.email)}>Quitar Rol</button>
+                <button className="action_button"  onClick={() => eliminarProd(product.id)}>Eliminar</button>
             </td>
         </tr>
         ))}

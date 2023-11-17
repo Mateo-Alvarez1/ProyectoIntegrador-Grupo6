@@ -8,7 +8,7 @@ const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
         fetch(`http://localhost:8080/api/v1/usuarios/listar`)
         .then(response=>response.json()).
         then(data=>setListarUsuarios(data));
-       
+    
     }
 
 
@@ -17,10 +17,10 @@ const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
         fetch(`http://localhost:8080/api/v1/usuarios/listar`)
         .then(response=>response.json()).
         then(data=>setListarUsuarios(data));
-       
+    
     
         
-      },[listarUsuarios])
+    },[listarUsuarios])
 
 
     const agregarRol = (email) => {
