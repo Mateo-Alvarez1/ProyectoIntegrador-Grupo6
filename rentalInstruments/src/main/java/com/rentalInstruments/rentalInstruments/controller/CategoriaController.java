@@ -18,7 +18,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> agregarCategoria(@RequestBody CategoriaDto categoriaDto) throws ObjectAlreadyExists {
         return ResponseEntity.ok(categoriaService.agregarCategoria(categoriaDto));
     }
-    @DeleteMapping
+    @DeleteMapping ("/{id}")
     public ResponseEntity<String> eliminarCategoria (@PathVariable  Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoriaService.eliminarCategoria(id).getBody());
     }
