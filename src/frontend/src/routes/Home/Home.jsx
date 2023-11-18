@@ -6,10 +6,22 @@ import Recomendaciones from '../../Components/Recomendaciones/recomendaciones'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
 import { Alert } from '@mui/material'
+import { useState } from 'react'
+import ProductoCard from '../../Components/ProductoCard/ProductoCard'
 
 const Home = () => {
 
   const {userAlert, setUserAlert} = useContext(userContext)
+  const [searchResults, setSearchResults] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+  };
+
+  const handleSearchQuery = (query) => {
+    setSearchQuery(query);
+  }
 
   useEffect(() => {
     if (userAlert) {
@@ -26,7 +38,7 @@ const Home = () => {
     {userAlert && (
       <Alert severity='success' 
       className='custom-alert'
-      sx={{transition: "opacity 0.5s ease-in-out",
+      sx={{transition: "opacity 0.5s ease-in-out", // no funca la animación :/
       width: '300px',
       margin: '0 auto',
       marginTop: '10px',
@@ -41,12 +53,41 @@ const Home = () => {
         <TypeIt className="welcome-title" element={"h2"}>¡Bienvenido!</TypeIt> 
         <p className='welcome-subtitle'>En Pitch Please podrás alquilar el instrumento que estás buscando.</p>
       </div>
-      <Buscador/>
+      <Buscador onSearch={handleSearchResults} onSearchQuery={handleSearchQuery}/>
     </div>
     
     <Categorias/>
-    <Recomendaciones/>
-    </>
+    {searchResults && searchResults.length > 0 ? (
+      <div>
+        <h3 className="search-results-title">Resultados de la búsqueda:</h3>
+        {searchResults.map((producto) => {
+          if (producto && producto.nombre) {
+            return (
+              <>
+              <div className="search-results-container"  key={producto.id}>
+                <ProductoCard key={producto.id} producto={producto} />
+              </div>
+              </>
+            )
+          } else {
+            return null;
+          }
+        })}
+      </div>
+    ) : (
+      searchResults.length === 0 && searchQuery !== "" ? (
+        <Alert severity='error'
+        sx={{margin: '0 auto',
+        textAlign: 'center',
+        width: '500px',
+        marginBottom: '50px'}}>
+          No se encontraron resultados para {searchQuery}
+        </Alert>
+    ) : (
+      <Recomendaciones/>
+    )
+  )}
+  </>
   )
 }
 

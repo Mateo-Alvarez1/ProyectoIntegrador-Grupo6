@@ -1,5 +1,5 @@
 import "./recomendaciones.css";
-import productos from "../../utils/products.json";
+// import productos from "../../utils/products.json";
 import { useState, useEffect } from "react";
 import ProductoCard from "../ProductoCard/ProductoCard";
 
@@ -32,10 +32,6 @@ useEffect(()=>{
   buscarInstrumentos()
 },[])
 
-
- 
-
- 
 
   return (
     <div id="recomendacionesContainer">
