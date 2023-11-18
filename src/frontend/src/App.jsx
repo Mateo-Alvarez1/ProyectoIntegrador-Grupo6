@@ -10,6 +10,7 @@ import Login from './routes/Login/Login'
 import SignUp from './routes/SignUp/SignUp'
 import SignUpAdm from './routes/SignUpAdm/SignUpAdm'
 import UserContextProvider from './context/userContext'
+import EditarProducto from './pages/Admin/EditarProducto/EditarProducto'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path="/admin" element={<Admin/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
+          <Route path="/editarprod/:productid" element={<EditarProducto/>} />
           <Route path='*' element={<h2>Page Not Found</h2>}/>
         </Routes>
         <Footer/>

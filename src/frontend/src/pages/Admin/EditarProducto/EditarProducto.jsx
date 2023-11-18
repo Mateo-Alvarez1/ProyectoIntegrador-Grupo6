@@ -1,68 +1,82 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./editarproducto.css";
+import { useParams } from 'react-router';
 
-const EditarProducto = ({location}) => {
-  const { id } = location.state;
+const EditarProducto = () => {
+  const { productid } = useParams();
   const [producto, setProducto] = useState({
-    nombre: '',
-    categoria: '',
-    precio: ''
+    nombre: "",
+    categoria: "",
+    precio: ""
     
   });
 
-  const InputChange = (e) => {
+  useEffect(() => {
+    
+    const ModProducto = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080//api/v1/instrumentos/${productid}`);
+        const data = await response.json();
+
+        
+        setProducto({
+          id: data.id,
+          nombre: data.nombre,
+          categoria: data.categoria,
+          precio: data.precio
+        });
+      } catch (error) {
+        console.error('Error al obtener la información del producto', error);
+      }
+    };
+
+    
+    ModProducto();
+  }, [productid]);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setProducto({
-      ...producto,
+    setProducto((prevProducto) => ({
+      ...prevProducto,
       [name]: value,
-    });
-};
+    }));
+  };
 
-const handleEditSubmit = async (e) => {
-  e.preventDefault();
+  const handleEditSubmit = async () => {
+    
+    try {
+      await fetch(`http://localhost:8080//api/v1/instrumentos/${productid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(producto),
+      });
 
-
-  const url = `http://localhost:8080//api/v1/instrumentos/${id}`;
-  const body = JSON.stringify({
-    nombre: producto.nombre,
-    categoria: producto.categoria,
-  });
-
-  const response = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: body,
-  });
-
-  if (response.ok) {
-    console.log("El producto se editó correctamente");
-  } else {
-    console.log("Ocurrió un error al editar el producto");
-  }
-};
+      
+    } catch (error) {
+      console.error('Error al actualizar el producto', error);
+    }
+  };
 
 return (
   <div className='editar-producto-container'>
+    <h2>Editar Producto</h2>
     <form>
-      <div className='input-container'>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="nombre"
-          value={producto.nombre}
-          onChange={InputChange}
-        />
-      </div>
+      <label>ID:</label>
+      <input type="text" value={producto.id} readOnly/>
 
+      <label>NOMBRE:</label>
+      <input type="text" value={producto.nombre} readOnly/>
+
+      
       <div className='input-container'>
         <label>Categoria:</label>
         <input
           type="text"
           name="categoria"
           value={producto.categoria}
-          onChange={InputChange}
+          onChange={handleChange}
         />
       </div>
 
@@ -72,7 +86,7 @@ return (
           type="text"
           name="precio"
           value={producto.precio}
-          onChange={InputChange}
+          onChange={handleChange}
         />
       </div>
 

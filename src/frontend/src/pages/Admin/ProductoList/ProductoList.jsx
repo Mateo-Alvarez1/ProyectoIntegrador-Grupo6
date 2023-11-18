@@ -1,5 +1,5 @@
-import { useEffect, useLocation } from "react";
-import { Navigate } from "react-router";
+import { useEffect } from "react";
+import { Navigate, Link } from "react-router-dom";
 
 const ProductoList = ({ listarProductos, setListarProductos }) => {
     
@@ -26,17 +26,17 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
     // },[listarProductos])
 
 
-    const editarProd = (id) => {        
-        <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
+    // const editarProd = (id) => {        
+    //     <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
         // fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
         //     method: 'PUT',
         //     headers: {
         //     'Content-Type': 'application/json',
         //     },
         // });
-        actualizarLista();     
+        // actualizarLista();     
         
-                };
+                
     
     const eliminarProd = (id) => {
         fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
@@ -67,7 +67,9 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
             <td>{product.nombre}</td>
             
             <td>
-                <button className="action_button" onClick={() => editarProd(product.id)}>Editar</button>
+            <Link to={`/editarprod/${product.id}`}>
+                <button className="action_button">Editar</button>
+            </Link>
             </td>
             <td>
                 <button className="action_button"  onClick={() => eliminarProd(product.id)}>Eliminar</button>
