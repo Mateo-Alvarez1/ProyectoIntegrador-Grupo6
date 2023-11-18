@@ -38,7 +38,10 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
-
+    @ManyToMany
+    @JoinTable (name = "usuario_instrumento_favorito", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "instrumento_id"))
+    private Set<Instrumento> instrumentosFavoritos = new HashSet<>();
 
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
@@ -77,5 +80,12 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+    public void agregarInstrumentoFavorito(Instrumento instrumento) {
+        this.instrumentosFavoritos.add(instrumento);
+    }
+
+    public void quitarInstrumentoFavorito(Instrumento instrumento) {
+
     }
 }
