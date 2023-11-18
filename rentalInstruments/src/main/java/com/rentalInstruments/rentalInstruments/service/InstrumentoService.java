@@ -171,5 +171,33 @@ public class InstrumentoService implements InstrumentoInterface {
         log.info("Categoria actualizada correctamente");
         return instrumento;
     }
+    private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){
+
+        Instrumento instrumento = new Instrumento();
+
+        Optional <Marca> marcaOptional= marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
+        instrumento.setMarca(marcaOptional.orElseGet( () -> {
+            Marca marca = new Marca();
+            marca.setNombre(instrumentoDto.getMarca().getNombre());
+            return marcaRepository.save(marca);
+        }));
+
+        Optional <Modelo> modeloOptional= modeloRepository.findByNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+        instrumento.setModelo(modeloOptional.orElseGet( () -> {
+            Modelo modelo = new Modelo();
+            modelo.setNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+            return modeloRepository.save(modelo);
+        }));
+
+        Optional <Categoria> categoriaOptional= categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        instrumento.setCategoria( categoriaOptional.orElseGet(() -> {
+            Categoria categoria = new Categoria();
+            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
+            return categoriaRepository.save(categoria);
+        }));
+
+        return instrumento;
+
+    }
 }
 
