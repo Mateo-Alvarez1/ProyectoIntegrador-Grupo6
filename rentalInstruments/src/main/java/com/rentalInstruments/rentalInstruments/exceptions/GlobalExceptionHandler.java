@@ -1,5 +1,6 @@
 package com.rentalInstruments.rentalInstruments.exceptions;
 
+import com.amazonaws.services.connect.model.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,5 +28,12 @@ public class GlobalExceptionHandler {
     private ResponseEntity<String> badRequest(BadRequestException BRE){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BRE.getMessage());
     }
-
+    @ExceptionHandler({UserNotFoundException.class})
+    private ResponseEntity<String> userNotFoundException(UserNotFoundException UNFE){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(UNFE.getMessage());
+    }
+    @ExceptionHandler({ReservaNoDisponibleException.class})
+    private ResponseEntity<String> ReservaNoDisponibleException(ReservaNoDisponibleException RNDE){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RNDE.getMessage());
+    }
 }
