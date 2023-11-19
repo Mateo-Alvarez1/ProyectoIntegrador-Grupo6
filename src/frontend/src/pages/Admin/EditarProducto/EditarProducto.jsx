@@ -61,37 +61,40 @@ const EditarProducto = () => {
   };
 
 return (
-  <div className='editar-producto-container'>
-    <h2>Editar Producto</h2>
-    <form>
-      <label>ID:</label>
-      <input type="text" value={producto.id} />
+  <div >
+    
+    <form className='editar-producto-form'>
+    <h2 className='h2-edit'>Editar Producto</h2>
+      <label className='label-form'>ID:</label>
+      <input className='input-form' type="text" value={producto.id} />
 
-      <label>NOMBRE:</label>
-      <input type="text" value={producto.nombre} />
+      <label className='label-form'>NOMBRE:</label>
+      <input className='input-form'type="text" value={producto.nombre} />
 
       
-      <div className='input-container'>
-        <label>Categoria:</label>
+      
+        <label className='label-form'>Categoria:</label>
         <input
+          className='input-form'
           type="text"
           name="categoria"
           value={producto.categoria}
           onChange={handleChange}
         />
-      </div>
+      
 
-      <div className='input-container'>
-        <label>Precio:</label>
+      
+        <label className='label-form'>Precio:</label>
         <input
+          className='input-form'
           type="text"
           name="precio"
           value={producto.precio}
           onChange={handleChange}
         />
-      </div>
+      
 
-      <button onClick={handleEditSubmit}>Editar</button>
+      <button className= 'button-edit'onClick={handleEditSubmit}>Editar</button>
     </form>
   </div>
 );
