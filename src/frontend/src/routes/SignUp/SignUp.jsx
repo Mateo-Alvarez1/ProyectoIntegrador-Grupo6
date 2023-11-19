@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import Input from "../../Components/Input/Input";
 import "./SignUp.css";
-import { Alert } from "@mui/material";
+
 
 const SignUp = () => {
   // estados para los campos del formulario
@@ -19,7 +19,6 @@ const SignUp = () => {
   // estado para el mensaje de error
   const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState("");
-  const [alert, setAlert] = useState(false);
 
   // navegación y context (para el logeo del usuario creado)
   const navigate = useNavigate();
@@ -147,11 +146,6 @@ const SignUp = () => {
 
   return (
     <>
-    {alert && (
-      <Alert severity="success" onClose={() => setAlert(false)}>
-        ¡Cuenta creada con éxito!
-      </Alert>
-    )}
     <div className="formContainer">
       <h1 className="signUpTitle">Crear Cuenta</h1>
       <form

@@ -3,13 +3,15 @@ import { Categorias } from '../../Components/Categorias/Categorias'
 import TypeIt from 'typeit-react'
 import './home.css'
 import Recomendaciones from '../../Components/Recomendaciones/recomendaciones'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { userContext } from '../../context/userContext'
 import { Alert } from '@mui/material'
 import { useState } from 'react'
 import ProductoCard from '../../Components/ProductoCard/ProductoCard'
 
 const Home = () => {
+
+  const searchResultsRef = useRef(null);
 
   const {userAlert, setUserAlert} = useContext(userContext)
   const [searchResults, setSearchResults] = useState([])
@@ -22,6 +24,12 @@ const Home = () => {
   const handleSearchQuery = (query) => {
     setSearchQuery(query);
   }
+
+  const scrollToResults = () => {
+    if (searchResultsRef.current) {
+      searchResultsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     if (userAlert) {
@@ -53,26 +61,24 @@ const Home = () => {
         <TypeIt className="welcome-title" element={"h2"}>¡Bienvenido!</TypeIt> 
         <p className='welcome-subtitle'>En Pitch Please podrás alquilar el instrumento que estás buscando.</p>
       </div>
-      <Buscador onSearch={handleSearchResults} onSearchQuery={handleSearchQuery}/>
+      <Buscador onSearch={handleSearchResults} onSearchQuery={handleSearchQuery} scrollToResults={scrollToResults}/>
     </div>
     
     <Categorias/>
     {searchResults && searchResults.length > 0 ? (
-      <div>
+      <div ref={searchResultsRef}>
         <h3 className="search-results-title">Resultados de la búsqueda:</h3>
-        {searchResults.map((producto) => {
-          if (producto && producto.nombre) {
-            return (
-              <>
-              <div className="search-results-container"  key={producto.id}>
+        <div className='search-results-container'>
+          {searchResults.map((producto) => {
+            if (producto && producto.nombre) {
+              return (
                 <ProductoCard key={producto.id} producto={producto} />
-              </div>
-              </>
-            )
-          } else {
-            return null;
-          }
-        })}
+              )
+            } else {
+              return null;
+            }
+          })}
+        </div>
       </div>
     ) : (
       searchResults.length === 0 && searchQuery !== "" ? (

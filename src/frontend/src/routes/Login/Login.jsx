@@ -3,6 +3,7 @@ import Input from "../../Components/Input/Input";
 import "./Login.css"
 import { useNavigate } from "react-router";
 import { userContext } from "../../context/userContext";
+import { Link } from "react-router-dom";
 
 
 const Login = () => {
@@ -79,22 +80,22 @@ const Login = () => {
 }
 
   return (
-    <div>
-      <h1 className="titulo">Login</h1>
-      <form className= "form" onSubmit={handleSubmit}>
-      <Input className= "input"
+    <div className="formContainer">
+      <h1 className="signUpTitle">Inicia Sesión</h1>
+      <form className= "signUpForm" onSubmit={handleSubmit}>
+      <Input
               state={userEmail}
               setState={setUserEmail}
               label='Email'
               type='email'
               id='userEmail'
               name='userEmail'
-              error='No se encuentra usuario registrado con este email.'
+              error='El formato del email no es válido.'
               placeholder='Ingrese su email'
               regex={regex.email}
               
             />
-      <Input className= "input"
+      <Input
               state={userPassword}
               setState={setUserPassword}
               label='Contraseña'
@@ -106,11 +107,19 @@ const Login = () => {
               regex={regex.password}
             />
         {isFormValid === false && (
-          <p className="error">
+          <p className="errorMsgForm">
             {error ? error : "Los datos son inválidos, por favor vuelva a intentarlo."}
           </p>
         )}
-      <button className= "button" type="submit">Iniciar sesión</button>
+      <button className="submitButton" type="submit">Iniciar sesión</button>
+      <div className="loginAccess">
+          <p>¿No tienes una cuenta?</p>
+          <p>
+            <Link className="loginLink" to="/signup">
+              Registrate
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   )
