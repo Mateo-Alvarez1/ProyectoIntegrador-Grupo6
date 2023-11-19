@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import "./editarproducto.css";
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 const EditarProducto = () => {
-  const { productid } = useParams();
+  const { id } = useParams();
+  console.log(id);
   const [producto, setProducto] = useState({
     nombre: "",
     categoria: "",
@@ -15,14 +16,14 @@ const EditarProducto = () => {
     
     const ModProducto = async () => {
       try {
-        const response = await fetch(`http://localhost:8080//api/v1/instrumentos/${productid}`);
+        const response = await fetch(`http://localhost:8080/api/v1/instrumentos/${id}`);
         const data = await response.json();
 
         
         setProducto({
           id: data.id,
           nombre: data.nombre,
-          categoria: data.categoria,
+          categoria: data.categoria.nombre ,
           precio: data.precio
         });
       } catch (error) {
@@ -32,12 +33,12 @@ const EditarProducto = () => {
 
     
     ModProducto();
-  }, [productid]);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProducto((prevProducto) => ({
-      ...prevProducto,
+    setProducto((producto) => ({
+      ...producto,
       [name]: value,
     }));
   };
@@ -45,7 +46,7 @@ const EditarProducto = () => {
   const handleEditSubmit = async () => {
     
     try {
-      await fetch(`http://localhost:8080//api/v1/instrumentos/${productid}`, {
+      await fetch(`http://localhost:8080/api/v1/instrumentos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -64,10 +65,10 @@ return (
     <h2>Editar Producto</h2>
     <form>
       <label>ID:</label>
-      <input type="text" value={producto.id} readOnly/>
+      <input type="text" value={producto.id} />
 
       <label>NOMBRE:</label>
-      <input type="text" value={producto.nombre} readOnly/>
+      <input type="text" value={producto.nombre} />
 
       
       <div className='input-container'>
