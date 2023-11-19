@@ -48,6 +48,6 @@ public class Instrumento {
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
 
-
+    private List<String> imagenes = new ArrayList<>();
 
 }

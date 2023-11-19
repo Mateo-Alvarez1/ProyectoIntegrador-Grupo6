@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -27,12 +29,28 @@ public class CategoriaService implements ICategoriaService{
 
 
     @Override
-    public String eliminarCategoria(String nombre) throws InvalidDataEntry {
+    public String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry {
+
         Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(nombre);
+        Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
+        System.out.println(instrumentoOptional.get());
+        instrumentoOptional.get().setCategoria(null);
+        instrumentoRepository.save(instrumentoOptional.get());
+
+
+        Set<Instrumento> instrumentos = categoriaOptional.get().getInstrumentos();
+        System.out.println(instrumentos);
+        for (Instrumento instrumento:instrumentos) {
+        if (instrumento.getCategoria().getId().equals(categoriaOptional.get().getId())){
+            instrumento.setCategoria(null);
+            }
+        }
         if (!categoriaOptional.isPresent()) {
             log.error("No se encontro una categoria con el nombre: " + nombre);
             throw new InvalidDataEntry("Se intento buscar una categoria que no se encuentra en la base de datos");
         }
+
+
 
         if (categoriaOptional.get().getNombre().equals(nombre)) {
             categoriaRepository.deleteByNombre(nombre);
@@ -70,5 +88,16 @@ public class CategoriaService implements ICategoriaService{
         log.info("Categoria actualizada correctamente");
         instrumentoRepository.save(instrumento);
         return instrumentoOptional.get();
+    }
+
+    @Override
+    public List<Categoria> listarCategorias() throws ResourceNotFoundException {
+       List<Categoria> categorias = categoriaRepository.findAll();
+       if (categorias.isEmpty()){
+           log.error("La lista de categorias esta vacia");
+           throw new ResourceNotFoundException("La lista de categorias esta vacia");
+       }
+       log.info("Categorias listadas correctamente");
+       return categorias;
     }
 }

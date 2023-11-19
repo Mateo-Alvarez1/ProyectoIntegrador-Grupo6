@@ -21,11 +21,15 @@ public class CategoriaController {
     public ResponseEntity<?> CambiarCategoria(@PathVariable Long id , @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
         return ResponseEntity.ok(categoriaService.editarCategoria(id ,instrumentoDto));
     }
-    @DeleteMapping("/{nombre}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable String nombre) throws InvalidDataEntry {
-        return ResponseEntity.ok(categoriaService.eliminarCategoria(nombre));
+    @DeleteMapping("/{id}/{nombre}")
+    public ResponseEntity<String> eliminarCategoria(@PathVariable String nombre , @PathVariable Long id) throws InvalidDataEntry {
+        return ResponseEntity.ok(categoriaService.eliminarCategoria(nombre , id));
     }
 
+    @GetMapping
+    public ResponseEntity<?> listarCategorias() throws ResourceNotFoundException {
+        return ResponseEntity.ok(categoriaService.listarCategorias());
+    }
 
 
 

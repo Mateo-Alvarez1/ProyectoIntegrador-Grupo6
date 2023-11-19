@@ -7,9 +7,12 @@ import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 
+import java.util.List;
+
 public interface ICategoriaService {
 
-    String eliminarCategoria(String nombre) throws InvalidDataEntry;
+    String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry;
     Instrumento editarCategoria (Long id , InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists;
+    List<Categoria> listarCategorias() throws ResourceNotFoundException;
 
 }
