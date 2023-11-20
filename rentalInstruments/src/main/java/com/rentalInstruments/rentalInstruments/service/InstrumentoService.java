@@ -44,11 +44,11 @@ public class InstrumentoService implements IInstrumentoService {
         }
 
         Instrumento instrumento =  instanciasMCM(instrumentoDto);
-        instrumento.setImagenes(instrumentoDto.getImagenes());
+        // instrumento.setImagenes(instrumentoDto.getImagenes());
         instrumento.setPrecio(instrumentoDto.getPrecio());
         instrumento.setStock(instrumentoDto.getStock());
         instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+        instrumento.setNombre(instrumento.getCategoria().getNombre() + " " + instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
 
         log.info("Instrumento persistido satisfactoriamente");
         instrumentoRepository.save(instrumento);
@@ -111,26 +111,61 @@ public class InstrumentoService implements IInstrumentoService {
         Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
 
         if (!instrumentoOptional.isPresent()) {
-            log.error("El instrumento no se encontro en la base de datos");
+            log.error("El instrumento no se encontró en la base de datos");
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
 
-
         Instrumento instrumento = instrumentoOptional.get();
 
-        instanciasMCM(instrumentoDto);
-
+        instrumento.setColor(instrumentoDto.getColor());
         instrumento.setPrecio(instrumentoDto.getPrecio());
         instrumento.setStock(instrumentoDto.getStock());
-        instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+
+        // Actualizar la relación de Marca
+        Marca marca = null;
+        Optional<Marca> marcaOptional = marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
+        if (marcaOptional.isPresent()) {
+            marca = marcaOptional.get();
+        } else {
+            // Si la Marca no existe, se crea una nueva
+            marca = new Marca();
+            marca.setNombre(instrumentoDto.getMarca().getNombre());
+            marca = marcaRepository.save(marca);
+        }
+        instrumento.setMarca(marca);
+
+        // Actualizar la relación de Modelo
+        Modelo modelo = null;
+        Optional<Modelo> modeloOptional = modeloRepository.findByNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+        if (modeloOptional.isPresent()) {
+            modelo = modeloOptional.get();
+        } else {
+            // Si el Modelo no existe, se crea uno nuevo
+            modelo = new Modelo();
+            modelo.setNumeroSerie(instrumentoDto.getModelo().getNumeroSerie());
+            modelo = modeloRepository.save(modelo);
+        }
+        instrumento.setModelo(modelo);
+
+        // Actualizar la relación de Categoria
+        Categoria categoria = null;
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        if (categoriaOptional.isPresent()) {
+            categoria = categoriaOptional.get();
+        } else {
+            // Si la Categoria no existe, se crea una nueva
+            categoria = new Categoria();
+            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
+            categoria = categoriaRepository.save(categoria);
+        }
+        instrumento.setCategoria(categoria);
+
+        instrumento.setNombre(instrumento.getCategoria().getNombre() + " " + instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
 
         log.info("Instrumento modificado correctamente");
         instrumentoRepository.save(instrumento);
         return instrumento;
     }
-
-
 
 
     private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){
