@@ -16,15 +16,15 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
     }
 
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        fetch(`http://localhost:8080/api/v1/instrumentos`)
-        .then(response=>response.json()).
-        then(data=>setListarProductos(data));
+    //     fetch(`http://localhost:8080/api/v1/instrumentos`)
+    //     .then(response=>response.json()).
+    //     then(data=>setListarProductos(data));
     
     
         
-    },[listarProductos])
+    // },[listarProductos])
 
 
     // const editarProd = (id) => {        
