@@ -83,7 +83,7 @@ const ProductoForm = () => {
       enviarImagenes();
 
     agregarProducto(producto);
-    //limpiarform();
+    limpiarform();
   };
 
   const limpiarform = () =>  {

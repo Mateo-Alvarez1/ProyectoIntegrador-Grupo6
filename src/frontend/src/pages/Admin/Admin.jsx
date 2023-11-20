@@ -7,17 +7,22 @@ import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { userContext } from '../../context/userContext.jsx'
 import UsuarioList from './UsuarioList/UsuarioList.jsx'
-
+import EliminarCategoria from './EliminarCategoria/EliminarCategoria.jsx'
+//import { Redirect } from "react-router-dom";
 
 const Admin = () => {
   
 
   const [listarProductos, setListarProductos] = useState([])
-  const [crearProducto, setCrearProducto] = useState(null)
+  const [crearProducto, setCrearProducto] = useState(false)
   const [editarProducto, setEditarProducto] = useState(null)
-  const [listarUsuarios, setListarUsuarios] = useState([])  
+  const [listarUsuarios, setListarUsuarios] = useState([])
+  const [eliminarCategoria, setEliminarCategoria] = useState(false)
+  const [categoria, setCategoria] = useState([])
+
+
+  //const navigate  = useNavigate()
   const context = useContext(userContext)
-  const token = context.userjwt
   const user = context.user
   const [mostrarListaUsuario, setMostrarListaUsuarios] = useState(null)
 
@@ -33,23 +38,39 @@ const Admin = () => {
       setEditarProducto(false)
       setCrearProducto(false)
       setListarProductos(data)
-      setMostrarListaUsuarios(false)
-      
+      setEliminarCategoria(false)
   }catch(error){
       console.log(error);
   }
 }
 
+const listarCategorias = async() => {
+  try{
+    const response =   await fetch('http://localhost:8080/api/v1/categoria')
+    const data = await response.json()
+    setCategoria(data)
+    console.log(data);
+  }catch(error){
+    console.log(error);
+  }
+
+  }
+
+  // const mostrarListaProductos = () => {
+  //   setListarProductos(true)
+  //   setCrearProducto(false)
+  //   setEditarProducto(false)
+  //   setListarUsuarios([])
+  // }
 
   
 
   const mostrarCrearProducto = () => {
-    setCrearProducto(true)
+    setCrearProducto(!crearProducto)
     setListarProductos([])
     setEditarProducto(false)
     setListarUsuarios([])
-    setMostrarListaUsuarios(false)
-    
+    setEliminarCategoria(false)
   }
 
   const mostrarEditarProducto = () => {
@@ -57,8 +78,15 @@ const Admin = () => {
     setCrearProducto(false)
     setListarProductos([])
     setListarUsuarios([])
-    setMostrarListaUsuarios(false)
-    
+    setEliminarCategoria(false)
+  }
+
+  const mostrarEliminarCategoria = () => {
+    setEditarProducto(false)
+    setCrearProducto(false)
+    setListarProductos([])
+    setListarUsuarios([])
+    setEliminarCategoria(!eliminarCategoria)
   }
 
   const userData=async () => {
@@ -76,12 +104,13 @@ const Admin = () => {
       console.log(error);
   }
 }
+
   if(user.rol !== "ROLE_ADMIN"){
     
     return <Navigate to="/"/>
-    
-    
   }
+
+
 
   return (
     <>    
@@ -96,7 +125,11 @@ const Admin = () => {
         </div>
         <div className='buttons'>
           <button className='product-button' onClick={userData}>Mostrar Usuarios</button>
+          <button className='product-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
         </div>
+       
+       
+        {eliminarCategoria && <EliminarCategoria categoria={categoria} setCategoria={setCategoria} />}
         {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
         {crearProducto && <ProductoForm/>}
         {editarProducto && <EditarProducto/>}
