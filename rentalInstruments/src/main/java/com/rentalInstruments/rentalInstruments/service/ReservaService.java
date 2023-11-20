@@ -51,7 +51,7 @@ public class ReservaService {
 
     }
     private boolean verificarDisponibilidad(Instrumento instrumento, LocalDate fechaInicio, LocalDate fechaDevolucion) {
-        Optional<Reserva> reservas = reservaRepository.findByInstrumentoAndFechaInicioBetweenOrFechaDevolucionBetween(
+        Optional<Reserva> reservas = reservaRepository.buscarResevaPorInstrumentoYFecha(
                 instrumento,
                 fechaInicio,
                 fechaDevolucion
