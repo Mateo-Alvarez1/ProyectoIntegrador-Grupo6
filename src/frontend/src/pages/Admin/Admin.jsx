@@ -56,13 +56,6 @@ const listarCategorias = async() => {
 
   }
 
-  // const mostrarListaProductos = () => {
-  //   setListarProductos(true)
-  //   setCrearProducto(false)
-  //   setEditarProducto(false)
-  //   setListarUsuarios([])
-  // }
-
   
 
   const mostrarCrearProducto = () => {
@@ -118,17 +111,26 @@ const listarCategorias = async() => {
     <section className='admin-body'>
         <h2 className='admin-title'>Administración</h2>
         <p className='admin-p'>¿Qué quieres hacer hoy?</p>
-        <div className='buttons'>
+        <h3 className='h3-admin'>Productos</h3>
+        <div className='buttons'>            
             <button onClick={productData} className='product-button'>Listar Productos</button>
             <button onClick={mostrarCrearProducto} className='product-button'>Crear Producto</button>
             <button onClick={mostrarEditarProducto} className='product-button'>Editar Producto</button>
         </div>
-        <div className='buttons'>
-          <button className='product-button' onClick={userData}>Mostrar Usuarios</button>
-          <button className='product-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
+        <h3 className='h3-admin'>Usuarios/Reservas</h3>
+        <div className='buttons'>        
+          <button className='user-button' onClick={userData}>Mostrar Usuarios</button>
+          <button className='user-button' >Listado Reservas</button>
+          <button className='user-button' >Reservas</button>
         </div>
-       
-       
+        <h3 className='h3-admin'>Categorias</h3>
+        <div className='buttons'>
+        <button className='categ-button' >Listado Categoria</button>
+          <button className='categ-button' >Modificar Categoria</button>
+          <button className='categ-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
+        </div>
+      
+      
         {eliminarCategoria && <EliminarCategoria categoria={categoria} setCategoria={setCategoria} />}
         {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
         {crearProducto && <ProductoForm/>}

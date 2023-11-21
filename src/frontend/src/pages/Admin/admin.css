@@ -21,7 +21,7 @@
     font-size: 20px;
     text-align: center;
     color: #000000;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -33,12 +33,14 @@
 }
 
 .product-button {
-    background-color: #ffffff;
+    background-color: #A9D6E9;
     border-radius: 10px;
     padding: 15px;
     font-size: 18px;
     width: 22%;
     box-shadow: 2px 2px 2px #e0dfdf;
+    border: none;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .product-button:hover {
@@ -46,10 +48,36 @@
     transition: all 0.5s;
 }
 
-.product-button button {
+
+
+.user-button {
+    background-color: #BAF2FA;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    width: 22%;
+    box-shadow: 2px 2px 2px #e0dfdf;
     border: none;
-    background-color: white;
     font-family: 'Roboto Condensed', sans-serif;
+}
+.user-button:hover {
+    transform: scale(1.05);
+    transition: all 0.5s;
+}
+
+.categ-button {
+    background-color: #92B1EC;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    width: 22%;
+    box-shadow: 2px 2px 2px #e0dfdf;
+    border: none;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.categ-button:hover {
+    transform: scale(1.05);
+    transition: all 0.5s;
 }
 
 .unavailable-button {
@@ -67,39 +95,49 @@
     align-items: center;
     margin: 0 auto;
     margin-top: 100px;
-  }
-  
-  .usersTable {
+}
+
+.usersTable {
     text-align: center;
-  }
-  
-  th {
+}
+
+th {
     text-align: center;
     padding: 10px;
     background-color: #f2f2f2;
     border: 1px solid #ddd;
     color: #4f6073;
     font-size: 20px;
-  }
-  
-  td {
+}
+
+td {
     padding: 10px;
     border: 1px solid #ddd;
-  }
+}
 
 
-  .role_button{
+.role_button{
     padding: 10px;
     width: 60%;
     border-radius: 5px;
-  }
+}
 
-  .role_button:hover{
+.role_button:hover{
     transform: scale(1.05);
     transition: all .5s;
-  }
+}
 
-
+.h3-admin{
+    color: #4F6073;
+    text-align: left;
+    font-family: Roboto;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 40px;
+    margin-left: 200px;
+}
 
 
 @media (max-width: 600px) {
