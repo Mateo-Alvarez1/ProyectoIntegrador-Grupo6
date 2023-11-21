@@ -9,6 +9,8 @@ const ProductoCard = ({ producto }) => {
         <p>Precio: USD {producto.precio}</p>
         <img src={producto.imagen} alt={producto.nombre} /> {/* producto.imagen[0] */}
         <Link className="cardLink" to={`/producto/${producto.id}`}>Ver más</Link>
+        <Link className="cardLink" to={`/reservas`}>Reservar</Link>
+
         {producto && console.log(producto)}
     </div>
   )
