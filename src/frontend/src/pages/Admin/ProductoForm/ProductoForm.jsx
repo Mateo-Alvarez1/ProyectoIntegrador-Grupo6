@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import "./productoform.css";
 import { useDropzone } from "react-dropzone";
 import Producto from "../../../routes/Producto/Producto";
+import { Alert } from "@mui/material";
 
 const ProductoForm = () => {
+
+  const [alert, setAlert] = useState(false);
+
   const URL = "http://localhost:8080/api/v1/instrumentos";
 
   const URlIMG = "http://localhost:8080/file/upload";
@@ -17,7 +21,15 @@ const ProductoForm = () => {
       body: JSON.stringify(producto),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data)
+        if(data.status === "OK"){
+          setAlert(true)
+          setTimeout(() => {
+            setAlert(false)
+          }, 3000);
+        }
+      })
       .catch((error) => console.error("Error al enviar la solicitud:", error));
   };
 
@@ -27,7 +39,7 @@ const ProductoForm = () => {
       const file = uploadedFiles[i];
   
       // Renombrar el archivo antes de enviarlo
-      const nuevoNombre = `${marca}-${modelo}-${color}-${i+1}`;
+      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i+1}`;
       const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
       setImagenes([...imagenes,nuevoNombre])
       
@@ -61,7 +73,7 @@ const ProductoForm = () => {
     e.preventDefault();
 
     const producto = {
-      nombre: `${marca} ${modelo} ${color}`,
+      nombre: `${categoria} ${marca} ${modelo} ${color}`,
       marca:{
         nombre:marca
       },
@@ -186,6 +198,11 @@ const ProductoForm = () => {
       <button className="button" type="submit">
         Agregar producto
       </button>
+      {alert && (
+        <Alert severity="success">
+          Producto agregado correctamente
+        </Alert>
+      )}
     </form>
   );
 };

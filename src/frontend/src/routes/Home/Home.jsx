@@ -68,6 +68,7 @@ const Home = () => {
     {searchResults && searchResults.length > 0 ? (
       <div ref={searchResultsRef}>
         <h3 className="search-results-title">Resultados de la búsqueda:</h3>
+        <p className="search-results-subtitle">Aquí se van a visualizar los resultados para {searchQuery}</p>
         <div className='search-results-container'>
           {searchResults.map((producto) => {
             if (producto && producto.nombre) {

@@ -44,6 +44,13 @@
     padding-bottom: 20px;
 }
 
+.search-results-subtitle {
+    font-size: 20px;
+    text-align: center;
+    color: #4f6073;
+    padding-bottom: 20px;
+}
+
 .search-results-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
