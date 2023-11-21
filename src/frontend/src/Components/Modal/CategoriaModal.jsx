@@ -27,7 +27,7 @@ const CategoriaModal = ({  open , closeModal ,  categoria , eliminarCategoria}) 
           <strong>¿ Esta seguro que desea eliminar la categoria ? </strong>
           </Typography>
           <div style={{marginLeft:140}}>
-            <Button onClick={ () => eliminarCategoria(categorias.nombre , categorias.id)} style={{ color:'green' , fontSize:'18px' }}>Confirmar</Button>
+            <Button onClick={ () => {eliminarCategoria(categorias.nombre , categorias.id) ; closeModal();}} style={{ color:'green' , fontSize:'18px' }}>Confirmar</Button>
             <Button  onClick={closeModal} style={{ color:'red' , fontSize:'18px' }}  >Cancelar</Button>
           </div>
           </div>
