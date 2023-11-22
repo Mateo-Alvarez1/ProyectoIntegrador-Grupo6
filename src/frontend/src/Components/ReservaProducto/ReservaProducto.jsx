@@ -1,44 +1,56 @@
+
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import './reservaProducto.css'
 
-const ReservaProducto = () => {
+const ReservaProducto = ({date}) => {
 
-    const [mixedProducts, setMixedProducts] = useState([]);
+  const [data, setData] = useState([])
+  const { productoId } = useParams()
 
-    const URLINSTRUMENTOS= "http://localhost:8080/api/v1/instrumentos";
+  const BUCKETURL ="https://1023c01grupo6.s3.amazonaws.com"
 
-    const buscarInstrumentos= ()=>{
- 
-      fetch(URLINSTRUMENTOS).
-      then(response=>response.json()).
-      then(data=>{
-      data=shuffleArray(data);
-      setMixedProducts(data) 
-  })
-}
+  const productData = async() => {
+    const response = await fetch(`http://localhost:8080/api/v1/instrumentos/${productoId}`)
+    const data = await response.json();
+    setData(data)
+  }
 
-console.log(mixedProducts);
+  
+  useEffect(() => {
+    productData()
+    
+  }, [])
 
-function shuffleArray(array) {
-  return array.slice().sort(() => Math.random() - 0.5);
-}
-
-useEffect(()=>{
-  buscarInstrumentos()
-},[])
-
+  const { precio } = data
+  const formattedPrice = `${precio.toFixed(2)}`.replace(".", ",").replace(",00", ".00");
 
   return (
-    <div>
-    {
-        mixedProducts.map( prod => {(
-            <div>
-                <img src={prod.imagenes} alt="img" />
-                <h1>{prod.nombre}</h1>
-                <p>{prod.precio}</p>
-            </div>
-        )})
-    }
-  </div>
+    <div className="cardReserva"> 
+      <h2 className="title">Detalle de la reserva</h2>
+       <img src={`${BUCKETURL}/${data.imagenes[0]}`} alt={data.imagenes[0]} /> 
+       <div>
+       <p>{data.categoria.nombre}</p>  
+      <h2>{data.nombre}</h2>
+       </div>
+
+       <div className="price">
+        <p>Total a pagar</p>
+        <p>{formattedPrice}</p> 
+       </div>
+    
+    <div className="checks">
+      <span>Check-in</span>
+      <p>{date.startDate.toLocaleDateString()}</p>
+    </div>
+    <div className="checks" >
+      <span>Check-in</span>
+      <p>{date.endDate.toLocaleDateString()}</p>
+    </div>
+    <div className="reservaButton">
+      <button>Confirmar Reserva</button>
+    </div>
+    </div>
   )
 }
 

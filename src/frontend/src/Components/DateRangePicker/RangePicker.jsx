@@ -3,6 +3,7 @@ import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css'
 import './rangePicker.css'
+import ReservaProducto from "../ReservaProducto/ReservaProducto";
 
 const RangePicker = () => {
 
@@ -18,6 +19,7 @@ const RangePicker = () => {
 
   return (
     <div className="container">
+      <div>
       <h2>Selecciona tu fecha de reserva</h2>
       <DateRange
       ranges={[date]}
@@ -26,6 +28,8 @@ const RangePicker = () => {
       months={2}
       direction="horizontal"
       />
+      </div>
+      <ReservaProducto date={date}/>
     </div>
   );
 };

@@ -26,7 +26,7 @@ function App() {
           <Route path='/signupadm' element={<SignUpAdm/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path="/admin" element={<Admin/>}/>
-          <Route path="/reservas" element={<Reservas/>}/>
+          <Route path="/reservas/:productoId" element={<Reservas/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
           <Route path="/editarprod/:id" element={<EditarProducto/>} />
           <Route path='*' element={<h2>Page Not Found</h2>}/>

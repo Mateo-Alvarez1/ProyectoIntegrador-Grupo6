@@ -33,7 +33,7 @@ function shuffleArray(array) {
 useEffect(()=>{
   buscarInstrumentos()
 },[])
-
+console.log(mixedProducts);
 
   return (
     <div id="recomendacionesContainer">
