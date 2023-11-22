@@ -25,31 +25,31 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
     
         
     // },[listarProductos])
-
-
-    // const editarProd = (id) => {        
-    //     <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
-        // fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //     'Content-Type': 'application/json',
-        //     },
-        // });
-        // actualizarLista();     
+    
         
                 
-    
-    const eliminarProd = (id) => {
-        fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
+    const handleDeleteSubmit = async (id, e) => {
+        e.preventDefault();
+        try {    
+        await fetch(`http://localhost:8080/api/v1/instrumentos/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         }
     
-        });
-
+        
+        })
+    }
+        catch(error)  {
+        console.error(error);
+        }
         actualizarLista();
-    };
+    }
+    
+
+    
+
+    
 
     return (
     <table className='containerTable' >
@@ -73,7 +73,7 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
             </Link>
             </td>
             <td>
-                <button className="action_button"  onClick={() => eliminarProd(product.id)}>Eliminar</button>
+                <button className="action_button"  onClick={(e) => handleDeleteSubmit(product.id, e)}>Eliminar</button>
             </td>
         </tr>
         ))}
@@ -83,3 +83,13 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
 };
 
 export default ProductoList
+
+// const editarProd = (id) => {        
+    //     <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
+        // fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //     'Content-Type': 'application/json',
+        //     },
+        // });
+        // actualizarLista();
