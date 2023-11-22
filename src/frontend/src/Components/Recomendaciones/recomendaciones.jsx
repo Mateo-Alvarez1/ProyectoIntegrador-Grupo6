@@ -10,6 +10,8 @@ const [mixedProducts, setMixedProducts] = useState([]);
 
 const URLINSTRUMENTOS= "http://localhost:8080/api/v1/instrumentos";
 
+
+
 const buscarInstrumentos= ()=>{
 
   fetch(URLINSTRUMENTOS).

@@ -7,7 +7,8 @@ import "yet-another-react-lightbox/styles.css";
 
 const Producto = () => {
   const { productoId } = useParams();
-  const URLINSTRUMENTO= ` http://localhost:8080/api/v1/instrumentos/${productoId}` 
+  const URLINSTRUMENTO= ` http://localhost:8080/api/v1/instrumentos/${productoId}` ;
+  const BUCKETURL="https://1023c01grupo6.s3.amazonaws.com";
   const [producto, setProducto] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,24 +45,24 @@ const Producto = () => {
         <div className='imageContainer'>
           <div>
             <div className='containerImagenPrincipal'>
-              {producto && <img src={producto.imagenes[0]} alt={producto.nombre} />}
+              {producto && <img src={`${BUCKETURL}/${producto.imagenes[0]}`} alt={producto.nombre} />}
             </div>
           </div>
           <div className='containerSecundarias'>
             <div className="containerSecundarias1">
               <div className='imagen2'>
-                {producto && <img src={producto.imagenes[0]} alt={producto.nombre} />}
+                {producto && <img src={`${BUCKETURL}/${producto.imagenes[1]}`} alt={producto.nombre} />}
               </div>
               <div className='imagen3'>
-                {producto && <img src={producto.imagenes[0]} alt={producto.nombre} />}
+                {producto && <img src={`${BUCKETURL}/${producto.imagenes[2]}`} alt={producto.nombre} />}
               </div>
             </div>
             <div className='containerSecundarias2'>
               <div className='imagen4'>
-                {producto && <img src={producto.imagenes[0]} alt={producto.nombre} />}
+                {producto && <img src={`${BUCKETURL}/${producto.imagenes[3]}`} alt={producto.nombre} />}
               </div>
               <div className='imagen5'>
-                {producto && <img src={producto.imagenes[0]} alt={producto.nombre} />}
+                {producto && <img src={`${BUCKETURL}/${producto.imagenes[4]}`} alt={producto.nombre} />}
               </div>
             </div>
           </div>
@@ -78,11 +79,11 @@ const Producto = () => {
           open={isOpen}
           close={() => setIsOpen(false)}
           slides={[
-            { src: producto.imagenes[0] },
-            { src: producto.imagenes[0] },
-            { src: producto.imagenes[0] },
-            { src: producto.imagenes[0] },
-            { src: producto.imagenes[0] }
+            { src: `${BUCKETURL}/${producto.imagenes[0]}` },
+            { src: `${BUCKETURL}/${producto.imagenes[1]}` },
+            { src: `${BUCKETURL}/${producto.imagenes[2]}` },
+            { src: `${BUCKETURL}/${producto.imagenes[3]}` },
+            { src: `${BUCKETURL}/${producto.imagenes[4]}` }
           ]}
         />
       </div>

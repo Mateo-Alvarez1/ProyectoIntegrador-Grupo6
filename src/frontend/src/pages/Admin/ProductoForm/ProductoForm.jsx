@@ -1,111 +1,11 @@
 import { useState, useEffect } from "react";
 import "./productoform.css";
 import { useDropzone } from "react-dropzone";
-import Producto from "../../../routes/Producto/Producto";
 import { Alert } from "@mui/material";
 
 const ProductoForm = () => {
 
   const [alert, setAlert] = useState(false);
-
-  const URL = "http://localhost:8080/api/v1/instrumentos";
-
-  const URlIMG = "http://localhost:8080/file/upload";
-
-
-
-  const agregarProducto = (producto) => {
-    fetch(URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(producto),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        if(data.status === "OK"){
-          setAlert(true)
-          setTimeout(() => {
-            setAlert(false)
-          }, 3000);
-        }
-      })
-      .catch((error) => console.error("Error al enviar la solicitud:", error));
-  };
-
-
-  const enviarImagenes = async () => {
-    for (let i = 0; i < uploadedFiles.length; i++) {
-      const file = uploadedFiles[i];
-  
-      // Renombrar el archivo antes de enviarlo
-      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i+1}`;
-      const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
-      setImagenes([...imagenes,nuevoNombre])
-      
-  
-      const formData = new FormData();
-      formData.append("file", archivoRenombrado);
-
-  
-      try {
-        const response = await fetch(URlIMG, {
-          method: "POST",
-          body: formData,
-        });
-  
-        const data = await response.text();
-        console.log(data);
-  
-        if (response.ok) {
-          console.log(`Imagen ${i + 1} creada correctamente`);
-        } else {
-          console.error(`Error al crear la imagen ${i + 1}:`, data.message);
-        }
-      } catch (error) {
-        console.error(`Error al enviar la imagen ${i + 1}:`, error);
-        // Puedes manejar el error de la manera que prefieras (por ejemplo, mostrando un mensaje al usuario)
-      }
-    }
-  };
-  
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    const producto = {
-      nombre: `${categoria} ${marca} ${modelo} ${color}`,
-      marca:{
-        nombre:marca
-      },
-      modelo:{
-        numeroSerie:modelo
-      },
-      categoria:{
-        nombre:categoria
-      },
-      imagenes,
-      color,
-      precio: parseFloat(precio),
-      stock: parseInt(stock),
-    };
-
-      console.log(uploadedFiles);
-
-      // HAY QUE CAMBIAR DESPUES PORQUE CREA LAS IMAGENES INDEPENDIENTEMENTE DE SI EL OBJETO SE GUARDA O NO
-      enviarImagenes();
-
-    agregarProducto(producto);
-    limpiarform();
-  };
-
-  const limpiarform = () =>  {
-    setMarca("")
-    setModelo("")
-    setColor("")
-    setPrecio("")
-    setStock("")
-    setCategoria("")
-  }
 
   const [modelo, setModelo] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -128,10 +28,164 @@ const ProductoForm = () => {
     },
   });
 
+  const URL = "http://localhost:8080/api/v1/instrumentos";
 
-  useEffect(() => {
-    console.log("Imágenes actualizadas:", imagenes);
-  }, [imagenes]);
+  const URlIMG = "http://localhost:8080/file/upload";
+
+
+
+
+  const agregarProducto = (producto) => {
+    // Devolvemos la promesa de fetch
+    return fetch(URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(producto),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "OK") {
+          setAlert(true);
+          setTimeout(() => {
+            setAlert(false);
+          }, 3000);
+        }
+        return data; // Devolvemos data para que esté disponible después del await
+      })
+      .catch((error) => {
+        console.error("Error al enviar la solicitud:", error);
+        throw error; // Lanzamos el error para que esté disponible después del await
+      });
+  };
+  
+
+
+  const enviarImagenes = async () => {
+    const nuevasImagenes = [];
+  
+    for (let i = 0; i < uploadedFiles.length; i++) {
+      const file = uploadedFiles[i];
+      const extension = file.name.slice(file.name.lastIndexOf(".") + 1);
+      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
+  
+      nuevasImagenes.push(nuevoNombre);
+  
+      const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
+      console.log("Nuevo nombre de imagen:", nuevoNombre);
+  
+      const formData = new FormData();
+      formData.append("file", archivoRenombrado);
+  
+      try {
+        const response = await fetch(URlIMG, {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (response.ok) {
+          console.log(`Imagen ${i + 1} creada correctamente`);
+        } else {
+          console.error(`Error al crear la imagen ${i + 1}`);
+        }
+      } catch (error) {
+        console.error(`Error al enviar la imagen ${i + 1}:`, error);
+      }
+    }
+  
+    // Después de manejar todas las imágenes, actualiza el estado una vez
+    setImagenes([...imagenes,nuevasImagenes]);
+    console.log("Imágenes actualizadas:", nuevasImagenes);
+  };
+
+
+  const enviarImagenesYAgregarProducto = async () => {
+    const nuevasImagenes = [];
+  
+    for (let i = 0; i < uploadedFiles.length; i++) {
+      const file = uploadedFiles[i];
+      const extension = file.name.slice(file.name.lastIndexOf(".") + 1);
+      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
+  
+      nuevasImagenes.push(nuevoNombre);
+  
+      const archivoRenombrado = new File([file], nuevoNombre, { type: file.type });
+      console.log("Nuevo nombre de imagen:", nuevoNombre);
+  
+      const formData = new FormData();
+      formData.append("file", archivoRenombrado);
+  
+      try {
+        const response = await fetch(URlIMG, {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (response.ok) {
+          console.log(`Imagen ${i + 1} creada correctamente`);
+        } else {
+          console.error(`Error al crear la imagen ${i + 1}`);
+        }
+      } catch (error) {
+        console.error(`Error al enviar la imagen ${i + 1}:`, error);
+      }
+    }
+  
+    // Después de manejar todas las imágenes, actualiza el estado una vez
+    setImagenes(nuevasImagenes);
+    console.log("Imágenes actualizadas:", nuevasImagenes);
+  
+    // Llamamos a agregarProducto después de manejar las imágenes
+    const producto = {
+      nombre: `${categoria} ${marca} ${modelo} ${color}`,
+      marca: { nombre: marca },
+      modelo: { numeroSerie: modelo },
+      categoria: { nombre: categoria },
+      imagenes: nuevasImagenes, // Utilizamos las imágenes actualizadas
+      color,
+      precio: parseFloat(precio),
+      stock: parseInt(stock),
+    };
+  
+    // Llamamos a agregarProducto dentro de enviarImagenes
+    await agregarProducto(producto);
+  };
+  
+
+
+
+
+
+
+
+
+
+  const limpiarform = () =>  {
+    setMarca("")
+    setModelo("")
+    setColor("")
+    setPrecio("")
+    setStock("")
+    setCategoria("")
+    setImagenes([]);
+  }
+
+  
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Espera a que se completen las imágenes y la llamada a agregarProducto
+    await enviarImagenesYAgregarProducto();
+  
+    // Limpia el formulario
+    limpiarform();
+  };
+  
+
+
+
+
+ 
 
   return (
     <form className="form" onSubmit={handleFormSubmit}>

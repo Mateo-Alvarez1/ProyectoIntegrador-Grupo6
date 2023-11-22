@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 
 const ProductoCard = ({ producto }) => {
 
+  const BUCKETURL="https://1023c01grupo6.s3.amazonaws.com";
+  
 
   return (
     <div className="recomendacionesCard" >
         <h3>{producto.nombre}</h3>
         <p>Precio: USD {producto.precio}</p>
-        <img src={producto.imagen} alt={producto.nombre} /> {/* producto.imagen[0] */}
+        <img src={`${BUCKETURL}/${producto.imagenes[0]}`} alt={producto.nombre} /> {/* producto.imagen[0] */}
         <Link className="cardLink" to={`/producto/${producto.id}`}>Ver más</Link>
         <Link className="cardLink" to={`/reservas`}>Reservar</Link>
+        <p>{producto.imagenes[0]}</p>
 
         {producto && console.log(producto)}
     </div>
