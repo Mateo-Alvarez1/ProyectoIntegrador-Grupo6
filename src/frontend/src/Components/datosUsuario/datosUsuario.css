@@ -1,12 +1,5 @@
 .datosContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
     padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
 }
 
 .datosContainer h2{
@@ -54,16 +47,36 @@
   font-weight: bold;
 }
 
-@media only screen and (max-width: 1200px) {
-    .datosContainer {
-        width: 100%;
+@media (max-width:500px){
+    .containerInputs{
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-}
+    .datosUsuario{
+        width: 300px;   
+        text-align: center;
+        padding: 20px;
+        margin-left: 20px;
+    }
 
-@media only screen and (max-width: 768px) {
-    .datosUsuario {
+    .datosContainer{
+        text-align: center;
+    }
+    .datosContainer h2{
+        padding: 20px 0px;
+    }
+
+    .datosUsuario .containerInput input{
+        width: 100%;
+        margin-left: 20px;
+    }
+
+    .calendar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 20px;
         width: 90%;
     }
 }

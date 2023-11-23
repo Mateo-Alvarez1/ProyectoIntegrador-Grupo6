@@ -42,7 +42,7 @@ const ReservaProducto = ({date}) => {
         )} 
       <div>
        <p>{data.categoria?.nombre}</p>  
-      <h2>{data.nombre}</h2>
+      <h2 className="titleName">{data.nombre}</h2>
        </div>
 
        <div className="price">

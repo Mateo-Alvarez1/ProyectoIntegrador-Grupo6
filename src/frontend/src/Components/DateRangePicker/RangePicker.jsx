@@ -4,6 +4,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css'
 import './rangePicker.css'
 import ReservaProducto from "../ReservaProducto/ReservaProducto";
+import DatosUsuario from "../datosUsuario/DatosUsuario"
 
 const RangePicker = () => {
 
@@ -44,22 +45,34 @@ const RangePicker = () => {
 
 
   return (
-    <div>
-      <div className="range-picker-container">
-      <h2>Selecciona tu fecha de reserva</h2>
-      <DateRange
-      ranges={[date]}
-      onChange={handleChange}
-      /*disabledDay={deshabilitarDias}*/
-      minDate={new Date()}
-      months={2}
-      direction="horizontal"
-      // disabledDates={disabledDateFunc}
-      />
+    <div className="container">
+
+      <div className="container1">
+
+        <div className="datos-usuario-container">
+          <DatosUsuario/>
+        </div>
+
+        <div className="range-picker-container">
+          <div >
+            <h2>Selecciona tu fecha de reserva</h2>
+            <DateRange
+            className="calendar"
+            ranges={[date]}
+            onChange={handleChange}
+            /*disabledDay={deshabilitarDias}*/
+            minDate={new Date()}
+            months={2}
+            direction="horizontal"
+            // disabledDates={disabledDateFunc}
+            />
+          </div>
+
       </div>
-      <div className="reserva-producto-container">
-        <ReservaProducto date={date}/>
-      </div>
+    </div>
+    <div className="container2">
+       <ReservaProducto date={date}/>
+    </div>
     </div>
   );
 };

@@ -1,46 +1,43 @@
-.range-picker-container {
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container1{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0 1rem;
-    overflow: hidden;
-    margin-bottom: 3%;
-    margin-left: 2%;
+    padding-left: 2%;
 }
+
+.container2{
+    margin-top: 100px;
+}
+
+.datos-usuario-container{
+    margin: 50px 0px;
+}
+
+
+.range-picker-container{
+    margin: 50px 0px;
+}
+
 
 .range-picker-container h2 {
     color: #4A5865;
     padding: 0px 0px 20px 10px;
 }
 
-.reserva-producto-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    overflow: hidden;
-    position: absolute;
-    top: 25%;
-    left: 60%;
+@media(max-width:500px){
+    .container{
+        flex-direction: column;
+    }
+    .range-picker-container{
+        text-align: center;
+    }
 }
 
-@media only screen and (max-width: 1200px) {
-    .range-picker-container
-    .reserva-producto-container {
-       width: 100%;
-       margin-left: 0;
-   }
 
-   .range-picker-container {
-        align-items: center;
-        justify-content: center;
-   }
 
-   .reserva-producto-container {
-    position: inherit;
-    align-items: flex-start;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-}
-}
+
