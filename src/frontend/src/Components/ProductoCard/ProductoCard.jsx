@@ -12,7 +12,7 @@ const ProductoCard = ({ producto }) => {
         <img src={`${BUCKETURL}/${producto.imagenes[0]}`} alt={producto.nombre} /> {/* producto.imagen[0] */}
         <Link className="cardLink" to={`/producto/${producto.id}`}>Ver más</Link>
         <Link className="cardLink" to={`/reservas`}>Reservar</Link>
-        <p>{producto.imagenes[0]}</p>
+
 
         {producto && console.log(producto)}
     </div>
