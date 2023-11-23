@@ -9,7 +9,7 @@ const Reservas = () => {
     <>
     <DatosUsuario/>
     <RangePicker/>
-    <ReservaProducto/>
+    {/* <ReservaProducto/> */}
     </>
     
   )
