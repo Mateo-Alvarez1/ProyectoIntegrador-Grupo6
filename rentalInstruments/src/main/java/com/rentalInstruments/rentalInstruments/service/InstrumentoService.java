@@ -44,7 +44,7 @@ public class InstrumentoService implements IInstrumentoService {
         }
 
         Instrumento instrumento =  instanciasMCM(instrumentoDto);
-        // instrumento.setImagenes(instrumentoDto.getImagenes());
+        instrumento.setImagenes(instrumentoDto.getImagenes());
         instrumento.setPrecio(instrumentoDto.getPrecio());
         instrumento.setStock(instrumentoDto.getStock());
         instrumento.setColor(instrumentoDto.getColor());

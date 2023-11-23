@@ -77,7 +77,7 @@ public class JwtService {
     }
 
     private Key getSigninKey() {
-        // return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+//        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
         byte[] keyBytes = Decoders.BASE64URL.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
