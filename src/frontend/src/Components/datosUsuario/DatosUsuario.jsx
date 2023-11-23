@@ -1,11 +1,16 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { userContext } from "../../context/userContext";
 import './datosUsuario.css'
 
 const DatosUsuario = () => {
+    const {user}= useContext(userContext);
+
+
+
     const [form, setForm] = useState({
-        nombre:'',
-        apellido:'',
-        email:'' ,
+        nombre:user.nombre,
+        apellido:user.apellido,
+        email:user.email ,
         ciudad:''
     })
 
@@ -38,6 +43,8 @@ const DatosUsuario = () => {
                 id="nombre"
                 placeholder='Nombre'
                 name="nombre"
+                value={user.nombre}
+                disabled
                 onChange={onInputChange}
             />
             </div>
@@ -47,6 +54,8 @@ const DatosUsuario = () => {
                 type="text" 
                 id="apellido"
                 placeholder='Apellido'
+                value={user.apellido}
+                disabled
                 name="apellido"
                 onChange={onInputChange}
             />
@@ -61,6 +70,8 @@ const DatosUsuario = () => {
                 id="nombre"
                 placeholder='pitch@please.com'
                 name="email"
+                value={user.email}
+                disabled
                 onChange={onInputChange}
             />
                </div>

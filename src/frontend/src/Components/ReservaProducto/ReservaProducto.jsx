@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import './reservaProducto.css'
+import { useContext } from "react";
 
 const ReservaProducto = ({date}) => {
 
+ 
   const [data, setData] = useState([])
   const { productoId } = useParams()
 
@@ -21,6 +23,8 @@ const ReservaProducto = ({date}) => {
       console.error("Error fetching data:", error);
     }
   }
+
+
 
   
   useEffect(() => {
