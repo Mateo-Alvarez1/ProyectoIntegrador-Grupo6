@@ -14,8 +14,12 @@ const RangePicker = () => {
   });
 
   const handleChange = (ranges) => {
-    setDate(ranges.selection)
-  }
+    const { startDate, endDate } = ranges.selection;
+    if (endDate - startDate < 2) {
+      return false;
+    }
+    setDate(ranges.selection);
+  };
 
  /* const deshabilitarDias = (date) => {
     const hoy = new Date();
