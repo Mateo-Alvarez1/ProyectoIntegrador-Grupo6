@@ -100,8 +100,18 @@ const Producto = () => {
               <p>Categoría: {producto.categoria.nombre}</p>
               <p>Precio: USD {producto.precio}</p>
               <p>Marca: {producto.marca.nombre}</p>
+              <div className='caracteristicas'>
+              <h3>Características:</h3>
+              <ul>
+                <li>Color: {producto.color}</li>
+                <li>Stock: {producto.stock}</li>
+              </ul>
+              </div>
             </>
           )}
+        <div className='botonReserva'>
+          <Link className="cardLink" to={`/reservas/${productoId}`}>¡Haz una reserva!</Link>
+        </div>
       </div>
 
     </>

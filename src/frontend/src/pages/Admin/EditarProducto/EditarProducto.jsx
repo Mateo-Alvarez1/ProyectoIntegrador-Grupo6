@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import "./editarproducto.css";
 import { useParams } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 const EditarProducto = () => {
+  const [alert, setAlert] = useState(false);
+
   const { id } = useParams();
   console.log(id);
   const [producto, setProducto] = useState({
@@ -111,6 +114,7 @@ const EditarProducto = () => {
         },
         body: JSON.stringify(producto),
       });
+      setAlert(true);
     } catch (error) {
       console.error("Error al actualizar el producto", error);
     }
@@ -196,6 +200,11 @@ const EditarProducto = () => {
         <button className="button-edit" type="submit">
           Editar
         </button>
+        {alert && (
+        <Alert severity="success">
+          Instrumento modificado correctamente.
+        </Alert>
+      )}
       </form>
     </div>
   );

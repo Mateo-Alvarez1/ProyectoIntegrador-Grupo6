@@ -45,12 +45,7 @@ const ProductoForm = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.status === "OK") {
-          setAlert(true);
-          setTimeout(() => {
-            setAlert(false);
-          }, 3000);
-        }
+        setAlert(true)
         return data; // Devolvemos data para que esté disponible después del await
       })
       .catch((error) => {
@@ -132,7 +127,7 @@ const ProductoForm = () => {
     }
   
     // Después de manejar todas las imágenes, actualiza el estado una vez
-    setImagenes(nuevasImagenes);
+    setImagenes([...imagenes,nuevasImagenes]);
     console.log("Imágenes actualizadas:", nuevasImagenes);
   
     // Llamamos a agregarProducto después de manejar las imágenes
@@ -254,7 +249,7 @@ const ProductoForm = () => {
       </button>
       {alert && (
         <Alert severity="success">
-          Producto agregado correctamente
+          Instrumento agregado correctamente.
         </Alert>
       )}
     </form>

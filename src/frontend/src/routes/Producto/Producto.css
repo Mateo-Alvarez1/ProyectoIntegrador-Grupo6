@@ -20,7 +20,7 @@
     background-color: #FFFFFF;
     gap: 10px;
     font-weight: bold;
-    height: 300px;
+    height: 400px;
     padding-top: 20px;
     padding-bottom: 30px;
     font-family:Helvetica, sans-serif
@@ -41,7 +41,13 @@
     font-size: 22px;
 }
 
+.caracteristicas h3{
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
 .caracteristicas ul {
+    margin-top: 5px;
     list-style: none;
     font-size: 17px;
 }
@@ -49,6 +55,15 @@
 .caracteristicas ul li:before {
     content: '✓ ';
   }
+
+.botonReserva{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+}
 
 .textArrow{
     font-size: 16px;
