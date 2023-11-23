@@ -7,9 +7,11 @@ const Reservas = () => {
 
   return (
     <>
-    <DatosUsuario/>
-    <RangePicker/>
+    <div className="reserva-container">
+      <DatosUsuario/>
+      <RangePicker/>
     {/* <ReservaProducto/> */}
+    </div>
     </>
     
   )

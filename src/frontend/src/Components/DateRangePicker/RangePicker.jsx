@@ -40,8 +40,8 @@ const RangePicker = () => {
 
 
   return (
-    <div className="container">
-      <div>
+    <div>
+      <div className="range-picker-container">
       <h2>Selecciona tu fecha de reserva</h2>
       <DateRange
       ranges={[date]}
@@ -53,7 +53,9 @@ const RangePicker = () => {
       // disabledDates={disabledDateFunc}
       />
       </div>
-      <ReservaProducto date={date}/>
+      <div className="reserva-producto-container">
+        <ReservaProducto date={date}/>
+      </div>
     </div>
   );
 };

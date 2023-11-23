@@ -127,7 +127,7 @@ const ProductoForm = () => {
     }
   
     // Después de manejar todas las imágenes, actualiza el estado una vez
-    setImagenes([...imagenes,nuevasImagenes]);
+    setImagenes(nuevasImagenes);
     console.log("Imágenes actualizadas:", nuevasImagenes);
   
     // Llamamos a agregarProducto después de manejar las imágenes
@@ -146,12 +146,6 @@ const ProductoForm = () => {
     await agregarProducto(producto);
   };
   
-
-
-
-
-
-
 
 
 
@@ -177,10 +171,6 @@ const ProductoForm = () => {
   };
   
 
-
-
-
- 
 
   return (
     <form className="form" onSubmit={handleFormSubmit}>
