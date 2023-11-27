@@ -41,14 +41,14 @@ const ReservaProducto = ({date}) => {
           <img src={`${BUCKETURL}/${data.imagenes[0]}`} alt={data.imagenes[0]} />
         )} 
       <div>
-       <p>{data.categoria?.nombre}</p>  
+      <p>{data.categoria?.nombre}</p>  
       <h2>{data.nombre}</h2>
-       </div>
+      </div>
 
-       <div className="price">
+      <div className="price">
         <p>Total a pagar</p>
         <p>{formattedPrice}</p> 
-       </div>
+      </div>
     
     <div className="checks">
       <span>Check-in</span>
