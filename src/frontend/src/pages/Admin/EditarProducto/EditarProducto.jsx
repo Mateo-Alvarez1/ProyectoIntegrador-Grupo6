@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import "./editarproducto.css";
 import { useParams } from "react-router-dom";
 import { Alert } from "@mui/material";
+import { is } from "date-fns/locale";
+import { ScaleLoader } from "react-spinners";
 
 const EditarProducto = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
 
   const { id } = useParams();
@@ -107,6 +111,8 @@ const EditarProducto = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
+
       await fetch(`http://localhost:8080/api/v1/instrumentos/${id}`, {
         method: "PUT",
         headers: {
@@ -117,6 +123,8 @@ const EditarProducto = () => {
       setAlert(true);
     } catch (error) {
       console.error("Error al actualizar el producto", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -198,7 +206,7 @@ const EditarProducto = () => {
         />
 
         <button className="button-edit" type="submit">
-          Editar
+          {isLoading ? <ScaleLoader color="#ffffff" height={16} /> : "Editar producto"}
         </button>
         {alert && (
         <Alert severity="success">

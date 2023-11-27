@@ -4,6 +4,7 @@ import "./Login.css"
 import { useNavigate } from "react-router";
 import { userContext } from "../../context/userContext";
 import { Link } from "react-router-dom";
+import { ScaleLoader } from 'react-spinners';
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState({ value: '', valid: null });
   const [userPassword, setUserPassword] = useState({ value: '', valid: null });
   
+  const [isLoading, setIsLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState('');
     
@@ -52,6 +54,7 @@ const Login = () => {
         email: userEmail.value,
         password: userPassword.value,
       }
+      setIsLoading(true);
       try {
         const response = await fetch(`http://localhost:8080/api/v1/auth/autenticar`, {
           method: 'POST',
@@ -75,7 +78,9 @@ const Login = () => {
         setError(
           'No se ha podido iniciar sesión. Por favor, vuelva a intentarlo.'
         );
-  }
+    } finally {
+      setIsLoading(false);
+    }
   }
 }
 
@@ -111,7 +116,9 @@ const Login = () => {
             {error ? error : "Los datos son inválidos, por favor vuelva a intentarlo."}
           </p>
         )}
-      <button className="submitButton" type="submit">Iniciar sesión</button>
+      <button className="submitButton" type="submit">
+        {isLoading ? <ScaleLoader color='#ffffff' height={16}/> : 'Iniciar Sesión'}
+      </button>
       <div className="loginAccess">
           <p>¿No tienes una cuenta?</p>
           <p>

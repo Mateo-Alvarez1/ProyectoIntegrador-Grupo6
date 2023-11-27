@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import "./productoform.css";
 import { useDropzone } from "react-dropzone";
 import { Alert } from "@mui/material";
+import { ScaleLoader } from "react-spinners";
+import { set } from "date-fns";
 
 const ProductoForm = () => {
 
+  const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
 
   const [modelo, setModelo] = useState("");
@@ -33,9 +36,8 @@ const ProductoForm = () => {
   const URlIMG = "http://localhost:8080/file/upload";
 
 
-
-
   const agregarProducto = (producto) => {
+    setIsLoading(true);
     // Devolvemos la promesa de fetch
     return fetch(URL, {
       method: "POST",
@@ -45,7 +47,12 @@ const ProductoForm = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setIsLoading(false);
         setAlert(true)
+
+        setTimeout(() => {
+        setAlert(false);
+        }, 3000);
         return data; // Devolvemos data para que esté disponible después del await
       })
       .catch((error) => {
@@ -109,12 +116,15 @@ const ProductoForm = () => {
   
       const formData = new FormData();
       formData.append("file", archivoRenombrado);
+
+      setIsLoading(true);
   
       try {
         const response = await fetch(URlIMG, {
           method: "POST",
           body: formData,
         });
+
   
         if (response.ok) {
           console.log(`Imagen ${i + 1} creada correctamente`);
@@ -235,7 +245,7 @@ const ProductoForm = () => {
 
   
       <button className="button" type="submit">
-        Agregar producto
+        {isLoading ? <ScaleLoader color="#ffffff" height={16} /> : "Agregar producto"}
       </button>
       {alert && (
         <Alert severity="success">

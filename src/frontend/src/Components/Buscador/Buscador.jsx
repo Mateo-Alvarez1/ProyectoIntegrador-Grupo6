@@ -10,6 +10,7 @@ import Autosuggest from "react-autosuggest/dist/Autosuggest";
 export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
 
     const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
 
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState([])
@@ -41,9 +42,11 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
 
-        return inputLength === 0 ? [] : producto.filter(instrumento => 
-            instrumento.nombre.toLowerCase().slice(0, inputLength) === inputValue
-        ).slice(0, 4);
+    return inputLength === 0 ? [] : producto.filter(instrumento => 
+        instrumento.nombre.toLowerCase().includes(inputValue) || 
+        instrumento.marca.nombre.toLowerCase().includes(inputValue) || 
+        instrumento.categoria.nombre.toLowerCase().includes(inputValue)
+    ).slice(0, 4);
     }
 
     const onSuggestionFetchRequested = ({ value }) => {
@@ -82,7 +85,11 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
             setSearchResults([]);
         } else {
             const filteredResults = producto.filter(instrumento => { 
-                return instrumento.nombre.toLowerCase().includes(search.toLowerCase()) 
+                return (
+                    instrumento.nombre.toLowerCase().includes(search.toLowerCase()) || 
+                    instrumento.marca.nombre.toLowerCase().includes(search.toLowerCase()) || 
+                    instrumento.categoria.nombre.toLowerCase().includes(search.toLowerCase())
+                );
             });
             setSearchResults(filteredResults.slice(0, 4));
         }
@@ -96,6 +103,12 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
         placeholder: '¿Qué instrumento buscas?',
         value: search,
         onChange: handleChange
+    };
+
+    const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
     };
 
 
@@ -112,7 +125,15 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
                     inputProps={inputProps}
                 />
                 <button type="submit"><AiOutlineSearch/></button>
-                <DatePicker className="datePicker" minDate={new Date()} selected={startDate} onChange={(date) => setStartDate(date)}  />
+                <DatePicker 
+                className="datePicker"
+                minDate={new Date()}
+                selected={startDate}
+                startDate={startDate}
+                endDate={endDate}
+                selectsRange
+                onChange={onChange}
+                />
             </div>
         </form>
     )

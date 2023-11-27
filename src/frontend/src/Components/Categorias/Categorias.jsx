@@ -6,7 +6,6 @@ import Amplificador from "../../assets/icons/amplificador.png";
 import Microfono from "../../assets/icons/microfono.png";
 import styles from "./Categorias.module.css";
 
-import "./categorias.css";
 
 
 export const Categorias = () => {
