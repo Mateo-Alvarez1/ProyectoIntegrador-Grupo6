@@ -5,8 +5,6 @@ import './datosUsuario.css'
 const DatosUsuario = () => {
     const {user}= useContext(userContext);
 
-
-
     const [form, setForm] = useState({
         nombre:user.nombre,
         apellido:user.apellido,
