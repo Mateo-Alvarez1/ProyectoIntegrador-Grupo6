@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../context/userContext";
 import Input from "../../Components/Input/Input";
 import "./SignUp.css";
+import { set } from "date-fns";
+import { ScaleLoader } from "react-spinners";
 
 
 const SignUp = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   // estados para los campos del formulario
   const [userName, setUserName] = useState({ value: "", valid: null });
   const [userLastName, setUserLastName] = useState({ value: "", valid: null });
@@ -95,6 +100,8 @@ const SignUp = () => {
       };
 
       try {
+        setIsLoading(true);
+
         const response = await fetch(`http://localhost:8080/api/v1/auth/registrar`, {
           method: "POST",
           body: JSON.stringify(data),
@@ -119,23 +126,28 @@ const SignUp = () => {
           if (loginResponse.ok) {
             const data = await loginResponse.json();
             console.log(data);
-            login({ ...data }); 
+            login({ ...data });
+            setIsLoading(false)
             setUserAlert(true);
             navigate("/");
           } else {
             handleRegistrationError("Error al autenticar al usuario.");
+            setIsLoading(false);
           }
 
         } else {
           handleRegistrationError("Error al registrar la cuenta.");
+          setIsLoading(false);
         }
 
       } catch (error) {
         handleRegistrationError("Error en la solicitud. Por favor, inténtalo más tarde.");
+        setIsLoading(false);
       }
 
     } else {
       handleRegistrationError("Los datos son incorrectos. Verifícalos y vuelve a intentar.");
+      setIsLoading(false);
     }
   };
   
@@ -224,7 +236,7 @@ const SignUp = () => {
           type="submit"
           className="submitButton"
         >
-          Crear Cuenta
+          {isLoading ? <ScaleLoader color="#ffffff" height={16}/> : "Crear cuenta"}
         </button>
         <div className="loginAccess">
           <p>¿Ya tienes una cuenta? </p>

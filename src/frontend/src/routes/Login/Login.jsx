@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Input from "../../Components/Input/Input";
 import "./Login.css"
 import { useNavigate } from "react-router";
 import { userContext } from "../../context/userContext";
 import { Link } from "react-router-dom";
+import { ScaleLoader } from 'react-spinners';
+import { Alert } from "@mui/material";
 
 
 const Login = () => {
@@ -11,8 +13,11 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState({ value: '', valid: null });
   const [userPassword, setUserPassword] = useState({ value: '', valid: null });
   
+  const [isLoading, setIsLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState('');
+
+  const [showReservationAlert, setShowReservationAlert] = useState(false);
     
   const navigate = useNavigate();
   const { login, setUserAlert } = useContext(userContext);
@@ -25,6 +30,12 @@ const Login = () => {
   // const setUser = (user) => {
   //   setUserContext(user);
   //};
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search); 
+    const reservationAlert = searchParams.get('reservationAlert');
+    setShowReservationAlert(reservationAlert === 'true')
+  }, [location.search]);
 
   //validar que campos no esten vacios
   const validateInputs = () => {
@@ -52,6 +63,7 @@ const Login = () => {
         email: userEmail.value,
         password: userPassword.value,
       }
+      setIsLoading(true);
       try {
         const response = await fetch(`http://localhost:8080/api/v1/auth/autenticar`, {
           method: 'POST',
@@ -75,12 +87,19 @@ const Login = () => {
         setError(
           'No se ha podido iniciar sesión. Por favor, vuelva a intentarlo.'
         );
-  }
+    } finally {
+      setIsLoading(false);
+    }
   }
 }
 
   return (
     <div className="formContainer">
+      {showReservationAlert && (
+        <Alert severity="error">
+          Para realizar una reserva, primero debes iniciar sesión.
+        </Alert>
+      )}
       <h1 className="signUpTitle">Inicia Sesión</h1>
       <form className= "signUpForm" onSubmit={handleSubmit}>
       <Input
@@ -111,7 +130,9 @@ const Login = () => {
             {error ? error : "Los datos son inválidos, por favor vuelva a intentarlo."}
           </p>
         )}
-      <button className="submitButton" type="submit">Iniciar sesión</button>
+      <button className="submitButton" type="submit">
+        {isLoading ? <ScaleLoader color='#ffffff' height={16}/> : 'Iniciar Sesión'}
+      </button>
       <div className="loginAccess">
           <p>¿No tienes una cuenta?</p>
           <p>

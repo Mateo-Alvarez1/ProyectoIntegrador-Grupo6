@@ -1,15 +1,20 @@
 import { createContext, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 export const userContext = createContext()
 const Provider = userContext.Provider
 
+
 const UserContextProvider = ({children}) => {
+
+    const navigate = useNavigate();
 
     // acá se inicializa el estado del usuario con el jwt 
     const [userJwt, setUserJwt] = useState(localStorage.getItem('token')) 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) 
 
     const [userAlert, setUserAlert] = useState(false);
+    
 
     const login = async (user) => {
       
@@ -57,6 +62,8 @@ const UserContextProvider = ({children}) => {
         // y se setea el estado del usuario
         setUser(null)
         localStorage.removeItem('user')
+
+        navigate('/')
 
     }
 
