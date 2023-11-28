@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface IUsuarioService {
     List<Usuario> listarUsuarios() throws ResourceNotFoundException;
+    Usuario agregarInstrumentoFavorito() throws ResourceNotFoundException;
+    Usuario quitarInstrumentoFavorito() throws ResourceNotFoundException;
+
 }

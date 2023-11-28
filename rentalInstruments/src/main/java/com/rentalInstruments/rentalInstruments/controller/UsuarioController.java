@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
@@ -7,11 +7,10 @@ import com.rentalInstruments.rentalInstruments.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/usuarios")
@@ -24,9 +23,22 @@ public class UsuarioController {
     public ResponseEntity<List<Usuario>> listarUsuarios() throws ResourceNotFoundException {
         return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
+    @PostMapping("/agregar-favorito")
+    public ResponseEntity<Usuario> agregarInstrumentoFavorito(@RequestBody Map<String, Long> request) throws ResourceNotFoundException {
+        Long usuarioId = request.get("usuarioId");
+        Long instrumentoId = request.get("instrumentoId");
+
+        Usuario usuario = usuarioService.agregarInstrumentoFavorito(usuarioId, instrumentoId);
+        return ResponseEntity.ok(usuario);
+    }
+    @PostMapping("/quitar-favorito/{usuarioId}/{instrumentoId}")
+    public ResponseEntity<Usuario> quitarInstrumentoFavorito(@PathVariable Long usuarioId, @PathVariable Long instrumentoId) throws ResourceNotFoundException {
+        Usuario usuario = usuarioService.quitarInstrumentoFavorito(usuarioId, instrumentoId);
+        return ResponseEntity.ok(usuario);
+    }
 
 }
-=======
+
 //package com.rentalInstruments.rentalInstruments.controller;
 //
 //import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
@@ -56,4 +68,4 @@ public class UsuarioController {
 //        return ResponseEntity.ok(usuarioService.listarTodos());
 //    }
 //}
->>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
+

@@ -34,22 +34,26 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<Reserva> reservas = new HashSet<>();
-=======
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Reserva> reservas = new HashSet<>();
 
->>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
+    @ManyToMany
+    @JoinTable (name = "usuario_instrumento_favorito", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "instrumento_id"))
+    private Set<Instrumento> instrumentosFavoritos = new HashSet<>();
 
+    public void agregarInstrumentoFavorito(Instrumento instrumento) {
+        this.instrumentosFavoritos.add(instrumento);
+    }
 
+    public void quitarInstrumentoFavorito(Instrumento instrumento) {
+
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -84,4 +88,6 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

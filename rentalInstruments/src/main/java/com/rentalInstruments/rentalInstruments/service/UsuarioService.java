@@ -1,7 +1,10 @@
 
 package com.rentalInstruments.rentalInstruments.service;
 
+import com.amazonaws.services.connect.model.UserNotFoundException;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
+import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +15,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UsuarioService implements IUsuarioService{
+public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    @Override
+    private final InstrumentoRepository instrumentoRepository;
+
     public List<Usuario> listarUsuarios() throws ResourceNotFoundException {
         List<Usuario> usuarios = usuarioRepository.findAll();
         if (usuarios.isEmpty()){
@@ -24,7 +28,32 @@ public class UsuarioService implements IUsuarioService{
         }
         return usuarios;
     }
+    public Usuario agregarInstrumentoFavorito(Long usuarioId, Long instrumentoId) throws ResourceNotFoundException {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+
+        Instrumento instrumento = instrumentoRepository.findById(instrumentoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Instrumento no encontrado"));
+
+        usuario.agregarInstrumentoFavorito(instrumento);
+        usuarioRepository.save(usuario);
+
+        return usuario;
+    }
+    public Usuario quitarInstrumentoFavorito(Long usuarioId, Long instrumentoId) throws ResourceNotFoundException {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+
+        Instrumento instrumento = instrumentoRepository.findById(instrumentoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Instrumento no encontrado"));
+
+        usuario.quitarInstrumentoFavorito(instrumento);
+        usuarioRepository.save(usuario);
+
+        return usuario;
+    }
 }
+
 
 //package com.rentalInstruments.rentalInstruments.service;
 //
