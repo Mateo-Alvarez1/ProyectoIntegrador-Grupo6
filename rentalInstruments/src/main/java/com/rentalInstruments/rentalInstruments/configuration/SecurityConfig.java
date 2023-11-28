@@ -25,12 +25,8 @@ public class SecurityConfig {
                 .csrf( csrf -> csrf.disable())
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("api/v1/instrumentos/**").permitAll();
-<<<<<<< HEAD
-                    auth.requestMatchers("api/v1/categoria/**").permitAll();
-=======
-                    auth.requestMatchers("api/v1/favoritos/**").permitAll();
->>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
-                    auth.requestMatchers("api/v1/auth/**").permitAll();
+                   auth.requestMatchers("api/v1/categoria/**").permitAll();
+                   auth.requestMatchers("api/v1/auth/**").permitAll();
                     auth.requestMatchers("/file/**").permitAll();
                     auth.requestMatchers("api/v1/usuarios/**").permitAll();
                     auth.requestMatchers("/v2/api-docs").permitAll();
