@@ -115,24 +115,63 @@ public class InstrumentoService implements IInstrumentoService {
             throw new ResourceNotFoundException("Instrumento no encontrado con ID: " + id);
         }
 
+//        instrumento.setColor(instrumentoDto.getColor());
+//        instrumento.setPrecio(instrumentoDto.getPrecio());
+//        instrumento.setStock(instrumentoDto.getStock());
+//
+//        // Actualizar la relación de Marca
+//        Marca marca = null;
+//        Optional<Marca> marcaOptional = marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
+//        if (marcaOptional.isPresent()) {
+//            marca = marcaOptional.get();
+//        } else {
+//            // Si la Marca no existe, se crea una nueva
+//            marca = new Marca();
+//            marca.setNombre(instrumentoDto.getMarca().getNombre());
+//            marca = marcaRepository.save(marca);
+//        }
+//        instrumento.setMarca(marca);
+
+
+            Instrumento instrumento = instrumentoOptional.get();
+            instanciasMCM(instrumentoDto);
+
+            instrumento.setPrecio(instrumentoDto.getPrecio());
+            instrumento.setStock(instrumentoDto.getStock());
+            instrumento.setColor(instrumentoDto.getColor());
+            instrumento.setNombre(instrumento.getMarca().getNombre() + " " + instrumento.getModelo().getNumeroSerie() + " " + instrumentoDto.getColor() );
+
+            log.info("Instrumento modificado correctamente");
+            instrumentoRepository.save(instrumento);
+            return  instrumento;
+
+
+
+
+
+    }
+
+
+    public Instrumento editarCategoria(Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
+
+        Optional<Instrumento> instrumentoOptional = instrumentoRepository.findById(id);
+
+        if (!instrumentoOptional.isPresent()) {
+            log.error("El instrumento con id: " + instrumentoDto.getId() + " no se encuentra en la base de datos");
+            throw new ResourceNotFoundException("No existe un instrumento con ese id");
+        }
         Instrumento instrumento = instrumentoOptional.get();
 
-        instrumento.setColor(instrumentoDto.getColor());
-        instrumento.setPrecio(instrumentoDto.getPrecio());
-        instrumento.setStock(instrumentoDto.getStock());
-
-        // Actualizar la relación de Marca
-        Marca marca = null;
-        Optional<Marca> marcaOptional = marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
-        if (marcaOptional.isPresent()) {
-            marca = marcaOptional.get();
-        } else {
-            // Si la Marca no existe, se crea una nueva
-            marca = new Marca();
-            marca.setNombre(instrumentoDto.getMarca().getNombre());
-            marca = marcaRepository.save(marca);
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        if(!categoriaOptional.isPresent()){
+            Categoria categoria = new Categoria();
+            categoria.setNombre(instrumentoDto.getCategoria().getNombre());
+            categoriaRepository.save(categoria);
+            instrumento.setCategoria(categoria);
+        }else{
+            instrumento.setCategoria(categoriaOptional.get());
         }
-        instrumento.setMarca(marca);
+
 
         // Actualizar la relación de Modelo
         Modelo modelo = null;
@@ -149,7 +188,7 @@ public class InstrumentoService implements IInstrumentoService {
 
         // Actualizar la relación de Categoria
         Categoria categoria = null;
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
+        categoriaOptional = categoriaRepository.findByNombre(instrumentoDto.getCategoria().getNombre());
         if (categoriaOptional.isPresent()) {
             categoria = categoriaOptional.get();
         } else {
@@ -164,7 +203,7 @@ public class InstrumentoService implements IInstrumentoService {
 
         log.info("Instrumento modificado correctamente");
         instrumentoRepository.save(instrumento);
-        return instrumento;
+        return instrumentoOptional.get();
     }
 
 

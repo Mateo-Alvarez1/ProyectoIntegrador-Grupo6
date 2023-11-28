@@ -1,6 +1,5 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/instrumentos")
 @CrossOrigin
+<<<<<<< HEAD
+=======
+@RequiredArgsConstructor
+
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 public class InstrumentoController {
 
 
@@ -42,14 +45,12 @@ public class InstrumentoController {
     }
 
 
-
     @GetMapping
-    public ResponseEntity<?> buscarTodos(){
-        try{
-            List<Instrumento> instrumentoList= instrumentoService.buscarTodos();
-            return  ResponseEntity.ok(instrumentoList);
-        }
-        catch (ResourceNotFoundException ex){
+    public ResponseEntity<?> buscarTodos() {
+        try {
+            List<Instrumento> instrumentoList = instrumentoService.buscarTodos();
+            return ResponseEntity.ok(instrumentoList);
+        } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No existen instrumentos en la base de datos");
         }
@@ -71,21 +72,47 @@ public class InstrumentoController {
     }
 
     @PutMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<?> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
         return  ResponseEntity.ok( instrumentoService.modificar(id , instrumentoDto));
+=======
+
+    public ResponseEntity<Instrumento> modificarInstrumento(@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists, BadRequestException {
+        return ResponseEntity.ok(instrumentoService.modificar(id, instrumentoDto));
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
     }
 
 
-    @PostMapping("/stock/{id}")
-    public ResponseEntity<?> agregarStock(@PathVariable Long id) throws ResourceNotFoundException {
-        instrumentoService.agregarStock(id);
-        return ResponseEntity.ok("Instrumento con id: " + id + " encontrado satisfactoriamente");
+//        @PostMapping("/stock/{id}")
+//        public ResponseEntity<?> agregarStock (@PathVariable Long id) throws ResourceNotFoundException {
+//            instrumentoService.agregarStock(id);
+//            return ResponseEntity.ok("Instrumento con id: " + id + " encontrado satisfactoriamente");
+//        }
+
+
+        @PutMapping("/categoria/{id}")
+        public ResponseEntity<Instrumento> CambiarCategoria (@PathVariable Long id, @RequestBody InstrumentoDto instrumentoDto) throws
+        ResourceNotFoundException, ObjectAlreadyExists {
+            return ResponseEntity.ok(instrumentoService.editarCategoria(id, instrumentoDto));
+        }
     }
 
 
+<<<<<<< HEAD
 
 
 
+=======
+//    @GetMapping
+//    public ResponseEntity<List<Imagen>> listarImagenes(){
+//        return ResponseEntity.ok(imagenService.listarImagenes());
+//    }
+//
+//    @PostMapping("/{instrumentoId}") // /api/v1/imagenes/1
+//    public ResponseEntity<Imagen> agregarImagen(@RequestBody ImagenDto imagenDto, @RequestParam Long instrumentoId) throws BadRequestException {
+//        return ResponseEntity.ok(imagenService.agregarImagen(imagenDto, instrumentoId));
+//    }
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 
 
-}
+

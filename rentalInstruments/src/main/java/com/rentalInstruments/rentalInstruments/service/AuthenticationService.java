@@ -1,30 +1,35 @@
 package com.rentalInstruments.rentalInstruments.service;
+
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Role;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
+<<<<<<< HEAD
 import com.rentalInstruments.rentalInstruments.email.EmailSender;
+=======
+import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
+import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 import com.rentalInstruments.rentalInstruments.model.AuthenticationRequest;
 import com.rentalInstruments.rentalInstruments.model.AuthenticationResponse;
 import com.rentalInstruments.rentalInstruments.model.RegisterRequest;
-import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
-import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
 
+=======
+
+import java.util.HashMap;
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 
 @Service
 @Slf4j
@@ -40,6 +45,14 @@ public class AuthenticationService {
     @Autowired
     private EmailSender emailSender;
 
+<<<<<<< HEAD
+=======
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    public final JwtService jwtService;
+
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
     public Usuario registrar(RegisterRequest registerRequest , Role role ) throws ObjectAlreadyExists {
         if (usuarioRepository.findByEmail(registerRequest.getEmail()).isPresent()) {
             log.error("Ya se encuentra un usuario registrado con ese email");
@@ -54,8 +67,12 @@ public class AuthenticationService {
                 .build();
 
         usuarioRepository.save(usuario);
+<<<<<<< HEAD
         String link = "http://localhost:8080";
         emailSender.send(registerRequest.getEmail() , buildEmail(registerRequest.getNombre() , link , registerRequest.getEmail()));
+=======
+
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
         return usuario;
     }
 
@@ -68,6 +85,10 @@ public class AuthenticationService {
         ));
 
         var user = usuarioRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+<<<<<<< HEAD
+=======
+        System.out.println(user);
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
         var token = jwtService.generateToken(new HashMap<>() , user , user.getNombre() , user.getApellido() , user.getRole());
 
         return AuthenticationResponse.builder()
@@ -76,10 +97,20 @@ public class AuthenticationService {
     }
 
 
+<<<<<<< HEAD
     public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
 
         var user = usuarioRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("El usuario no se encuentra"));
         System.out.println("hola desde asignar");
+=======
+    // TODO -> QUITAR ROLE_ADMIN
+
+    public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
+
+        var user = usuarioRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("El usuario no se encuentra"));
+        System.out.println(user);
+
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
         if (user.getRole() == Role.ROLE_ADMIN){
             log.error("El usuario ya tiene el rol de administrador");
             throw new ObjectAlreadyExists("El usuario ya tiene el role admin");
@@ -89,12 +120,71 @@ public class AuthenticationService {
         log.info("Rol asignado correctamente");
         usuarioRepository.save(user);
 
+<<<<<<< HEAD
         Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
                 user.getUsername(), user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(newAuthentication);
 
+=======
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70
 
         log.info("Rol asignado correctamente");
+        return user;
+    }
+//public Usuario asignarRolAdmin(String email) throws ObjectAlreadyExists {
+//    var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+//    System.out.println(user);
+//
+//    // Verificar si el usuario ya tiene el rol de administrador después de asignarlo
+//    if (user.getRole() != Role.ROLE_ADMIN) {
+//        user.setRole(Role.ROLE_ADMIN);
+//
+//        // Intentar guardar el cambio en el repositorio
+//        try {
+//            user = usuarioRepository.save(user);
+//            log.info("Rol asignado correctamente");
+//        } catch (Exception e) {
+//            log.error("Error al asignar el rol de administrador: " + e.getMessage());
+//            // En caso de error al guardar, lanzar una excepción
+//            throw new ObjectAlreadyExists("Error al asignar el rol de administrador");
+//        }
+//    } else {
+//        log.error("El usuario ya tiene el rol de administrador");
+//        throw new ObjectAlreadyExists("El usuario ya tiene el rol admin");
+//    }
+//
+//    return user;
+//}
+
+    // TODO -> QUITAR ROLE_ADMIN
+//    public Usuario quitarRolAdmin(String email) throws ObjectAlreadyExists {
+//        var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+//        System.out.println(user);
+//
+//        if (user.getRole() != Role.ROLE_ADMIN) {
+//            log.error("El usuario no tiene el rol de administrador");
+//            throw new ObjectAlreadyExists("El usuario no tiene el role admin");
+//        }
+//
+//        user.setRole(null); // Asigna null para quitar el rol de administrador
+//        log.info("Rol de administrador eliminado correctamente");
+//        usuarioRepository.save(user);
+//
+//        return user;
+//    }
+    public Usuario quitarRolAdmin(String email) {
+        var user = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario no se encuentra"));
+
+        if (user.getRole() != Role.ROLE_ADMIN) {
+            log.error("El usuario no tiene el rol de administrador");
+            // Podrías lanzar una excepción específica o simplemente devolver null o un objeto especial para indicar que no tiene el rol
+            return null; // O lanzar una excepción diferente
+        }
+
+        user.setRole(null);
+        log.info("Rol de administrador eliminado correctamente");
+        usuarioRepository.save(user);
+
         return user;
     }
 

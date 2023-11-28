@@ -40,7 +40,12 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
+
+//   private List<Imagen> imagen;
+
+
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
@@ -50,4 +55,6 @@ public class Instrumento {
 
     private List<String> imagenes = new ArrayList<>();
 
+    public void setImagenes(List<String> imagenes) {
+    }
 }

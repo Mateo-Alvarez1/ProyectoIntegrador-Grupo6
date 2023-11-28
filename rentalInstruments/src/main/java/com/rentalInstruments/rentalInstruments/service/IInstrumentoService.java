@@ -21,5 +21,9 @@ public interface IInstrumentoService {
 
     void agregarStock(Long id) throws ResourceNotFoundException;
 
+<<<<<<< HEAD:rentalInstruments/src/main/java/com/rentalInstruments/rentalInstruments/service/IInstrumentoService.java
 
+=======
+    Instrumento editarCategoria (Long id ,InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists;
+>>>>>>> d390bf04f17160395e12ba69bcefa8758094ab70:rentalInstruments/src/main/java/com/rentalInstruments/rentalInstruments/service/InstrumentoInterface.java
 }
