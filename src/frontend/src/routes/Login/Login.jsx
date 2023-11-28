@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Input from "../../Components/Input/Input";
 import "./Login.css"
 import { useNavigate } from "react-router";
 import { userContext } from "../../context/userContext";
 import { Link } from "react-router-dom";
 import { ScaleLoader } from 'react-spinners';
+import { Alert } from "@mui/material";
 
 
 const Login = () => {
@@ -15,6 +16,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(null);
   const [error, setError] = useState('');
+
+  const [showReservationAlert, setShowReservationAlert] = useState(false);
     
   const navigate = useNavigate();
   const { login, setUserAlert } = useContext(userContext);
@@ -27,6 +30,12 @@ const Login = () => {
   // const setUser = (user) => {
   //   setUserContext(user);
   //};
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search); 
+    const reservationAlert = searchParams.get('reservationAlert');
+    setShowReservationAlert(reservationAlert === 'true')
+  }, [location.search]);
 
   //validar que campos no esten vacios
   const validateInputs = () => {
@@ -86,6 +95,11 @@ const Login = () => {
 
   return (
     <div className="formContainer">
+      {showReservationAlert && (
+        <Alert severity="error">
+          Para realizar una reserva, primero debes iniciar sesión.
+        </Alert>
+      )}
       <h1 className="signUpTitle">Inicia Sesión</h1>
       <form className= "signUpForm" onSubmit={handleSubmit}>
       <Input

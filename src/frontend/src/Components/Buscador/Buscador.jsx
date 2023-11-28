@@ -133,6 +133,7 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
                 endDate={endDate}
                 selectsRange
                 onChange={onChange}
+                monthsShown={2}
                 />
             </div>
         </form>

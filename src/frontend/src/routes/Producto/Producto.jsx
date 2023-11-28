@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import arrow from "../../assets/arrow.svg";
 import "./Producto.css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { userContext } from '../../context/userContext';
 
 const Producto = () => {
   const { productoId } = useParams();
@@ -11,6 +12,13 @@ const Producto = () => {
   const BUCKETURL="https://1023c01grupo6.s3.amazonaws.com";
   const [producto, setProducto] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const userContextResults = useContext(userContext)
+  const token = userContextResults.userJwt ? userContextResults.userJwt : null;
+
+  const navigate = useNavigate();
+
+
 
 
   const buscarInstrumento= ()=>{
@@ -109,8 +117,12 @@ const Producto = () => {
               </div>
             </>
           )}
-        <div className='botonReserva'>
-          <Link className="cardLink" to={`/reservas/${productoId}`}>¡Haz una reserva!</Link>
+        <div className='botonReserva' >
+          <button className="cardLink" onClick={() => {
+            token ? navigate(`/reservas/${productoId}`) : navigate('/login?reservationAlert=true')
+          }}>
+            ¡Haz una reserva!
+            </button>
         </div>
       </div>
 

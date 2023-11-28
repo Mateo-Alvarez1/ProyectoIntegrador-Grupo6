@@ -65,6 +65,23 @@
     text-align: center;
 }
 
+.botonReserva button{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    background-color: #a2b7c0;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botonReserva button:hover{
+    background-color: #8c9aa5;
+}
+
 .textArrow{
     font-size: 16px;
     color: #007bff;
