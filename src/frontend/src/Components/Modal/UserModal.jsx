@@ -1,6 +1,8 @@
 import { Modal, Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const UserModal = ({ isOpen, closeModal, user }) => {
+  const isAdmin = user.rol === 'ROLE_ADMIN';
     return (
         <>
             <Modal
@@ -27,7 +29,14 @@ const UserModal = ({ isOpen, closeModal, user }) => {
           <strong>Rol:</strong> {user.rol}
           </Typography>
           </div>
-          <Button onClick={closeModal} variant="contained">Cerrar</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 2 }}>
+          <Button onClick={closeModal} variant="contained" >Cerrar</Button>
+          {isAdmin && (
+            <Link to="/admin">
+              <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Administración</Button>
+            </Link>
+          )}
+          </Box>
         </Box>
       </Modal>
         </>
