@@ -51,7 +51,7 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
 
     
 
-    return (
+    return ( 
     <table className='containerTable' >
     <thead>
         <tr className='usersTable'>
@@ -79,17 +79,13 @@ const ProductoList = ({ listarProductos, setListarProductos }) => {
         ))}
     </tbody>
     </table>
-);
+            
+
+    
+    );
 };
+
+
 
 export default ProductoList
 
-// const editarProd = (id) => {        
-    //     <Navigate to={{ pathname: "./EditarProducto/EditarProducto.jsx", state: { id } }}/>
-        // fetch(`http://localhost:8080//api/v1/instrumentos/${id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //     'Content-Type': 'application/json',
-        //     },
-        // });
-        // actualizarLista();

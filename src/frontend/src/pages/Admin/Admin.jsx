@@ -42,6 +42,8 @@ const Admin = () => {
       setListarProductos(data)
       setEliminarCategoria(false)
       setMostrarListaUsuarios(false)
+      setCrearCategoria(false)
+      
   }catch(error){
       console.log(error);
   }
@@ -86,6 +88,7 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(!eliminarCategoria)
     setMostrarListaUsuarios(false)
+    setCrearCategoria(false)
   }
 
   const mostrarCrearCategoria = () => {
