@@ -67,6 +67,7 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(false)
     setMostrarListaUsuarios(false)
+    setCrearCategoria(false)
   }
 
   const mostrarEditarProducto = () => {
@@ -109,7 +110,7 @@ const listarCategorias = async() => {
       setListarProductos([])
       setMostrarListaUsuarios(true)
       setEliminarCategoria(false)
-      
+      setCrearCategoria(false)
   }catch(error){
       console.log(error);
   }

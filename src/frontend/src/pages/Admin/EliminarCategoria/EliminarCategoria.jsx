@@ -1,19 +1,25 @@
-
 import { useState } from 'react'
 import './eliminarCategoria.css'
 import CategoriaModal from '../../../Components/Modal/CategoriaModal';
-const EliminarCategoria = ({setCategoria , categoria}) => {
-    
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openModal = () => {
-      setIsModalOpen(true);
+const EliminarCategoria = ({setCategoria , categoria}) => {
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+    //const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // const openModal = () => {
+    //   setIsModalOpen(true);
+    // };
+  
+    // const closeModal = () => {
+    //   setIsModalOpen(false);
+    // };
+    const openModal = (categoria) => {
+      setCategoriaSeleccionada(categoria);
     };
   
     const closeModal = () => {
-      setIsModalOpen(false);
+      setCategoriaSeleccionada(null);
     };
-
 
     
       
@@ -41,21 +47,27 @@ const EliminarCategoria = ({setCategoria , categoria}) => {
 
   return (  
       <div  className='eliminarCategorias'>
-       {categoria.length > 0 ? (
+        {categoria.length > 0 ? (
         <div>
-          {categoria.map((categoria) => (
-            <div key={categoria.id} className='categoria'>
-              <p>{categoria.nombre}</p>
-              <button onClick={() => openModal()}>Eliminar</button>
-           </div>
+          {categoria.map((category) => (
+            <div key={category.id} className='categoria'>
+              <p>{category.nombre}</p>
+              <button onClick={() => openModal(category)}>Eliminar</button>
+            </div>
           ))}
         </div>
       ) : (
-        <p className='categoriasP' >No hay categorías disponibles</p>
+        <p className='categoriasP' >No hay categorí­as disponibles</p>
       )}
-          { isModalOpen && <CategoriaModal open={isModalOpen} closeModal={closeModal} categoria={categoria} eliminarCategoria={eliminarCategoria}/>}
+          { categoriaSeleccionada && (
+          <CategoriaModal 
+          open={true} 
+          closeModal={closeModal} 
+          categoria={[categoriaSeleccionada]} 
+          eliminarCategoria={eliminarCategoria}/>
+          )}
     </div>
-   
+  
   )
 }
 
