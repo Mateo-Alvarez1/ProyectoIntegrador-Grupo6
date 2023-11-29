@@ -26,7 +26,7 @@ const Admin = () => {
   //const navigate  = useNavigate()
   const context = useContext(userContext)
   const user = context.user
-  const [mostrarListaUsuario, setMostrarListaUsuarios] = useState(null)
+  const [mostrarListaUsuario, setMostrarListaUsuarios] = useState(false)
 
   
 
@@ -41,6 +41,7 @@ const Admin = () => {
       setCrearProducto(false)
       setListarProductos(data)
       setEliminarCategoria(false)
+      setMostrarListaUsuarios(false)
   }catch(error){
       console.log(error);
   }
@@ -65,6 +66,7 @@ const listarCategorias = async() => {
     setEditarProducto(false)
     setListarUsuarios([])
     setEliminarCategoria(false)
+    setMostrarListaUsuarios(false)
   }
 
   const mostrarEditarProducto = () => {
@@ -73,6 +75,7 @@ const listarCategorias = async() => {
     setListarProductos([])
     setListarUsuarios([])
     setEliminarCategoria(false)
+    setMostrarListaUsuarios(false)
   }
 
   const mostrarEliminarCategoria = () => {
@@ -81,6 +84,7 @@ const listarCategorias = async() => {
     setListarProductos([])
     setListarUsuarios([])
     setEliminarCategoria(!eliminarCategoria)
+    setMostrarListaUsuarios(false)
   }
 
   const mostrarCrearCategoria = () => {
@@ -104,6 +108,7 @@ const listarCategorias = async() => {
       setCrearProducto(false)
       setListarProductos([])
       setMostrarListaUsuarios(true)
+      setEliminarCategoria(false)
       
   }catch(error){
       console.log(error);

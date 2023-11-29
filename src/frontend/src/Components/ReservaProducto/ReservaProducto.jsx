@@ -45,10 +45,10 @@ const ReservaProducto = ({date}) => {
       <h2 className="titleName">{data.nombre}</h2>
        </div>
 
-       <div className="price">
+      <div className="price">
         <p>Total a pagar</p>
         <p>{formattedPrice}</p> 
-       </div>
+      </div>
     
     <div className="checks">
       <span>Check-in</span>
