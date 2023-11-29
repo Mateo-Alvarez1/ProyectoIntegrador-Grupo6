@@ -88,7 +88,7 @@ const ProductoForm = () => {
     for (let i = 0; i < uploadedFiles.length; i++) {
       const file = uploadedFiles[i];
       const extension = file.name.slice(file.name.lastIndexOf(".") + 1);
-      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
+      const nuevoNombre = `${categoriaSeleccionada}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
   
       nuevasImagenes.push(nuevoNombre);
   
@@ -126,7 +126,7 @@ const ProductoForm = () => {
     for (let i = 0; i < uploadedFiles.length; i++) {
       const file = uploadedFiles[i];
       const extension = file.name.slice(file.name.lastIndexOf(".") + 1);
-      const nuevoNombre = `${categoria}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
+      const nuevoNombre = `${categoriaSeleccionada}-${marca}-${modelo}-${color}-${i + 1}.${extension}`;
   
       nuevasImagenes.push(nuevoNombre);
   
