@@ -12,6 +12,7 @@ import SignUpAdm from './routes/SignUpAdm/SignUpAdm'
 import UserContextProvider from './context/userContext'
 import EditarProducto from './pages/Admin/EditarProducto/EditarProducto'
 import Reservas from './routes/Reservas/Reservas'
+import HistorialReserva from './Components/HistorialReserva/HistorialReserva'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/reservas/:productoId" element={<Reservas/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
           <Route path="/editarprod/:id" element={<EditarProducto/>} />
+          <Route path="/historial" element={<HistorialReserva/>}/>
           <Route path='*' element={<h2>Page Not Found</h2>}/>
         </Routes>
         <Footer/>
