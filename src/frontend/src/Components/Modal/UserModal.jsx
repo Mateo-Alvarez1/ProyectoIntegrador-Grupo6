@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const UserModal = ({ isOpen, closeModal, user }) => {
   const isAdmin = user.rol === 'ROLE_ADMIN';
+  const isUsuario =user.rol === 'ROLE_USUARIO'
     return (
         <>
             <Modal
@@ -34,6 +35,11 @@ const UserModal = ({ isOpen, closeModal, user }) => {
           {isAdmin && (
             <Link to="/admin">
               <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Administración</Button>
+            </Link>
+          )}
+          {isUsuario && (
+            <Link to="/historial">
+              <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Historial</Button>
             </Link>
           )}
           </Box>
