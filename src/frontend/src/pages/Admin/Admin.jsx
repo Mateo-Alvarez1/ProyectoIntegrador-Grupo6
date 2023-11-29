@@ -86,6 +86,7 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(!eliminarCategoria)
     setMostrarListaUsuarios(false)
+    setCrearCategoria(false)
   }
 
   const mostrarCrearCategoria = () => {
