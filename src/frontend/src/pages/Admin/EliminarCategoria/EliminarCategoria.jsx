@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import './eliminarCategoria.css'
 import CategoriaModal from '../../../Components/Modal/CategoriaModal';
@@ -58,7 +57,7 @@ const EliminarCategoria = ({setCategoria , categoria}) => {
           ))}
         </div>
       ) : (
-        <p className='categoriasP' >No hay categorías disponibles</p>
+        <p className='categoriasP' >No hay categorí­as disponibles</p>
       )}
           { categoriaSeleccionada && (
           <CategoriaModal 

@@ -10,8 +10,10 @@ const ProductoForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
 
+  const [categoria, setCategoria] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+
   const [modelo, setModelo] = useState("");
-  const [categoria, setCategoria] = useState("");
   const [marca, setMarca] = useState("");
   const [color, setColor] = useState("");
   const [precio, setPrecio] = useState("");
@@ -32,8 +34,25 @@ const ProductoForm = () => {
   });
 
   const URL = "http://localhost:8080/api/v1/instrumentos";
-
   const URlIMG = "http://localhost:8080/file/upload";
+
+  useEffect(() => {
+    const obtenerCategorias = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/categoria");
+        if (response.ok) {
+          const data = await response.json();
+          setCategoria(data);
+        } else {
+          console.error("Error al obtener las categorías");
+        }
+      } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+      }
+    }
+
+    obtenerCategorias();
+  }, [])
 
 
   const agregarProducto = (producto) => {
@@ -145,7 +164,7 @@ const ProductoForm = () => {
       nombre: `${categoria} ${marca} ${modelo} ${color}`,
       marca: { nombre: marca },
       modelo: { numeroSerie: modelo },
-      categoria: { nombre: categoria },
+      categoria: { nombre: categoriaSeleccionada },
       imagenes: nuevasImagenes, // Utilizamos las imágenes actualizadas
       color,
       precio: parseFloat(precio),
@@ -165,7 +184,6 @@ const ProductoForm = () => {
     setColor("")
     setPrecio("")
     setStock("")
-    setCategoria("")
     setImagenes([]);
   }
 
@@ -199,13 +217,18 @@ const ProductoForm = () => {
         value={modelo}
         onChange={(e) => setModelo(e.target.value)}
       />
-      <input
-        className="input"
-        type="text"
-        placeholder="Categoría"
-        value={categoria}
-        onChange={(e) => setCategoria(e.target.value)}
-      />
+      <select
+        className="input select"
+        value={categoriaSeleccionada}
+        onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+      >
+        <option>Seleccione una categoría</option>
+        {categoria.map((categoria) => (
+          <option key={categoria.id} value={categoria.nombre}>
+            {categoria.nombre}
+          </option>
+        ))}
+      </select>
       <input
         className="input"
         type="text"

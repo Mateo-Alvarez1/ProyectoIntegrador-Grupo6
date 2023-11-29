@@ -24,7 +24,7 @@ const CategoriaModal = ({  open , closeModal ,  categoria , eliminarCategoria}) 
           <strong>{categorias.nombre}</strong>
           </Typography>
           <Typography variant="body1" id="user-modal-description" gutterBottom style={{ margin: '0px 0px 12px 80px'}}>
-          <strong>¿ Esta seguro que desea eliminar la categoria ? </strong>
+          <strong>¿ Esta seguro que desea eliminar la categoria ?<br></br> Se eliminaran todos los productos asociados a ella. </strong>
           </Typography>
           <div style={{marginLeft:140}}>
             <Button onClick={ () => {eliminarCategoria(categorias.nombre , categorias.id) ; closeModal();}} style={{ color:'green' , fontSize:'18px' }}>Confirmar</Button>

@@ -8,6 +8,7 @@ import { useContext } from 'react'
 import { userContext } from '../../context/userContext.jsx'
 import UsuarioList from './UsuarioList/UsuarioList.jsx'
 import EliminarCategoria from './EliminarCategoria/EliminarCategoria.jsx'
+import CrearCategoria from './CrearCategoria/CrearCategoria.jsx'
 //import { Redirect } from "react-router-dom";
 
 const Admin = () => {
@@ -18,6 +19,7 @@ const Admin = () => {
   const [editarProducto, setEditarProducto] = useState(null)
   const [listarUsuarios, setListarUsuarios] = useState([])
   const [eliminarCategoria, setEliminarCategoria] = useState(false)
+  const [crearCategoria, setCrearCategoria] = useState(false)
   const [categoria, setCategoria] = useState([])
 
 
@@ -57,7 +59,6 @@ const listarCategorias = async() => {
 
   }
 
-  
 
   const mostrarCrearProducto = () => {
     setCrearProducto(!crearProducto)
@@ -66,6 +67,7 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(false)
     setMostrarListaUsuarios(false)
+    setCrearCategoria(false)
   }
 
   const mostrarEditarProducto = () => {
@@ -86,6 +88,17 @@ const listarCategorias = async() => {
     setMostrarListaUsuarios(false)
   }
 
+  const mostrarCrearCategoria = () => {
+    setEditarProducto(false)
+    setCrearProducto(false)
+    setListarProductos([])
+    setListarUsuarios([])
+    setEliminarCategoria(false)
+    setCrearCategoria(!crearCategoria)
+  }
+
+
+
   const userData=async () => {
     try {
       const response = await fetch(`http://localhost:8080/api/v1/usuarios/listar`)
@@ -97,7 +110,7 @@ const listarCategorias = async() => {
       setListarProductos([])
       setMostrarListaUsuarios(true)
       setEliminarCategoria(false)
-      
+      setCrearCategoria(false)
   }catch(error){
       console.log(error);
   }
@@ -130,12 +143,12 @@ const listarCategorias = async() => {
         </div>
         <h3 className='h3-admin'>Categorias</h3>
         <div className='buttons'>
-        <button className='categ-button' >Listado Categoria</button>
-          <button className='categ-button' >Modificar Categoria</button>
+          <button className='categ-button' onClick={mostrarCrearCategoria}>Crear Categoria</button>
+          <button className='categ-button' >Listar Categoria</button>
           <button className='categ-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
         </div>
       
-      
+        {crearCategoria && <CrearCategoria/>}
         {eliminarCategoria && <EliminarCategoria categoria={categoria} setCategoria={setCategoria} />}
         {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
         {crearProducto && <ProductoForm/>}
