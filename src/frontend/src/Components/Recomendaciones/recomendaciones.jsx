@@ -4,39 +4,59 @@ import { useState, useEffect } from "react";
 import ProductoCard from "../ProductoCard/ProductoCard";
 
 
-const Recomendaciones = () => {
+const Recomendaciones = ({ selectedCategory, resetCategory }) => {
 
 const [mixedProducts, setMixedProducts] = useState([]);
+const url = "http://localhost:8080/api/v1/instrumentos";
 
-const URLINSTRUMENTOS= "http://localhost:8080/api/v1/instrumentos";
+useEffect(() => {
+  const fetchInstrumentos = async () => {
+    try {
 
-const buscarInstrumentos= ()=>{
+      const response = await fetch(url);
+      const data = await response.json();
 
-  fetch(URLINSTRUMENTOS).
-  then(response=>response.json()).
-  then(data=>{
-    data=shuffleArray(data);
-    setMixedProducts(data)
+      let filteredProducts = data;
 
-    
-  })
+      if (selectedCategory) {
+        filteredProducts = data.filter(
+          (producto) => producto.categoria.nombre === selectedCategory
+        );
+      }
 
-}
+      filteredProducts = shuffleArray(filteredProducts);
+      setMixedProducts(filteredProducts);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  fetchInstrumentos();
+}, [selectedCategory]);
 
 
 function shuffleArray(array) {
   return array.slice().sort(() => Math.random() - 0.5);
 }
 
-useEffect(()=>{
-  buscarInstrumentos()
-},[])
-console.log(mixedProducts);
+const showAll = () => {
+  resetCategory(); 
+};
 
   return (
     <div id="recomendacionesContainer">
-      <h1>Recomendaciones</h1>
-      <p>¿Listos para hacer música?</p>
+      
+      {selectedCategory ? (
+        <div className="categories-title">
+          <h1>Instrumentos con categoría {selectedCategory}</h1>
+          <button className="categories-button" onClick={showAll}>Mostrar Todos</button>
+        </div>
+      ) : (
+        <>
+          <h1>Recomendaciones</h1>
+          <p>¿Listos para hacer música?</p>
+        </>
+      )}
       <div className="recomendacionesCardContainer">
         {mixedProducts.map((producto) => {
           return <ProductoCard producto={producto} key={producto.id}/>;

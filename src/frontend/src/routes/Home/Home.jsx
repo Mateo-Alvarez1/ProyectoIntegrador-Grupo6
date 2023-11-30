@@ -17,6 +17,8 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
 
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const handleSearchResults = (results) => {
     setSearchResults(results);
   };
@@ -24,6 +26,14 @@ const Home = () => {
   const handleSearchQuery = (query) => {
     setSearchQuery(query);
   }
+
+  const handleSelectedCategory = (category) => {
+    setSelectedCategory(category);
+  }
+
+  const resetCategory = () => {
+    setSelectedCategory(null); 
+  };
 
   const scrollToResults = () => {
     if (searchResultsRef.current) {
@@ -64,7 +74,7 @@ const Home = () => {
       <Buscador onSearch={handleSearchResults} onSearchQuery={handleSearchQuery} scrollToResults={scrollToResults}/>
     </div>
     
-    <Categorias/>
+    <Categorias onSelectedCategory={handleSelectedCategory}/>
     {searchResults && searchResults.length > 0 ? (
       <div ref={searchResultsRef}>
         <h3 className="search-results-title">Resultados de la búsqueda:</h3>
@@ -91,7 +101,7 @@ const Home = () => {
           No se encontraron resultados para {searchQuery}
         </Alert>
     ) : (
-      <Recomendaciones/>
+      <Recomendaciones selectedCategory={selectedCategory} resetCategory={resetCategory}/>
     )
   )}
   </>

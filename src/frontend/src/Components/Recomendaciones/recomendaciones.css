@@ -38,6 +38,34 @@
     margin: auto;
 }
 
+.categories-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.categories-button {
+    background-color: #4f6073;
+    color: #ffffff;
+    border: none;
+    width: 250px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Roboto Condensed', sans-serif;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: 0.3s;
+}
+
+.categories-button:hover {
+    background-color: #ffffff;
+    color: #4f6073;
+    border: 0 solid #4f6073;
+}
+
 
 @media (max-width: 768px) {
 
