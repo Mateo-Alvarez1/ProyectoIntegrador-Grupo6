@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,11 +19,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private LocalDateTime fechaInicio ;
+    private LocalDate fechaInicio ;
     @Column(nullable = false)
-    private LocalDateTime fechaDevolucion ;
-    @Column(nullable = false)
-    private Boolean disponibilidad;
+    private LocalDate fechaDevolucion ;
+    //@Column(nullable = false)
+    //private Boolean disponibilidad;
 
     @ManyToOne
     @JoinColumn(name = "instrumento_id" , referencedColumnName = "id")

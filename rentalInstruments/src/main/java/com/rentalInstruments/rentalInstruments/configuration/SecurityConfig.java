@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth -> {
                     auth.requestMatchers("api/v1/instrumentos/**").permitAll();
                     auth.requestMatchers("api/v1/categoria/**").permitAll();
+                    auth.requestMatchers("api/v1/reservas/**").permitAll();
                     auth.requestMatchers("api/v1/auth/**").permitAll();
                     auth.requestMatchers("/file/**").permitAll();
                     auth.requestMatchers("api/v1/usuarios/**").permitAll();

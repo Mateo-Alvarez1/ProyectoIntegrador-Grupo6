@@ -1,6 +1,5 @@
 package com.rentalInstruments.rentalInstruments.model;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 @Data
@@ -9,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UsuarioDTO {
+public class UsuarioDto {
     private String nombre;
     private String apellido;
     private String email;
