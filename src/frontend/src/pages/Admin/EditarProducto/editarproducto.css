@@ -1,0 +1,64 @@
+.editar-producto-form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 220px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 20px 40px;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: center
+}
+  
+  .input-form {
+    width:200px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  
+  .label-form {
+    font-weight: bold;
+  }
+  
+  
+  .input-form:focus {
+    border-color: #0069d9;
+    }
+  
+  .button-edit {
+    width: 100px;
+margin: 0 auto;
+background-color: #0069d9;
+color: #fff;
+border: none;
+padding: 10px;
+cursor: pointer;
+border-radius: 10px;
+margin-bottom: 10px;
+  }
+  
+  .button-edit:hover {
+    background-color: #0069d9;
+  transform: scale(1.04);
+  transition: all .5s;
+  }
+
+  .h2-edit{
+    font-size: 40px;
+    text-align: center;
+    color: #4f6073;
+    padding-bottom: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding-top: 20px;
+
+  }
+  
