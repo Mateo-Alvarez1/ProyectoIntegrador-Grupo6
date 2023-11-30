@@ -5,7 +5,7 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Reserva;
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
-import com.rentalInstruments.rentalInstruments.Repository.ReservasRepository;
+import com.rentalInstruments.rentalInstruments.Repository.ReservaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.ReservaDto;
@@ -31,7 +31,7 @@ public class ReservaService implements IReservaService{
     private InstrumentoService instrumentoService;
 
     @Autowired
-    private ReservasRepository reservasRepository;
+    private ReservaRepository reservasRepository;
 
     @Override
     public Reserva buscar(Long id) throws ResourceNotFoundException {
