@@ -14,5 +14,5 @@ import java.util.Optional;
 public interface ReservaRepository extends JpaRepository<Reserva ,Long> {
 
     @Query("SELECT r FROM Reserva r WHERE r.usuario.email = ?1")
-    Optional<Usuario> findByEmail(String email);
+    Optional<Reserva> findByEmail(String email);
 }
