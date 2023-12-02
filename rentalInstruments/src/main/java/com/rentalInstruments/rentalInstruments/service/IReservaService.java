@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface IReservaService {
 
+    List<Reserva> buscarPorInstrumento(Long id) throws ResourceNotFoundException;
+
+    List<Reserva> buscarPorUsuario(String email) throws ResourceNotFoundException;
+
     Reserva buscar(Long id) throws ResourceNotFoundException;
 
     List<Reserva> buscarTodos()throws ResourceNotFoundException;

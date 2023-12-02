@@ -13,10 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -41,7 +38,7 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Reserva> reservas = new HashSet<>();
+    private List<Reserva> reservas = new ArrayList<>();
 
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
