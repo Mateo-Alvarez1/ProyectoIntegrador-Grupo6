@@ -35,6 +35,30 @@ public class ReservaService implements IReservaService{
     private ReservaRepository reservasRepository;
 
     @Override
+    public List<Reserva> buscarPorInstrumento(Long id) throws ResourceNotFoundException {
+        Optional<Instrumento> instrumentoOptional= instrumentoRepository.findById(id);
+        if (instrumentoOptional.isEmpty()){
+            log.error("No existe el instrumento");
+            throw new ResourceNotFoundException("No existe el instrumento");
+        }
+        Instrumento instrumento= instrumentoOptional.get();
+        List<Reserva> reservas= instrumento.getReservas();
+        return reservas;
+    }
+
+    @Override
+    public List<Reserva> buscarPorUsuario(String email) throws ResourceNotFoundException {
+        Optional<Usuario> usuarioOptional= usuarioRepository.findByEmail(email);
+        if (usuarioOptional.isEmpty()){
+            log.error("No existe el usuario");
+            throw new ResourceNotFoundException("No existe el usuario");
+        }
+        Usuario usuario= usuarioOptional.get();
+        List<Reserva> reservas= usuario.getReservas();
+        return reservas;
+    }
+
+    @Override
     public Reserva buscar(Long id) throws ResourceNotFoundException {
         Optional<Reserva> reservaOptional=reservasRepository.findById(id);
         if (reservaOptional.isEmpty()){
@@ -93,24 +117,15 @@ public class ReservaService implements IReservaService{
 
         Reserva reserva= new Reserva();
         reserva.setUsuario(usuario);
-        reserva.setInstrumentoDto(new InstrumentoDto());
+        reserva.setInstrumento(new Instrumento());
         reserva.setFechaInicio(reservaDto.getFechaInicio());
         reserva.setFechaDevolucion(reservaDto.getFechaDevolucion());
 
         reservasRepository.save(reserva);
+        instrumentoRepository.save(instrumento);
 
-        /*instrumento.agregarReserva(reserva);
-
-
-        instrumentoRepository.save(instrumento);*/
-
-
-
-
-
+        log.info("Reserva agregada con exito");
         return reserva;
-
-
 
     }
 }

@@ -21,12 +21,13 @@ public class Reserva {
     private LocalDate fechaInicio ;
     @Column(nullable = false)
     private LocalDate fechaDevolucion ;
-    //@Column(nullable = false)
-    //private Boolean disponibilidad;
+
+//    @Column(nullable = false)
+//    private Boolean disponibilidad;
 
     @ManyToOne
     @JoinColumn(name = "instrumento_id" , referencedColumnName = "id")
-    private InstrumentoDto instrumentoDto;
+    private Instrumento instrumento;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

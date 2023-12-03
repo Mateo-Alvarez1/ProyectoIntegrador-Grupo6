@@ -44,15 +44,12 @@ public class Instrumento {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "instrumento", cascade = CascadeType.ALL)
-//    private Set<Reserva> reservas = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "instrumento", cascade = CascadeType.ALL)
+    private List<Reserva> reservas = new ArrayList<>();
+
 
     private List<String> imagenes = new ArrayList<>();
-
-
-    /*public void agregarReserva(Reserva reserva){
-
-    }*/
 
 }

@@ -19,6 +19,27 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
+    @GetMapping("/instrumento/{id}")
+    public ResponseEntity<?> buscarPorInstrumento(@PathVariable Long id) {
+        try {
+            List<Reserva> reservas = reservaService.buscarPorInstrumento(id);
+            return ResponseEntity.ok(reservas);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existen reservas para el instrumento con ID: " + id);
+        }
+    }
+
+    @GetMapping("/usuario/{email}")
+    public ResponseEntity<?> buscarPorUsuario(@PathVariable String email) {
+        try {
+            List<Reserva> reservas = reservaService.buscarPorUsuario(email);
+            return ResponseEntity.ok(reservas);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existen reservas para el usuario con email: " + email);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Long id) {

@@ -47,9 +47,9 @@ public class InstrumentoDto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "instrumentoDto", cascade = CascadeType.ALL)
-    private Set<Reserva> reservas = new HashSet<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "instrumentoDto", cascade = CascadeType.ALL)
+//    private List<Reserva> reservas = new ArrayList<>();
 
 
 
