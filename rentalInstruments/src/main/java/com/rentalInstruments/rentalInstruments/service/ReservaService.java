@@ -8,6 +8,7 @@ import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.ReservaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
+import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import com.rentalInstruments.rentalInstruments.model.ReservaDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class ReservaService implements IReservaService{
 
         Reserva reserva= new Reserva();
         reserva.setUsuario(usuario);
-        reserva.setInstrumento(instrumento);
+        reserva.setInstrumentoDto(new InstrumentoDto());
         reserva.setFechaInicio(reservaDto.getFechaInicio());
         reserva.setFechaDevolucion(reservaDto.getFechaDevolucion());
 

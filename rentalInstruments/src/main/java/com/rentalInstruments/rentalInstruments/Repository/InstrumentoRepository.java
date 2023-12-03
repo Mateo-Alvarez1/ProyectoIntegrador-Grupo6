@@ -18,4 +18,5 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
 
     @Query("select i from Instrumento i where i.categoria.nombre = ?1")
     List<Instrumento> findByCategoria(String categoria);
+
 }

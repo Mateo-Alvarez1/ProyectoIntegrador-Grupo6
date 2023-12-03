@@ -1,11 +1,10 @@
 package com.rentalInstruments.rentalInstruments.Repository.Entities;
 
+import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -27,7 +26,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "instrumento_id" , referencedColumnName = "id")
-    private Instrumento instrumento;
+    private InstrumentoDto instrumentoDto;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

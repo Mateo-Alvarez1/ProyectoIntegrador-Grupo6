@@ -11,7 +11,7 @@ import com.rentalInstruments.rentalInstruments.Repository.ModeloRepository;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
-import lombok.RequiredArgsConstructor;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +35,7 @@ public class InstrumentoService implements IInstrumentoService {
     private CategoriaRepository categoriaRepository;
 
     @Override
+    @Transactional
     public Instrumento agregarInstrumento(InstrumentoDto instrumentoDto) throws ObjectAlreadyExists {
 
         Optional<Instrumento> instrumentoOptional =instrumentoRepository.findByNombre(instrumentoDto.getMarca().getNombre()+ " " + instrumentoDto.getModelo().getNumeroSerie()+ " " + instrumentoDto.getColor());
@@ -171,7 +172,10 @@ public class InstrumentoService implements IInstrumentoService {
     private Instrumento instanciasMCM(InstrumentoDto instrumentoDto){
 
         Instrumento instrumento = new Instrumento();
-
+        String nombreMarca = instrumentoDto.getMarca().getNombre();
+        if (nombreMarca == null || nombreMarca.isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la marca no puede ser nulo o vacío");
+        }
         Optional <Marca> marcaOptional= marcaRepository.findByNombre(instrumentoDto.getMarca().getNombre());
         instrumento.setMarca(marcaOptional.orElseGet( () -> {
             Marca marca = new Marca();
