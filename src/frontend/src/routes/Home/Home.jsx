@@ -8,6 +8,7 @@ import { userContext } from '../../context/userContext'
 import { Alert } from '@mui/material'
 import { useState } from 'react'
 import ProductoCard from '../../Components/ProductoCard/ProductoCard'
+import BuscadorFechas from '../../Components/BuscadorFechas/BuscadorFechas'
 
 const Home = () => {
 
@@ -18,6 +19,11 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const [reservas, setReservas] = useState([])
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+
 
   const handleSearchResults = (results) => {
     setSearchResults(results);
@@ -33,6 +39,12 @@ const Home = () => {
 
   const resetCategory = () => {
     setSelectedCategory(null); 
+  };
+
+  const handleReservas = (data, startDate, endDate) => {
+    setReservas(data); 
+    setStartDate(startDate); 
+    setEndDate(endDate); 
   };
 
   const scrollToResults = () => {
@@ -71,7 +83,12 @@ const Home = () => {
         <TypeIt className="welcome-title" element={"h2"}>¡Bienvenido!</TypeIt> 
         <p className='welcome-subtitle'>En Pitch Please podrás alquilar el instrumento que estás buscando.</p>
       </div>
-      <Buscador onSearch={handleSearchResults} onSearchQuery={handleSearchQuery} scrollToResults={scrollToResults}/>
+      <Buscador 
+        onSearch={handleSearchResults} 
+        onSearchQuery={handleSearchQuery} 
+        scrollToResults={scrollToResults}
+      />
+      <BuscadorFechas onReservasSearch={handleReservas}/>
     </div>
     
     <Categorias onSelectedCategory={handleSelectedCategory}/>
@@ -101,7 +118,13 @@ const Home = () => {
           No se encontraron resultados para {searchQuery}
         </Alert>
     ) : (
-      <Recomendaciones selectedCategory={selectedCategory} resetCategory={resetCategory}/>
+      <Recomendaciones 
+        selectedCategory={selectedCategory} 
+        resetCategory={resetCategory} 
+        reservas={reservas} 
+        startDate={startDate} 
+        endDate={endDate}
+      />
     )
   )}
   </>
