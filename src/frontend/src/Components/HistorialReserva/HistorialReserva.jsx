@@ -66,13 +66,13 @@ const HistorialReserva = () => {
                 contentLabel="Detalles de la Reserva"
             >
             {selectedReserva && (
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 600, bgcolor: 'white', boxShadow: 24, p: 4, borderRadius: 8}}>
+                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: "auto", bgcolor: 'white', boxShadow: 24, p: 4, borderRadius: 8}}>
                     <h3>Detalles de la Reserva</h3>
-                    <p>Nro Id: {selectedReserva.id}</p>
-                    <p>Instrumento: {selectedReserva.instrumento.nombre}</p>
-                    <p>Fecha de inicio: {selectedReserva.fechaInicio}</p>
-                    <p>Fecha de finalización: {selectedReserva.fechaDevolucion}</p>
-                    <p>Precio: {selectedReserva.instrumento.precio}</p>
+                    <p className="reservaDet">Nro Id: {selectedReserva.id}</p>
+                    <p className="reservaDet">Instrumento: {selectedReserva.instrumento.nombre}</p>
+                    <p className="reservaDet">Fecha de inicio: {selectedReserva.fechaInicio}</p>
+                    <p className="reservaDet">Fecha de finalización: {selectedReserva.fechaDevolucion}</p>
+                    <p className="reservaDet">Precio: {selectedReserva.instrumento.precio}</p>
                     <button className='cerrarBtn' onClick={closeModal}>Cerrar</button>
                 </Box>
                 )}
