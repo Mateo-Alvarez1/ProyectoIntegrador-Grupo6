@@ -30,7 +30,7 @@ function App() {
           <Route path="/reservas/:productoId" element={<Reservas/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
           <Route path="/editarprod/:id" element={<EditarProducto/>} />
-          <Route path="/historial" element={<HistorialReserva/>}/>
+          <Route path="historial/:userEmail" element={<HistorialReserva/>}/>
           <Route path='*' element={<h2>Page Not Found</h2>}/>
         </Routes>
         <Footer/>

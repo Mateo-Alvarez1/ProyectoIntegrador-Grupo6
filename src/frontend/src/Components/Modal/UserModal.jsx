@@ -38,7 +38,7 @@ const UserModal = ({ isOpen, closeModal, user }) => {
             </Link>
           )}
           {isUsuario && (
-            <Link to="/historial">
+            <Link to={`/historial/${user.email}`}>
               <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Historial</Button>
             </Link>
           )}
