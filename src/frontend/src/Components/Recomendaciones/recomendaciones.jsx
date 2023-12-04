@@ -2,15 +2,20 @@ import "./recomendaciones.css";
 // import productos from "../../utils/products.json";
 import { useState, useEffect } from "react";
 import ProductoCard from "../ProductoCard/ProductoCard";
+import { ScaleLoader } from "react-spinners";
 
 
-const Recomendaciones = ({ selectedCategory, resetCategory }) => {
+const Recomendaciones = ({ selectedCategory, resetCategory, reservas, startDate, endDate }) => {
 
 const [mixedProducts, setMixedProducts] = useState([]);
+const [productosDisponibles, setProductosDisponibles] = useState([]);
+const [isLoading, setIsLoading] = useState(true);
+
 const url = "http://localhost:8080/api/v1/instrumentos";
 
 useEffect(() => {
   const fetchInstrumentos = async () => {
+    setIsLoading(true);
     try {
 
       const response = await fetch(url);
@@ -26,6 +31,7 @@ useEffect(() => {
 
       filteredProducts = shuffleArray(filteredProducts);
       setMixedProducts(filteredProducts);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -33,6 +39,26 @@ useEffect(() => {
 
   fetchInstrumentos();
 }, [selectedCategory]);
+
+useEffect(() => {
+  const productosConReservas = mixedProducts.filter((producto) => {
+    const reservasArray = Array.isArray(reservas) ? reservas : [];
+    const estaReservado = reservasArray.some((reserva) => {
+      const reservaInicio = new Date(reserva.fechaInicio);
+      const reservaFin = new Date(reserva.fechaDevolucion);
+
+      const reservaOverlap = (
+        startDate <= reservaFin && endDate >= reservaInicio
+      );
+    
+      return reserva.instrumento.id === producto.id && reservaOverlap;
+    });
+    
+    return !estaReservado;
+  });
+
+  setProductosDisponibles(productosConReservas);
+}, [mixedProducts, reservas, startDate, endDate]);
 
 
 function shuffleArray(array) {
@@ -45,23 +71,33 @@ const showAll = () => {
 
   return (
     <div id="recomendacionesContainer">
-      
-      {selectedCategory ? (
-        <div className="categories-title">
-          <h1>Instrumentos con categoría {selectedCategory}</h1>
-          <button className="categories-button" onClick={showAll}>Mostrar Todos</button>
-        </div>
-      ) : (
+      {isLoading ? (
+        <div style={{margin: "0 auto"}}>
+          <ScaleLoader color="#4f6073" height={20}/>
+        </div>) 
+        : (
         <>
-          <h1>Recomendaciones</h1>
-          <p>¿Listos para hacer música?</p>
+          {selectedCategory ? (
+            <div className="categories-title">
+              <h1>Instrumentos con categoría {selectedCategory}</h1>
+              <button className="categories-button" onClick={showAll}>Mostrar Todos</button>
+            </div>
+          ) : (
+            <>
+              <h1>Recomendaciones</h1>
+              <p>¿Listos para hacer música?</p>
+            </>
+          )}
+          <div className="recomendacionesCardContainer">
+            {/* {mixedProducts.map((producto) => {
+              return <ProductoCard producto={producto} key={producto.id}/>;
+            })} */}
+            {productosDisponibles.map((producto) => {
+              return <ProductoCard producto={producto} key={producto.id}/>;
+            })}
+          </div>
         </>
       )}
-      <div className="recomendacionesCardContainer">
-        {mixedProducts.map((producto) => {
-          return <ProductoCard producto={producto} key={producto.id}/>;
-        })}
-      </div>
     </div>
   );
 };

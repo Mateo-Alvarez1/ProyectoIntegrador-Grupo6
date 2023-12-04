@@ -1,16 +1,12 @@
 import { useState } from "react"
 import { AiOutlineSearch } from "react-icons/ai";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import './buscador.css'
 // import producto from '../../utils/products.json'
 import { useEffect } from "react";
 import Autosuggest from "react-autosuggest/dist/Autosuggest";
+import BuscadorFechas from "../BuscadorFechas/BuscadorFechas";
 
 export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
 
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState([])
@@ -105,12 +101,6 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
         onChange: handleChange
     };
 
-    const onChange = (dates) => {
-        const [start, end] = dates;
-        setStartDate(start);
-        setEndDate(end);
-    };
-
 
     return (
         <form  onSubmit={ onHandleSubmit } >
@@ -125,16 +115,7 @@ export const Buscador = ({ onSearch, onSearchQuery, scrollToResults }) => {
                     inputProps={inputProps}
                 />
                 <button type="submit"><AiOutlineSearch/></button>
-                <DatePicker 
-                className="datePicker"
-                minDate={new Date()}
-                selected={startDate}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                onChange={onChange}
-                monthsShown={2}
-                />
+                {/* <BuscadorFechas onReservasSearch={onReservasSearch}/> */}
             </div>
         </form>
     )

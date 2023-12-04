@@ -150,8 +150,10 @@ td {
         display: block;
         text-align: center;
         font-size: 18px;
+        font-weight: bold;
         color: rgb(173, 41, 41);
-        margin-top: 25px;
+        margin-top: 200px;
+        margin-bottom: 250px;
         font-family: 'Roboto Condensed', sans-serif;
     }
 }
