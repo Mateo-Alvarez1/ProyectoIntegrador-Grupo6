@@ -50,6 +50,4 @@ public class Instrumento {
 
     private List<String> imagenes = new ArrayList<>();
 
-    
-
 }
