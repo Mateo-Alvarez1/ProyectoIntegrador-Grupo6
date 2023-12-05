@@ -39,10 +39,12 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Reserva> reservas = new ArrayList<>();
+
     @ManyToMany
-    @JoinTable (name = "usuario_instrumento_favorito", joinColumns = @JoinColumn(name = "usuario_id"),
+    @JoinTable (name = "usuario_instrumento_favorito",
+            joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "instrumento_id"))
-    private Set<Instrumento> instrumentosFavoritos = new HashSet<>();
+    private List<Instrumento> instrumentosFavoritos = new ArrayList<>();
 
     @Enumerated(value = EnumType.ORDINAL)
     private Role role;
@@ -91,6 +93,10 @@ public class Usuario implements UserDetails {
 
 
     public void quitarInstrumentoFavorito(Instrumento instrumento) {
+        this.instrumentosFavoritos.remove(instrumento);
+    }
 
+    public List<Instrumento> obtenerInstrumentosFavoritos() {
+        return instrumentosFavoritos;
     }
 }

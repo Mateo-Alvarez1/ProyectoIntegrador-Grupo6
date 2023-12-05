@@ -62,11 +62,11 @@ public class UsuarioService implements IUsuarioService{
 
         return usuario;
     }
-    public Set<Instrumento> listarInstrumentosFavoritos(Long usuarioId) throws ResourceNotFoundException {
+    public List<Instrumento> listarInstrumentosFavoritos(Long usuarioId) throws ResourceNotFoundException {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
-        return usuario.getInstrumentosFavoritos();
+        return usuario.obtenerInstrumentosFavoritos();
     }
 
 }

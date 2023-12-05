@@ -40,16 +40,16 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "instrumento", cascade = CascadeType.ALL)
     private List<Reserva> reservas = new ArrayList<>();
 
-
     private List<String> imagenes = new ArrayList<>();
+
+    
 
 }
