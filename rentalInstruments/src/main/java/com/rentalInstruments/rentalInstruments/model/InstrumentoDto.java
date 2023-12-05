@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,6 +21,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class InstrumentoDto {
+
     private Long id;
     private String nombre;
     private String color;
@@ -29,5 +31,6 @@ public class InstrumentoDto {
     private Modelo modelo;
     private Categoria categoria;
     private List<String> imagenes= new ArrayList<>();
+
 
 }

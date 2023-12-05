@@ -122,7 +122,6 @@ public class ReservaService implements IReservaService{
         reserva.setFechaDevolucion(reservaDto.getFechaDevolucion());
 
         reservasRepository.save(reserva);
-        instrumentoRepository.save(instrumento);
 
         log.info("Reserva agregada con exito");
         return reserva;
