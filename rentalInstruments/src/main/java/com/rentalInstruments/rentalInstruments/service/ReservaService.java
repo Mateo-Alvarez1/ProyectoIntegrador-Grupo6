@@ -117,12 +117,11 @@ public class ReservaService implements IReservaService{
 
         Reserva reserva= new Reserva();
         reserva.setUsuario(usuario);
-        reserva.setInstrumento(new Instrumento());
+        reserva.setInstrumento(instrumento);
         reserva.setFechaInicio(reservaDto.getFechaInicio());
         reserva.setFechaDevolucion(reservaDto.getFechaDevolucion());
 
         reservasRepository.save(reserva);
-        instrumentoRepository.save(instrumento);
 
         log.info("Reserva agregada con exito");
         return reserva;

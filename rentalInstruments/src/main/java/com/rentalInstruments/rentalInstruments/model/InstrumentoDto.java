@@ -12,52 +12,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+
 @Getter
 @Setter
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class InstrumentoDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-
-    @Column(nullable = false)
     private String nombre;
-
-    @Column(nullable = false)
     private Double precio;
-
-    @Column(nullable = false)
     private String color;
-
-    @Column(nullable = false)
     private Integer stock;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "modelo_id" )
     private Modelo modelo;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "marca_id" )
     private Marca marca;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "instrumentoDto", cascade = CascadeType.ALL)
-//    private List<Reserva> reservas = new ArrayList<>();
-
-
-
     private List<String> imagenes = new ArrayList<>();
-
-
-    /*public void agregarReserva(Reserva reserva){
-
-    }*/
 
 }

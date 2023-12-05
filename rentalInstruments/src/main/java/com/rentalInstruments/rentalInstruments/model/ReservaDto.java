@@ -1,5 +1,7 @@
 package com.rentalInstruments.rentalInstruments.model;
 
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,8 +16,7 @@ public class ReservaDto {
 
     private LocalDate fechaInicio ;
     private LocalDate fechaDevolucion ;
-    private InstrumentoDto instrumento;
-    private UsuarioDto usuario;
-
+    private Instrumento instrumento;
+    private Usuario usuario;
 
 }

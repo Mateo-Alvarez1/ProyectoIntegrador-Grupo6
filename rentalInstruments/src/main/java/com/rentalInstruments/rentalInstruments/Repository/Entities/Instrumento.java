@@ -40,11 +40,6 @@ public class Instrumento {
     @JoinColumn(name = "marca_id" )
     private Marca marca;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-
-
     @JsonIgnore
     @OneToMany(mappedBy = "instrumento", cascade = CascadeType.ALL)
     private List<Reserva> reservas = new ArrayList<>();
