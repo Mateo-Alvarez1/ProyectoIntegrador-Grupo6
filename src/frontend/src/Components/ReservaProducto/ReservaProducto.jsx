@@ -1,28 +1,93 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import './reservaProducto.css'
-import { useContext } from "react";
+import { userContext } from "../../context/userContext";
+
 
 const ReservaProducto = ({date}) => {
 
- 
+  const navigate = useNavigate();
   const [data, setData] = useState([])
   const { productoId } = useParams()
+  const {user}= useContext(userContext);
+  const [reserva,setReserva]= useState({
+      fechaInicio:formatearFecha(date.startDate.toLocaleDateString()),
+      fechaDevolucion:formatearFecha(date.endDate.toLocaleDateString()),
+      usuario:{
+        nombre:user.nombre,
+        apellido:user.apellido,
+        email:user.email
+      },
+      instrumento:{
+       
+      }
+  
+    
+  })
+
 
   const BUCKETURL ="https://1023c01grupo6.s3.amazonaws.com"
 
-  const productData = async() => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/instrumentos/${productoId}`
-      );
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const RESERVAURL ="http://localhost:8080/api/v1/reservas"
+
+
+  function formatearFecha(fechaString) {
+    const [dia, mes, año] = fechaString.split('/');
+    const fecha = new Date(`${año}/${mes}/${dia}`);
+  
+    const diaFormateado = fecha.getDate().toString().padStart(2, '0');
+    const mesFormateado = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const añoFormateado = fecha.getFullYear();
+  
+    return `${añoFormateado}-${mesFormateado}-${diaFormateado}`;
   }
+
+  const productData = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/instrumentos/${productoId}`);
+      const jsonData = await response.json();
+  
+      setData(jsonData);
+      console.log("data", data);
+  
+      setReserva({
+        fechaInicio: reserva.fechaInicio,
+        fechaDevolucion: reserva.fechaDevolucion,
+        usuario: {
+          nombre: user.nombre,
+          apellido: user.apellido,
+          email: user.email
+        },
+        instrumento: jsonData // Configurar con los datos recuperados
+      });
+  
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+      console.log(reserva);
+    }
+  };
+  
+
+  const realizarReserva = async () => {
+    try {
+      const respuesta = await fetch(RESERVAURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reserva),
+      });
+    
+      const info = await respuesta.json();
+      
+      console.log(info);
+      navigate(`/reservas/confirmadas/${info.id}`)
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
+  };
+  
+ 
 
 
 
@@ -30,6 +95,12 @@ const ReservaProducto = ({date}) => {
   useEffect(() => {
     productData()
   }, [productoId])
+
+
+  useEffect(()=>{
+    console.log("reserva actualizada");
+    console.log(reserva);
+  },[reserva])
 
   // const { precio } = data
   const formattedPrice = data.precio ? `${data.precio.toFixed(2)}`.replace(".", ",").replace(",00", ".00") : "";
@@ -55,11 +126,11 @@ const ReservaProducto = ({date}) => {
       <p>{date.startDate?.toLocaleDateString()}</p>
     </div>
     <div className="checks" >
-      <span>Check-in</span>
+      <span>Check-out</span>
       <p>{date.endDate?.toLocaleDateString()}</p>
     </div>
     <div className="reservaButton">
-      <button>Confirmar Reserva</button>
+      <button onClick={realizarReserva}>Confirmar Reserva</button>
     </div>
     </div>
   )

@@ -13,6 +13,7 @@ import UserContextProvider from './context/userContext'
 import EditarProducto from './pages/Admin/EditarProducto/EditarProducto'
 import Reservas from './routes/Reservas/Reservas'
 import HistorialReserva from './Components/HistorialReserva/HistorialReserva'
+import ReservaConfirmacion from './Components/ReservaConfirmación/ReservaConfirmacion'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path="/admin" element={<Admin/>}/>
           <Route path="/reservas/:productoId" element={<Reservas/>}/>
+          <Route path="/reservas/confirmadas/:reservaID" element={<ReservaConfirmacion/>}/>
           <Route path="producto/:productoId" element={<Producto/>}/>
           <Route path="/editarprod/:id" element={<EditarProducto/>} />
           <Route path="historial/:userEmail" element={<HistorialReserva/>}/>
