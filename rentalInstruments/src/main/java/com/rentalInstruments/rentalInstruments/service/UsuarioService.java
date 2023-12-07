@@ -34,8 +34,8 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public Usuario agregarInstrumentoFavorito(Long usuarioId, Long instrumentoId) throws ResourceNotFoundException {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+    public Usuario agregarInstrumentoFavorito(String usuarioEmail, Long instrumentoId) throws ResourceNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(usuarioEmail)
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 
         Instrumento instrumento = instrumentoRepository.findById(instrumentoId)
@@ -50,8 +50,8 @@ public class UsuarioService implements IUsuarioService{
 
 
     @Override
-    public Usuario quitarInstrumentoFavorito(Long usuarioId, Long instrumentoId) throws ResourceNotFoundException {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+    public Usuario quitarInstrumentoFavorito(String usuarioEmail, Long instrumentoId) throws ResourceNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(usuarioEmail)
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 
         Instrumento instrumento = instrumentoRepository.findById(instrumentoId)
@@ -62,8 +62,8 @@ public class UsuarioService implements IUsuarioService{
 
         return usuario;
     }
-    public List<Instrumento> listarInstrumentosFavoritos(Long usuarioId) throws ResourceNotFoundException {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+    public List<Instrumento> listarInstrumentosFavoritos(String usuarioEmail) throws ResourceNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(usuarioEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         return usuario.obtenerInstrumentosFavoritos();

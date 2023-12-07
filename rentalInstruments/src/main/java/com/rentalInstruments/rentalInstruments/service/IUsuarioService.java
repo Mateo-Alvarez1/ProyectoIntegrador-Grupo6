@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IUsuarioService {
     List<Usuario> listarUsuarios() throws ResourceNotFoundException;
-    Usuario agregarInstrumentoFavorito(Long usuarioId, Long instrumentoId) throws ResourceNotFoundException;
+    Usuario agregarInstrumentoFavorito(String usuarioEmail, Long instrumentoId) throws ResourceNotFoundException;
 
-    Usuario quitarInstrumentoFavorito(Long usuarioId,Long instrumentoId) throws ResourceNotFoundException;
-    List<Instrumento> listarInstrumentosFavoritos (Long usuarioId) throws ResourceNotFoundException;
+    Usuario quitarInstrumentoFavorito(String usuarioEmail,Long instrumentoId) throws ResourceNotFoundException;
+    List<Instrumento> listarInstrumentosFavoritos (String usuarioEmail) throws ResourceNotFoundException;
 }
