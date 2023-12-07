@@ -1,6 +1,7 @@
 package com.rentalInstruments.rentalInstruments.controller;
 
 import com.rentalInstruments.rentalInstruments.Repository.Entities.Reserva;
+import com.rentalInstruments.rentalInstruments.exceptions.NotAvailableDateException;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.ReservaDto;
 import com.rentalInstruments.rentalInstruments.service.ReservaService;
@@ -66,8 +67,12 @@ public class ReservaController {
 
 
     @PostMapping
-    public ResponseEntity<Reserva> agregarReserva(@RequestBody ReservaDto reservaDto) throws ResourceNotFoundException {
-        return ResponseEntity.ok(reservaService.agregarReserva(reservaDto));
+    public ResponseEntity<?> agregarReserva(@RequestBody ReservaDto reservaDto) throws ResourceNotFoundException, NotAvailableDateException {
+        try{
+            return ResponseEntity.ok(reservaService.agregarReserva((reservaDto)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error "+ e);
+        }
     }
 
     @DeleteMapping("/{id}")

@@ -7,8 +7,8 @@ import com.rentalInstruments.rentalInstruments.Repository.Entities.Usuario;
 import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
 import com.rentalInstruments.rentalInstruments.Repository.ReservaRepository;
 import com.rentalInstruments.rentalInstruments.Repository.UsuarioRepository;
+import com.rentalInstruments.rentalInstruments.exceptions.NotAvailableDateException;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
-import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
 import com.rentalInstruments.rentalInstruments.model.ReservaDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,8 @@ public class ReservaService implements IReservaService{
 
     @Autowired
     private ReservaRepository reservasRepository;
+
+    private ReservaService reservaService;
 
     @Override
     public List<Reserva> buscarPorInstrumento(Long id) throws ResourceNotFoundException {
@@ -96,7 +98,7 @@ public class ReservaService implements IReservaService{
     }
 
     @Override
-    public Reserva agregarReserva(ReservaDto reservaDto) throws ResourceNotFoundException, UserNotFoundException {
+    public Reserva agregarReserva(ReservaDto reservaDto) throws ResourceNotFoundException, UserNotFoundException, NotAvailableDateException {
         Optional<Usuario> usuarioOptional= usuarioRepository.findByEmail(reservaDto.getUsuario().getEmail());
         if (usuarioOptional.isEmpty()) {
             log.error("No existe el usuario de la reserva");
@@ -112,6 +114,28 @@ public class ReservaService implements IReservaService{
             throw new ResourceNotFoundException("No existe el instrumento");
 
         }
+
+        List<Reserva> reservaList = instrumentoOptional.get().getReservas();
+
+        if (!reservaList.isEmpty()) {
+            for (Reserva reserva : reservaList) {
+                // Verificar si hay solapamiento de fechas
+                if (reserva.getFechaInicio().isEqual(reservaDto.getFechaInicio())
+                        || reserva.getFechaInicio().isEqual(reservaDto.getFechaDevolucion())
+                        || reserva.getFechaDevolucion().isEqual(reservaDto.getFechaInicio())
+                        || reserva.getFechaDevolucion().isEqual(reservaDto.getFechaDevolucion())
+                        || (reserva.getFechaInicio().isBefore(reservaDto.getFechaDevolucion()) &&
+                        reserva.getFechaDevolucion().isAfter(reservaDto.getFechaInicio()))) {
+                    log.error("La fecha para la reserva no se encuentra disponible");
+                    throw new NotAvailableDateException("La fecha para la reserva no se encuentra disponible");
+                }
+            }
+        }
+
+
+
+
+
 
         Instrumento instrumento= instrumentoOptional.get();
 
