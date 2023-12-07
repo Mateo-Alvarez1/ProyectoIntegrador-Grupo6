@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import './reservaProducto.css'
 import { userContext } from "../../context/userContext";
+import ReservaModal from "../Modal/ReservaModal";
+import { differenceInDays } from 'date-fns';
+
 
 
 const ReservaProducto = ({date}) => {
@@ -26,6 +29,17 @@ const ReservaProducto = ({date}) => {
   
     
   })
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [error,setError] = useState("");
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
 
 
@@ -98,6 +112,15 @@ const ReservaProducto = ({date}) => {
       instrumento: reserva.instrumento // Configurar con los datos recuperados
     });
 
+    // Verificar si la diferencia de días es menor a 2
+  const diasDiferencia = differenceInDays(date.endDate, date.startDate);
+  if (diasDiferencia < 2) {
+    // Si la diferencia de días es menor a 2, establecer el error y mostrar el modal
+    await setError("LA RESERVA DEBE SER DE AL MENOS 72HS");
+    handleOpenModal();
+    return; // Salir de la función si hay un error
+  }
+
     try {
       const respuesta = await fetch(RESERVAURL, {
         method: "POST",
@@ -110,7 +133,10 @@ const ReservaProducto = ({date}) => {
       console.log(info);
       navigate(`/reservas/confirmadas/${info.id}`)
     } catch (error) {
-      console.error("Error al obtener datos:", error);
+      console.error("Error al realizar reserva:", error);
+      await setError("FECHA DE RESERVA NO DISPONIBLE");
+      handleOpenModal();
+
     }
   };
   
@@ -163,6 +189,14 @@ const ReservaProducto = ({date}) => {
     <div className="reservaButton">
       <button onClick={realizarReserva}>Confirmar Reserva</button>
     </div>
+
+      {/* Agrega el modal */}
+      <ReservaModal
+        open={modalOpen}
+        closeModal={handleCloseModal}
+        error={error}
+        /* otras propiedades necesarias */
+      />
     </div>
   )
 }

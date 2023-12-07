@@ -64,9 +64,6 @@ useEffect(()=>{
   ];
 
   const dayContentRenderer = (date, _, dayProps) => {
-    // Verifica si la fecha está en el rango que quieres pintar en rojo
-
-  
     // Verifica si la fecha está en el rango de alguna reserva realizada
     const isReserved = reservas.some((reserva) => {
       const reservaStartDate = new Date(reserva.fechaInicio);
@@ -79,8 +76,10 @@ useEffect(()=>{
       return date >= reservaStartDate && date <= reservaEndDate;
     });
   
-    // Aplica estilos adicionales solo a las fechas en el rango o reservadas
-    const additionalStyles = {};
+    // Aplica estilos adicionales a todas las fechas (negro y negrita por defecto)
+    const additionalStyles = { color: 'black', fontWeight: 'bold' };
+  
+    // Modifica los estilos adicionales solo si la fecha está reservada
     if (isReserved) {
       additionalStyles.color = 'red';
       additionalStyles.fontWeight = 'bold';
@@ -97,6 +96,7 @@ useEffect(()=>{
   
   
   
+  
 
   return (
     <div className="container">
@@ -106,7 +106,7 @@ useEffect(()=>{
         </div>
         <div className="range-picker-container">
           <div>
-            <h2>Selecciona tu fecha de reserva <span>(minimo 48hs)</span></h2>
+            <h2>Selecciona tu fecha de reserva <span>(minimo 72hs)</span></h2>
             <DateRange
               className="calendar"
               ranges={[date]}
