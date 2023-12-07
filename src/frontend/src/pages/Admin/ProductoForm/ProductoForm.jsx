@@ -3,7 +3,6 @@ import "./productoform.css";
 import { useDropzone } from "react-dropzone";
 import { Alert } from "@mui/material";
 import { ScaleLoader } from "react-spinners";
-import { set } from "date-fns";
 
 const ProductoForm = () => {
 

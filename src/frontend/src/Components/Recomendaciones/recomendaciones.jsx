@@ -46,6 +46,7 @@ useEffect(() => {
   fetchInstrumentos();
 }, [selectedCategory]);
 
+
 useEffect(() => {
   const productosConReservas = mixedProducts.filter((producto) => {
     const reservasArray = Array.isArray(reservas) ? reservas : [];

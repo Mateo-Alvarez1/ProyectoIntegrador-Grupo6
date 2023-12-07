@@ -75,11 +75,11 @@ const DatosUsuario = () => {
                </div>
                <div className="containerInput">
 
-               <label htmlFor="ciudad">Ciudad</label>
+               <label htmlFor="ciudad">Dirección</label>
             <input 
                 type="email" 
                 id="ciudad"
-                placeholder='Ciudad o Provincia'
+                placeholder='Dirección'
                 name="ciudad"
                 onChange={onInputChange}
             />

@@ -2,38 +2,54 @@ import { useState, useEffect } from "react";
 import "./editarproducto.css";
 import { useParams } from "react-router-dom";
 import { Alert } from "@mui/material";
-import { is } from "date-fns/locale";
 import { ScaleLoader } from "react-spinners";
 
 const EditarProducto = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
-  const [categoria, setCategoria] =useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
 
+  const [categorias, setCategorias] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
 
   const { id } = useParams();
   console.log(id);
   const [producto, setProducto] = useState({
-    id: "",
+    id: id,
     nombre: "",
     color: "",
     precio: "",
     stock: "",
     marca: {
-      id: "",
       nombre: "",
     },
     modelo: {
-      id: "",
       numeroSerie: "",
     },
     categoria: {
-      id: "",
+      id: 0,
       nombre: "",
+      icono: "",
     },
   });
+
+  useEffect(() => {
+    const obtenerCategorias = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/categoria");
+        if (response.ok) {
+          const data = await response.json();
+          setCategorias(data);
+        } else {
+          console.error("Error al obtener las categorías");
+        }
+      } catch (error) {
+        console.error("Error al obtener las categorías:", error);
+      }
+    }
+
+    obtenerCategorias();
+  }, [])
 
   useEffect(() => {
     const ModProducto = async () => {
@@ -45,22 +61,21 @@ const EditarProducto = () => {
           const data = await response.json();
           setProducto((prevProducto) => ({
             ...prevProducto,
-            id: data.id,
             nombre: data.nombre,
             color: data.color,
             precio: data.precio,
             stock: data.stock,
             marca: {
-              id: data.marca.id,
               nombre: data.marca.nombre,
             },
             modelo: {
-              id: data.modelo.id,
               numeroSerie: data.modelo.numeroSerie,
             },
             categoria: {
-              id: data.categoria.id,
-              nombre: data.categoria.nombre,
+            ...prevProducto.categoria,
+            id: data.categoria.id,
+            nombre: data.categoria.nombre,
+            icono: data.categoria.icono,
             },
             imagenes: data.imagenes
           }));
@@ -110,23 +125,38 @@ const EditarProducto = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-  if (name === "marca" || name === "modelo" || name === "categoria") {
-    const fieldToUpdate = name;
-    const nestedFieldName = e.target.getAttribute("data-nested");
-
-    setProducto((prevProducto) => ({
-      ...prevProducto,
-      [fieldToUpdate]: {
-        ...prevProducto[fieldToUpdate],
-        [nestedFieldName]: value,
-      },
-    }));
-  } else {
-    setProducto((prevProducto) => ({
-      ...prevProducto,
-      [name]: value,
-    }));
-  }
+    if (name === "categoria") {
+      const categoriaId = parseInt(value); 
+  
+      const categoriaSeleccionada = categorias.find(cat => cat.id === categoriaId);
+  
+      if (categoriaSeleccionada) {
+        setProducto((prevProducto) => ({
+          ...prevProducto,
+          categoria: {
+            ...prevProducto.categoria,
+            id: categoriaSeleccionada.id,
+            nombre: categoriaSeleccionada.nombre,
+            icono: categoriaSeleccionada.icono,
+          },
+        }));
+        setCategoriaSeleccionada(categoriaId); 
+      } else {
+        console.error("Categoría no encontrada");
+      }
+    } else {
+      
+      const fieldToUpdate = name;
+      const nestedFieldName = e.target.getAttribute("data-nested");
+  
+      setProducto((prevProducto) => ({
+        ...prevProducto,
+        [fieldToUpdate]: {
+          ...prevProducto[fieldToUpdate],
+          [nestedFieldName]: value,
+        },
+      }));
+    }
   };
 
   const handleEditSubmit = async (e) => {
@@ -217,18 +247,14 @@ const EditarProducto = () => {
         />
 
         <label className="label-form">Categoria:</label>
-        <select
-        className="input select"
-        value={categoriaSeleccionada}
-        onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-      >
-        <option value={categoria.nombre}>Seleccione una categoría</option>
-        {categoria.map((categoria) => (
-          <option key={categoria.id} value={categoria.id}>
-            {categoria.nombre}
-          </option>
-        ))}
-      </select>
+        <input
+          className="input-form"
+          type="text"
+          name="categoria"
+          data-nested="nombre"
+          value={producto.categoria.nombre}
+          onChange={handleChange}
+        />
 
         <button className="button-edit" type="submit">
           {isLoading ? <ScaleLoader color="#ffffff" height={16} /> : "Editar producto"}

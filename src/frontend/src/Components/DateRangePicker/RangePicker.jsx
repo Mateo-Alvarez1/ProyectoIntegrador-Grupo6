@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
@@ -22,27 +23,12 @@ const RangePicker = () => {
     setDate(ranges.selection);
   };
 
- /* const deshabilitarDias = (date) => {
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0); // Establecer las horas a 00:00:00 para comparar solo las fechas
-
-    const dosDiasDespues = new Date();
-    dosDiasDespues.setDate(hoy.getDate() + 2);
-
-    // Deshabilitar si la fecha es menos de 2 días a partir de hoy
-    return date < dosDiasDespues;
-  };*/
-
-
-  // const isWithinDisabledRange = (date) => {
-  //   // Define the range you want to disable (e.g., November 25th, 2023, to November 30th, 2023)
-  //   const disabledStartDate = new Date('2023-11-25');
-  //   const disabledEndDate = new Date('2023-11-30');
-  //   return date >= disabledStartDate && date <= disabledEndDate;
-  // };
-
-  // const disabledDateFunc = (date) => isWithinDisabledRange(date);
-
+  const disabledDates = [
+    {
+      start: new Date(new Date().getFullYear(), 11, 6),
+      end: new Date(new Date().getFullYear(), 11, 7),
+    },
+  ];
 
   return (
     <div className="container">
@@ -64,7 +50,7 @@ const RangePicker = () => {
             minDate={new Date()}
             months={2}
             direction="horizontal"
-            // disabledDates={disabledDateFunc}
+            disabledDates={disabledDates}
             />
           </div>
 
