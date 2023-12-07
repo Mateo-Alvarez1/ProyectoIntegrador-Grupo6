@@ -6,7 +6,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { userContext } from "../../context/userContext";
 
 
-const ProductoCard = ({ producto, user}) => {
+const ProductoCard = ({ producto, user, onFavoritoChange}) => {
 
   const BUCKETURL="https://1023c01grupo6.s3.amazonaws.com";
   const [favorito, setFavorito] = useState(false);
@@ -85,9 +85,10 @@ const ProductoCard = ({ producto, user}) => {
               
       if (!favorito) {
         await addToFavorites( { userEmail: user.email, productoId: producto.id } );
-        
+        onFavoritoChange(producto.id, true);
       } else {
         await removeFromFavorites( { userEmail: user.email, productoId: producto.id });
+        onFavoritoChange(producto.id, false);
       }      
       obtenerEstadoFavorito();  
       
