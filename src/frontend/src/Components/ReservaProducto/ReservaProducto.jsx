@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import './reservaProducto.css'
 import { userContext } from "../../context/userContext";
+import ReservaModal from "../Modal/ReservaModal";
+import { differenceInDays } from 'date-fns';
+
 
 
 const ReservaProducto = ({date}) => {
@@ -13,8 +16,8 @@ const ReservaProducto = ({date}) => {
   const { productoId } = useParams()
   const {user}= useContext(userContext);
   const [reserva,setReserva]= useState({
-      fechaInicio:formatearFecha(date.startDate.toLocaleDateString()),
-      fechaDevolucion:formatearFecha(date.endDate.toLocaleDateString()),
+      fechaInicio:"",
+      fechaDevolucion:"",
       usuario:{
         nombre:user.nombre,
         apellido:user.apellido,
@@ -27,10 +30,24 @@ const ReservaProducto = ({date}) => {
     
   })
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [error,setError] = useState("");
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+
 
   const BUCKETURL ="https://1023c01grupo6.s3.amazonaws.com"
 
   const RESERVAURL ="http://localhost:8080/api/v1/reservas"
+
+
 
 
   function formatearFecha(fechaString) {
@@ -48,13 +65,16 @@ const ReservaProducto = ({date}) => {
     try {
       const response = await fetch(`http://localhost:8080/api/v1/instrumentos/${productoId}`);
       const jsonData = await response.json();
-  
+
+
+
       setData(jsonData);
       console.log("data", data);
+      console.log(jsonData);
   
       setReserva({
-        fechaInicio: reserva.fechaInicio,
-        fechaDevolucion: reserva.fechaDevolucion,
+        fechaInicio: "",
+        fechaDevolucion: "",
         usuario: {
           nombre: user.nombre,
           apellido: user.apellido,
@@ -62,6 +82,8 @@ const ReservaProducto = ({date}) => {
         },
         instrumento: jsonData // Configurar con los datos recuperados
       });
+
+
   
     } catch (error) {
       console.error("Error al obtener datos:", error);
@@ -70,7 +92,35 @@ const ReservaProducto = ({date}) => {
   };
   
 
+
+
+
+
+
+
+
   const realizarReserva = async () => {
+
+    await setReserva({
+      fechaInicio: formatearFecha(date.startDate?.toLocaleDateString()),
+      fechaDevolucion: formatearFecha(date.endDate?.toLocaleDateString()),
+      usuario: {
+        nombre: user.nombre,
+        apellido: user.apellido,
+        email: user.email
+      },
+      instrumento: reserva.instrumento // Configurar con los datos recuperados
+    });
+
+    // Verificar si la diferencia de días es menor a 2
+  const diasDiferencia = differenceInDays(date.endDate, date.startDate);
+  if (diasDiferencia < 2) {
+    // Si la diferencia de días es menor a 2, establecer el error y mostrar el modal
+    await setError("LA RESERVA DEBE SER DE AL MENOS 72HS");
+    handleOpenModal();
+    return; // Salir de la función si hay un error
+  }
+
     try {
       const respuesta = await fetch(RESERVAURL, {
         method: "POST",
@@ -83,7 +133,10 @@ const ReservaProducto = ({date}) => {
       console.log(info);
       navigate(`/reservas/confirmadas/${info.id}`)
     } catch (error) {
-      console.error("Error al obtener datos:", error);
+      console.error("Error al realizar reserva:", error);
+      await setError("FECHA DE RESERVA NO DISPONIBLE");
+      handleOpenModal();
+
     }
   };
   
@@ -93,14 +146,18 @@ const ReservaProducto = ({date}) => {
 
   
   useEffect(() => {
-    productData()
+    productData();
+
+
   }, [productoId])
 
 
-  useEffect(()=>{
+  
+
+ /* useEffect(()=>{
     console.log("reserva actualizada");
     console.log(reserva);
-  },[reserva])
+  },[reserva])*/
 
   // const { precio } = data
   const formattedPrice = data.precio ? `${data.precio.toFixed(2)}`.replace(".", ",").replace(",00", ".00") : "";
@@ -132,6 +189,14 @@ const ReservaProducto = ({date}) => {
     <div className="reservaButton">
       <button onClick={realizarReserva}>Confirmar Reserva</button>
     </div>
+
+      {/* Agrega el modal */}
+      <ReservaModal
+        open={modalOpen}
+        closeModal={handleCloseModal}
+        error={error}
+        /* otras propiedades necesarias */
+      />
     </div>
   )
 }
