@@ -104,24 +104,6 @@ const EditarProducto = () => {
     ModProducto();
   }, [id]);
 
-  useEffect(() => {
-    const obtenerCategorias = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/v1/categoria");
-        if (response.ok) {
-          const data = await response.json();
-          setCategoria(data);
-        } else {
-          console.error("Error al obtener las categorías");
-        }
-      } catch (error) {
-        console.error("Error al obtener las categorías:", error);
-      }
-    }
-
-    obtenerCategorias();
-  }, [])
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -169,7 +151,7 @@ const EditarProducto = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({producto}),
+        body: JSON.stringify(producto),
       });
       setAlert(true);
     } catch (error) {
@@ -247,14 +229,17 @@ const EditarProducto = () => {
         />
 
         <label className="label-form">Categoria:</label>
-        <input
+        <select
           className="input-form"
-          type="text"
           name="categoria"
-          data-nested="nombre"
-          value={producto.categoria.nombre}
+          value={categoriaSeleccionada}
           onChange={handleChange}
-        />
+        >
+          <option value="">Seleccionar una categoría</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
+            ))}
+        </select>
 
         <button className="button-edit" type="submit">
           {isLoading ? <ScaleLoader color="#ffffff" height={16} /> : "Editar producto"}

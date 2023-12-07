@@ -59,7 +59,7 @@
     position: absolute;
     top: 30px; 
     left: 50%;
-    ransform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .favoriteIcon {

@@ -1,9 +1,9 @@
 import "./recomendaciones.css";
 // import productos from "../../utils/products.json";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect} from "react";
 import ProductoCard from "../ProductoCard/ProductoCard";
 import { ScaleLoader } from "react-spinners";
-import userContext from "../../context/userContext";
+
 
 
 
@@ -13,8 +13,7 @@ const [mixedProducts, setMixedProducts] = useState([]);
 const [productosDisponibles, setProductosDisponibles] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 
-//const user = useContext(userContext)
-//console.log(user.email);
+
 
 
 const url = "http://localhost:8080/api/v1/instrumentos";
