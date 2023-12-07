@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./ProductoCard.module.css";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useContext} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { userContext } from "../../context/userContext";
 
 
 const ProductoCard = ({ producto, user}) => {
@@ -10,6 +11,8 @@ const ProductoCard = ({ producto, user}) => {
   const BUCKETURL="https://1023c01grupo6.s3.amazonaws.com";
   const [favorito, setFavorito] = useState(false);
   const [showText, setShowText] = useState(false);
+  
+  
   
 
 
@@ -54,6 +57,11 @@ const ProductoCard = ({ producto, user}) => {
 
   const obtenerEstadoFavorito = async () => {
     try {
+      if (!user || !user.email) {
+        setFavorito(false);
+        return;
+      }
+      
       const userEmail = user.email;
       const response = await fetch(`http://localhost:8080/api/v1/usuarios/${userEmail}/listar`);
       if (response.ok) {
@@ -90,8 +98,9 @@ const ProductoCard = ({ producto, user}) => {
   };
 
   useEffect(() => {    
+    
     obtenerEstadoFavorito();
-  }, [producto.id]);
+  }, [producto, user]);
   
 console.log(producto);
 

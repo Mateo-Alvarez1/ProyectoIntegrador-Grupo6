@@ -16,6 +16,7 @@ const Home = () => {
 
   const usercontextResult = useContext(userContext);
   const user = usercontextResult.user
+  
   //console.log(user);
 
   const {userAlert, setUserAlert} = useContext(userContext)
@@ -105,7 +106,7 @@ const Home = () => {
             if (producto && producto.nombre) {
               
               return ( 
-                <ProductoCard key={producto.id} producto={producto} user={user}/>
+                <ProductoCard key={producto.id} producto={producto} user={user} />
               )
             } else {
               return null;

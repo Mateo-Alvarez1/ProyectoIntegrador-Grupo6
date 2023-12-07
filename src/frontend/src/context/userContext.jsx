@@ -15,6 +15,9 @@ const UserContextProvider = ({children}) => {
 
     const [userAlert, setUserAlert] = useState(false);
     
+    
+    
+    
 
     const login = async (user) => {
       
@@ -54,8 +57,8 @@ const UserContextProvider = ({children}) => {
   
       // el fetch de login se hace en el componente Login.jsx
   }
-
-    const logout = () => {
+  
+    const logout = () => {        
         // acá se borra el jwt del localstorage
         setUserJwt(null)
         localStorage.removeItem('token')
@@ -64,9 +67,13 @@ const UserContextProvider = ({children}) => {
         setUser(null)
         localStorage.removeItem('user')
 
+        
+
         navigate('/')
 
     }
+
+    
 
   return (
     <Provider value={{user, userJwt, login, logout, userAlert, setUserAlert}}>
