@@ -1,15 +1,21 @@
 import "./recomendaciones.css";
 // import productos from "../../utils/products.json";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ProductoCard from "../ProductoCard/ProductoCard";
 import { ScaleLoader } from "react-spinners";
+import userContext from "../../context/userContext";
 
 
-const Recomendaciones = ({ selectedCategory, resetCategory, reservas, startDate, endDate }) => {
+
+const Recomendaciones = ({ selectedCategory, resetCategory, reservas, startDate, endDate, user }) => {
 
 const [mixedProducts, setMixedProducts] = useState([]);
 const [productosDisponibles, setProductosDisponibles] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
+
+//const user = useContext(userContext)
+//console.log(user.email);
+
 
 const url = "http://localhost:8080/api/v1/instrumentos";
 
@@ -93,7 +99,7 @@ const showAll = () => {
               return <ProductoCard producto={producto} key={producto.id}/>;
             })} */}
             {productosDisponibles.map((producto) => {
-              return <ProductoCard producto={producto} key={producto.id}/>;
+              return <ProductoCard producto={producto} key={producto.id} user={user}/>;
             })}
           </div>
         </>

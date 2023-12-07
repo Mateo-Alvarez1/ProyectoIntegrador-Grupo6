@@ -40,7 +40,8 @@ const UserContextProvider = ({children}) => {
       // Verifica que payload no sea nulo antes de acceder a sus propiedades
       if (payload) {
           localStorage.setItem('user', JSON.stringify(
-              {
+              {   
+                  
                   nombre: payload.nombre,
                   apellido: payload.apellido,
                   email: payload.sub,

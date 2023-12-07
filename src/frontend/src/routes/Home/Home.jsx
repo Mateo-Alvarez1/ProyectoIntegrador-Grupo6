@@ -14,6 +14,10 @@ const Home = () => {
 
   const searchResultsRef = useRef(null);
 
+  const usercontextResult = useContext(userContext);
+  const user = usercontextResult.user
+  //console.log(user);
+
   const {userAlert, setUserAlert} = useContext(userContext)
   const [searchResults, setSearchResults] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
@@ -61,7 +65,7 @@ const Home = () => {
     }
   }, [userAlert, setUserAlert])
 
-
+  //console.log(user);
   return (
     <>
     <div className='welcome-container'>
@@ -99,8 +103,9 @@ const Home = () => {
         <div className='search-results-container'>
           {searchResults.map((producto) => {
             if (producto && producto.nombre) {
-              return (
-                <ProductoCard key={producto.id} producto={producto} />
+              
+              return ( 
+                <ProductoCard key={producto.id} producto={producto} user={user}/>
               )
             } else {
               return null;
@@ -124,6 +129,7 @@ const Home = () => {
         reservas={reservas} 
         startDate={startDate} 
         endDate={endDate}
+        user={user}
       />
     )
   )}
