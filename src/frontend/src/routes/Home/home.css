@@ -61,25 +61,7 @@
     margin-bottom: 50px;
 }
 
-.whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000; /* Ajusta según sea necesario para que el botón esté sobre otros elementos */
-}
 
-.whatsapp-button a {
-    display: block;
-    width: 60px; /* Ajusta el tamaño según sea necesario */
-    height: 60px; /* Ajusta el tamaño según sea necesario */
-
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
-    text-align: center;
-    text-decoration: none;
-    line-height: 60px; /* Alinea el ícono verticalmente */
-    color: #fff; /* Color del icono */
-}
 
 @media (max-width: 768px) {
     .welcome-title {
