@@ -54,7 +54,7 @@ public class AuthenticationService {
                 .build();
 
         usuarioRepository.save(usuario);
-        String link = "http://localhost:8080";
+        String link = "http://pitchpleasefront.s3-website-us-east-1.amazonaws.com/";
         emailSender.send(registerRequest.getEmail() , buildEmail(registerRequest.getNombre() , link , registerRequest.getEmail()));
         return usuario;
     }
@@ -116,6 +116,7 @@ public class AuthenticationService {
 
         return user;
     }
+
 
     private String buildEmail(String name, String link , String email) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
@@ -185,5 +186,4 @@ public class AuthenticationService {
                 "\n" +
                 "</div></div>";
     }
-
 }
