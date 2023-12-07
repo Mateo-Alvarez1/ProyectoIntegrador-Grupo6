@@ -187,11 +187,11 @@ const listarCategorias = async() => {
         <div className='buttons'>
           <button className='categ-button' onClick={mostrarCrearCategoria}>Crear Categoria</button>
           <button className='categ-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
-          <button className='categ-button' onClick={listarCategorias}>Listar Categoria</button>
+          {/* <button className='categ-button' onClick={listarCategorias}>Listar Categoria</button> */}
         </div>
       
         {crearCategoria && <CrearCategoria/>}
-        {listarCategoriasListado.length> 0 && <CategoriaList listarCategorias={listarCategoriasListado} setListarCategorias={setListarCategoriasListado}></CategoriaList>}
+        {/* {listarCategoriasListado.length> 0 && <CategoriaList listarCategorias={listarCategoriasListado} setListarCategorias={setListarCategoriasListado}></CategoriaList>} */}
         {listarReservas.length> 0 && <ReservaList listarReservas={listarReservas} setListarReservas={setListarReservas}></ReservaList>}
         {eliminarCategoria && <EliminarCategoria categoria={categoria} setCategoria={setCategoria} />}
         {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
