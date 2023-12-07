@@ -40,8 +40,8 @@ public class UsuarioController {
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
     @GetMapping("/{usuarioId}/listar")
-public ResponseEntity<Set<Instrumento>> listarFavoritos(@PathVariable Long usuarioId) throws ResourceNotFoundException{
-    Set<Instrumento> instrumentosFavoritos = usuarioService.listarInstrumentosFavoritos(usuarioId);
+public ResponseEntity<List<Instrumento>> listarFavoritos(@PathVariable Long usuarioId) throws ResourceNotFoundException{
+    List<Instrumento> instrumentosFavoritos = usuarioService.listarInstrumentosFavoritos(usuarioId);
     return  ResponseEntity.ok(instrumentosFavoritos);
     }
 

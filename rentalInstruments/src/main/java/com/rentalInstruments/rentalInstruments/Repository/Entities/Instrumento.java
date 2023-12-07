@@ -48,7 +48,6 @@ public class Instrumento {
     @OneToMany(mappedBy = "instrumento", cascade = CascadeType.ALL)
     private List<Reserva> reservas = new ArrayList<>();
 
-
     private List<String> imagenes = new ArrayList<>();
 
 }

@@ -13,22 +13,24 @@ import java.util.List;
 import java.util.Set;
 
 
-@Getter
-@Setter
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class InstrumentoDto {
 
     private Long id;
     private String nombre;
-    private Double precio;
     private String color;
+    private Double precio;
     private Integer stock;
-    private Modelo modelo;
     private Marca marca;
+    private Modelo modelo;
     private Categoria categoria;
-    private List<String> imagenes = new ArrayList<>();
+    private List<String> imagenes= new ArrayList<>();
+
 
 }
