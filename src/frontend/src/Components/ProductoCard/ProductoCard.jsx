@@ -91,7 +91,7 @@ const ProductoCard = ({ producto, user}) => {
 
   useEffect(() => {    
     obtenerEstadoFavorito();
-  }, [producto.id, user.email]);
+  }, [producto.id]);
   
 console.log(producto);
 
@@ -106,20 +106,23 @@ console.log(producto);
           Ver más
         </Link>
         <div className={styles.favoriteContainer}>
+        <div >
         <FontAwesomeIcon
         icon={faStar}
         className={`${styles.favoriteIcon} ${favorito ? styles.favorited : ''}`}
         onClick={handleToggleFavorite}
       />
+      </div>
+      </div>
       {showText && (
-          <p>
+          <p className={styles.favoriteText}>
             {favorito
-              ? 'Quitar de favoritos'
-              : 'Añadir a favoritos'}
+              ? 'Quitar favorito'
+              : 'Añadir favorito'}
           </p>
         )}
       </div>
-    </div>
+    
   )
 }
 

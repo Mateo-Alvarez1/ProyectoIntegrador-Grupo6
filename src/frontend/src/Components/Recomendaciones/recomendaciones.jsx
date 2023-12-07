@@ -91,7 +91,7 @@ const showAll = () => {
           ) : (
             <>
               <h1>Recomendaciones</h1>
-              <p>¿Listos para hacer música?</p>
+              <p className="recomendaciones-p">¿Listos para hacer música?</p>
             </>
           )}
           <div className="recomendacionesCardContainer">
