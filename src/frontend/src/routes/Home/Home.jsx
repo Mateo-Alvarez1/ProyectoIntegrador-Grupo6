@@ -9,6 +9,7 @@ import { Alert } from '@mui/material'
 import { useState } from 'react'
 import ProductoCard from '../../Components/ProductoCard/ProductoCard'
 import BuscadorFechas from '../../Components/BuscadorFechas/BuscadorFechas'
+import whatsapp from "../../assets/whatsapp.png"
 
 const Home = () => {
 
@@ -134,6 +135,12 @@ const Home = () => {
       />
     )
   )}
+   <div class="whatsapp-button">
+  <a href="https://wa.me/5491132994468?text=Hola,%20PitchPlease!%20Quiero%20hacer%20una%20consulta." target='blank'>
+  <img src={whatsapp} alt="whatsapp pitch" />
+  </a>
+  </div>
+  
   </>
   )
 }
