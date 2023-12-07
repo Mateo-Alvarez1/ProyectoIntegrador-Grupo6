@@ -65,7 +65,7 @@ useEffect(()=>{
 
   const dayContentRenderer = (date, _, dayProps) => {
     // Verifica si la fecha está en el rango que quieres pintar en rojo
-    const isInRange = date >= new Date(new Date().getFullYear(), 11, 25) && date <= new Date(new Date().getFullYear(), 11, 27);
+
   
     // Verifica si la fecha está en el rango de alguna reserva realizada
     const isReserved = reservas.some((reserva) => {
@@ -81,7 +81,7 @@ useEffect(()=>{
   
     // Aplica estilos adicionales solo a las fechas en el rango o reservadas
     const additionalStyles = {};
-    if (isInRange || isReserved) {
+    if (isReserved) {
       additionalStyles.color = 'red';
       additionalStyles.fontWeight = 'bold';
     }
