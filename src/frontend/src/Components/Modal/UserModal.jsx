@@ -12,7 +12,7 @@ const UserModal = ({ isOpen, closeModal, user }) => {
         aria-labelledby="user-modal-title"
         aria-describedby="user-modal-description"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'white', boxShadow: 24, p: 4, borderRadius: 8 }}>
+        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 350, bgcolor: 'white', boxShadow: 24, p: 4, borderRadius: 8 }}>
           <Typography variant="h6" component="h2" gutterBottom style={{ marginBottom: 16 }}>
             Tu Perfil:
           </Typography>
@@ -38,9 +38,15 @@ const UserModal = ({ isOpen, closeModal, user }) => {
             </Link>
           )}
           {isUsuario && (
+            <>
             <Link to={`/historial/${user.email}`}>
               <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Historial</Button>
             </Link>
+
+            <Link to={`/listadoFavs/${user.email}`}>
+            <Button onClick={closeModal} variant="contained" style={{ marginLeft: 8 }}>Favoritos</Button>
+          </Link>
+          </>
           )}
           </Box>
         </Box>
