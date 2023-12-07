@@ -13,8 +13,8 @@ const ReservaProducto = ({date}) => {
   const { productoId } = useParams()
   const {user}= useContext(userContext);
   const [reserva,setReserva]= useState({
-      fechaInicio:formatearFecha(date.startDate.toLocaleDateString()),
-      fechaDevolucion:formatearFecha(date.endDate.toLocaleDateString()),
+      fechaInicio:"",
+      fechaDevolucion:"",
       usuario:{
         nombre:user.nombre,
         apellido:user.apellido,
@@ -28,9 +28,12 @@ const ReservaProducto = ({date}) => {
   })
 
 
+
   const BUCKETURL ="https://1023c01grupo6.s3.amazonaws.com"
 
   const RESERVAURL ="http://localhost:8080/api/v1/reservas"
+
+
 
 
   function formatearFecha(fechaString) {
@@ -48,13 +51,16 @@ const ReservaProducto = ({date}) => {
     try {
       const response = await fetch(`http://localhost:8080/api/v1/instrumentos/${productoId}`);
       const jsonData = await response.json();
-  
+
+
+
       setData(jsonData);
       console.log("data", data);
+      console.log(jsonData);
   
       setReserva({
-        fechaInicio: reserva.fechaInicio,
-        fechaDevolucion: reserva.fechaDevolucion,
+        fechaInicio: "",
+        fechaDevolucion: "",
         usuario: {
           nombre: user.nombre,
           apellido: user.apellido,
@@ -62,6 +68,8 @@ const ReservaProducto = ({date}) => {
         },
         instrumento: jsonData // Configurar con los datos recuperados
       });
+
+
   
     } catch (error) {
       console.error("Error al obtener datos:", error);
@@ -70,7 +78,26 @@ const ReservaProducto = ({date}) => {
   };
   
 
+
+
+
+
+
+
+
   const realizarReserva = async () => {
+
+    await setReserva({
+      fechaInicio: formatearFecha(date.startDate?.toLocaleDateString()),
+      fechaDevolucion: formatearFecha(date.endDate?.toLocaleDateString()),
+      usuario: {
+        nombre: user.nombre,
+        apellido: user.apellido,
+        email: user.email
+      },
+      instrumento: reserva.instrumento // Configurar con los datos recuperados
+    });
+
     try {
       const respuesta = await fetch(RESERVAURL, {
         method: "POST",
@@ -93,14 +120,18 @@ const ReservaProducto = ({date}) => {
 
   
   useEffect(() => {
-    productData()
+    productData();
+
+
   }, [productoId])
 
 
-  useEffect(()=>{
+  
+
+ /* useEffect(()=>{
     console.log("reserva actualizada");
     console.log(reserva);
-  },[reserva])
+  },[reserva])*/
 
   // const { precio } = data
   const formattedPrice = data.precio ? `${data.precio.toFixed(2)}`.replace(".", ",").replace(",00", ".00") : "";
