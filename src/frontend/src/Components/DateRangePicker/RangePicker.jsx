@@ -106,7 +106,7 @@ useEffect(()=>{
         </div>
         <div className="range-picker-container">
           <div>
-            <h2>Selecciona tu fecha de reserva</h2>
+            <h2>Selecciona tu fecha de reserva <span>(minimo 48hs)</span></h2>
             <DateRange
               className="calendar"
               ranges={[date]}

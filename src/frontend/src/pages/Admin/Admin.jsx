@@ -147,8 +147,8 @@ const listarCategorias = async() => {
         <h3 className='h3-admin'>Categorias</h3>
         <div className='buttons'>
           <button className='categ-button' onClick={mostrarCrearCategoria}>Crear Categoria</button>
-          <button className='categ-button' >Listar Categoria</button>
           <button className='categ-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
+          <button className='categ-button' disabled>Listar Categoria</button>
         </div>
       
         {crearCategoria && <CrearCategoria/>}
