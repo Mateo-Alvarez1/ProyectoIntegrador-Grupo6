@@ -9,6 +9,8 @@ import { userContext } from '../../context/userContext.jsx'
 import UsuarioList from './UsuarioList/UsuarioList.jsx'
 import EliminarCategoria from './EliminarCategoria/EliminarCategoria.jsx'
 import CrearCategoria from './CrearCategoria/CrearCategoria.jsx'
+import ReservaList from './ReservasList/ReservaList'
+import CategoriaList from "./CategoriaList/CategoriaList"
 //import { Redirect } from "react-router-dom";
 
 const Admin = () => {
@@ -21,6 +23,8 @@ const Admin = () => {
   const [eliminarCategoria, setEliminarCategoria] = useState(false)
   const [crearCategoria, setCrearCategoria] = useState(false)
   const [categoria, setCategoria] = useState([])
+  const [listarReservas, setListarReservas] = useState([])
+  const [listarCategoriasListado, setListarCategoriasListado] = useState([])
 
 
   //const navigate  = useNavigate()
@@ -43,6 +47,9 @@ const Admin = () => {
       setEliminarCategoria(false)
       setMostrarListaUsuarios(false)
       setCrearCategoria(false)
+      setListarReservas([])
+      setCategoria([])
+      setListarCategoriasListado([])
       
   }catch(error){
       console.log(error);
@@ -54,12 +61,30 @@ const listarCategorias = async() => {
     const response =   await fetch('http://localhost:8080/api/v1/categoria')
     const data = await response.json()
     setCategoria(data)
+    setListarCategoriasListado(data)
     console.log(data);
   }catch(error){
     console.log(error);
   }
 
   }
+
+
+
+  const listaReservas = async() => {
+    try{
+      const response =   await fetch('http://localhost:8080/api/v1/reservas')
+      const data = await response.json()
+      setListarReservas(data)
+      console.log(data);
+    }catch(error){
+      console.log(error);
+    }
+  
+    }
+
+
+
 
 
   const mostrarCrearProducto = () => {
@@ -70,6 +95,8 @@ const listarCategorias = async() => {
     setEliminarCategoria(false)
     setMostrarListaUsuarios(false)
     setCrearCategoria(false)
+    setListarReservas([])
+      setCategoria([])
   }
 
   const mostrarEditarProducto = () => {
@@ -79,6 +106,9 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(false)
     setMostrarListaUsuarios(false)
+    setListarReservas([])
+      setCategoria([])
+      
   }
 
   const mostrarEliminarCategoria = () => {
@@ -89,6 +119,8 @@ const listarCategorias = async() => {
     setEliminarCategoria(!eliminarCategoria)
     setMostrarListaUsuarios(false)
     setCrearCategoria(false)
+    setListarReservas([])
+    setListarCategoriasListado([])
   }
 
   const mostrarCrearCategoria = () => {
@@ -98,7 +130,12 @@ const listarCategorias = async() => {
     setListarUsuarios([])
     setEliminarCategoria(false)
     setCrearCategoria(!crearCategoria)
+    setListarReservas([])
+    setCategoria([])
+    setListarCategoriasListado([])
   }
+
+ 
 
 
 
@@ -114,6 +151,8 @@ const listarCategorias = async() => {
       setMostrarListaUsuarios(true)
       setEliminarCategoria(false)
       setCrearCategoria(false)
+      setListarReservas([])
+      setCategoria([])
   }catch(error){
       console.log(error);
   }
@@ -141,17 +180,19 @@ const listarCategorias = async() => {
         <h3 className='h3-admin'>Usuarios/Reservas</h3>
         <div className='buttons'>        
           <button className='user-button' onClick={userData}>Mostrar Usuarios</button>
-          <button className='user-button' >Listado Reservas</button>
-          <button className='user-button' >Reservas</button>
+          <button className='user-button' onClick={listaReservas} >Listado Reservas</button>
+          {/* <button className='user-button' >Reservas</button> */}
         </div>
         <h3 className='h3-admin'>Categorias</h3>
         <div className='buttons'>
           <button className='categ-button' onClick={mostrarCrearCategoria}>Crear Categoria</button>
           <button className='categ-button' onClick={ () => { mostrarEliminarCategoria(); listarCategorias();}}>Eliminar Categoria</button>
-          <button className='categ-button' disabled>Listar Categoria</button>
+          {/* <button className='categ-button' onClick={listarCategorias}>Listar Categoria</button> */}
         </div>
       
         {crearCategoria && <CrearCategoria/>}
+        {/* {listarCategoriasListado.length> 0 && <CategoriaList listarCategorias={listarCategoriasListado} setListarCategorias={setListarCategoriasListado}></CategoriaList>} */}
+        {listarReservas.length> 0 && <ReservaList listarReservas={listarReservas} setListarReservas={setListarReservas}></ReservaList>}
         {eliminarCategoria && <EliminarCategoria categoria={categoria} setCategoria={setCategoria} />}
         {listarProductos.length > 0 && <ProductoList listarProductos= {listarProductos} setListarProductos={setListarProductos}/>}
         {crearProducto && <ProductoForm/>}

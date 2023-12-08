@@ -8,9 +8,9 @@ const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
         fetch(`http://localhost:8080/api/v1/usuarios/listar`)
         .then(response=>response.json()).
         then(data=>setListarUsuarios(data));
-    
+        
     }
-
+    
 
     useEffect(()=>{
 
@@ -21,7 +21,7 @@ const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
     
         
     },[listarUsuarios])
-
+    
 
     const agregarRol = (email) => {
         fetch(`http://localhost:8080/api/v1/auth/asignar/${email}`, {
@@ -48,7 +48,7 @@ const UsuarioList = ({ listarUsuarios, setListarUsuarios }) => {
 
         actualizarLista();
     };
-
+    
     return (
     <table className='containerTable' >
     <thead>

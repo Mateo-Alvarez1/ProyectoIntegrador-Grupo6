@@ -54,3 +54,35 @@
 .card:hover .button {
     opacity: 1;
 }
+
+.favoriteContainer {
+    position: absolute;
+    top: 30px; 
+    left: 50%;
+    
+}
+
+.favoriteIconContainer {
+    width: auto; 
+    height: 40px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.favoriteText {
+    position: absolute;
+    top: 55px;
+    font-size:smaller;
+    margin:0;
+    
+}
+
+.favoriteIcon {
+    color: #ccc; 
+    cursor: pointer; 
+}
+
+.favorited {
+    color: #ffcc00; 
+}

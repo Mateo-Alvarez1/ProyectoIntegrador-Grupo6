@@ -49,7 +49,7 @@ const Navbar = () => {
               token !== null && user !== '' ? 
                 <div className='containerLogout'>
                     <p onClick={() => {
-                      userContextResult.logout()
+                      userContextResult.logout()                      
                       navigate('/')}} 
                       className='logoutButton'>
                         Cerrar sesion
