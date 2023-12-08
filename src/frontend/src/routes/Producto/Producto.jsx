@@ -18,27 +18,23 @@ const Producto = () => {
 
   const navigate = useNavigate();
 
-
-
-
-  const buscarInstrumento= ()=>{
-
-    fetch(URLINSTRUMENTO).
-    then(response=>response.json()).
-    then(data=>{
-      setProducto(data);
+  useEffect(() => {  
+    const fetchProducto = async () => {
+      try {
+        const response = await fetch(URLINSTRUMENTO);
+        if (response.ok) {
+          const data = await response.json();
+          setProducto(data);
+        } else {
+          throw new Error('Error al obtener el producto');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
   
-      
-    })
-  
-  }
-
-  useEffect(()=>{
-    buscarInstrumento();
-  },[producto])
- 
-
-
+    fetchProducto();
+  }, [productoId]);
 
   return (
     <>
@@ -86,13 +82,7 @@ const Producto = () => {
         <Lightbox
           open={isOpen}
           close={() => setIsOpen(false)}
-          slides={[
-            { src: `${BUCKETURL}/${producto.imagenes[0]}` },
-            { src: `${BUCKETURL}/${producto.imagenes[1]}` },
-            { src: `${BUCKETURL}/${producto.imagenes[2]}` },
-            { src: `${BUCKETURL}/${producto.imagenes[3]}` },
-            { src: `${BUCKETURL}/${producto.imagenes[4]}` }
-          ]}
+          slides={producto && producto.imagenes.map(imagen => ({ src: `${BUCKETURL}/${imagen}` }))}
         />
       </div>
       )}
