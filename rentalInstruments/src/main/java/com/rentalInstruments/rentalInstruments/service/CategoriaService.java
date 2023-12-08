@@ -28,10 +28,13 @@ public class CategoriaService implements ICategoriaService{
     @Autowired
     private InstrumentoRepository instrumentoRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
 
 
     @Override
-    public String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry {
+    public String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry, ResourceNotFoundException {
 
         Optional<Categoria> categoriaOptional = categoriaRepository.findByNombre(nombre);
 
@@ -48,6 +51,7 @@ public class CategoriaService implements ICategoriaService{
             return "Categoria eliminada satisfactoriamente";
         }
         for (Instrumento instrumento:instrumentos) {
+            usuarioService.quitarInstrumentoFav(instrumento.getId());
             instrumentoRepository.deleteById(instrumento.getId());
             log.info("Instrumento con id: "+ instrumento.getId() + " eliminado satisfactoriamente");
         }

@@ -69,4 +69,22 @@ public class UsuarioService implements IUsuarioService{
         return usuario.obtenerInstrumentosFavoritos();
     }
 
+    public void quitarInstrumentoFav(Long instrumentoId) throws ResourceNotFoundException {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+
+        Instrumento instrumento = instrumentoRepository.findById(instrumentoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Instrumento no encontrado"));
+
+        for(Usuario usuario: usuarios) {
+            if(usuario.obtenerInstrumentosFavoritos().contains(instrumento)){
+                usuario.quitarInstrumentoFavorito(instrumento);
+                usuarioRepository.save(usuario);
+            }
+        }
+
+
+
+    }
+
 }

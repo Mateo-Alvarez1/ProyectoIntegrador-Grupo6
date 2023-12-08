@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ICategoriaService {
 
-    String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry;
+    String eliminarCategoria(String nombre , Long id) throws InvalidDataEntry, ResourceNotFoundException;
     Instrumento editarCategoria (Long id , InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists;
     List<Categoria> listarCategorias() throws ResourceNotFoundException;
 

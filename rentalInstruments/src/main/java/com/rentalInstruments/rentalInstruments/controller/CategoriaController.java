@@ -23,7 +23,7 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.editarCategoria(id ,instrumentoDto));
     }
     @DeleteMapping("/{id}/{nombre}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable String nombre , @PathVariable Long id) throws InvalidDataEntry {
+    public ResponseEntity<String> eliminarCategoria(@PathVariable String nombre , @PathVariable Long id) throws InvalidDataEntry, ResourceNotFoundException {
         return ResponseEntity.ok(categoriaService.eliminarCategoria(nombre , id));
     }
 

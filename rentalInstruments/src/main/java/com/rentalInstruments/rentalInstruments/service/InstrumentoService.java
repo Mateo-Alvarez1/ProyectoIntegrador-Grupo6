@@ -1,13 +1,7 @@
 package com.rentalInstruments.rentalInstruments.service;
 
-import com.rentalInstruments.rentalInstruments.Repository.CategoriaRepository;
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Categoria;
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Instrumento;
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Marca;
-import com.rentalInstruments.rentalInstruments.Repository.Entities.Modelo;
-import com.rentalInstruments.rentalInstruments.Repository.InstrumentoRepository;
-import com.rentalInstruments.rentalInstruments.Repository.MarcaRepository;
-import com.rentalInstruments.rentalInstruments.Repository.ModeloRepository;
+import com.rentalInstruments.rentalInstruments.Repository.*;
+import com.rentalInstruments.rentalInstruments.Repository.Entities.*;
 import com.rentalInstruments.rentalInstruments.exceptions.ObjectAlreadyExists;
 import com.rentalInstruments.rentalInstruments.exceptions.ResourceNotFoundException;
 import com.rentalInstruments.rentalInstruments.model.InstrumentoDto;
@@ -33,6 +27,9 @@ public class InstrumentoService implements IInstrumentoService {
     private  ModeloRepository modeloRepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Override
     @Transactional
@@ -96,15 +93,16 @@ public class InstrumentoService implements IInstrumentoService {
     @Override
     public void eliminar(Long id) throws ResourceNotFoundException {
         Optional<Instrumento> instrumentoOptional= instrumentoRepository.findById(id);
-        if(instrumentoOptional.isPresent()){
-            instrumentoRepository.deleteById(id);
-        }
-        else{
+        if(instrumentoOptional.isEmpty()){
             log.error("No existe instrumento con el id: "+id);
             throw new ResourceNotFoundException("No existe el instrumento a borrar");
+
+        }
+            usuarioService.quitarInstrumentoFav(id);
+            instrumentoRepository.deleteById(id);
         }
 
-    }
+
 
     @Override
     public Instrumento modificar(Long id, InstrumentoDto instrumentoDto) throws ResourceNotFoundException, ObjectAlreadyExists {
