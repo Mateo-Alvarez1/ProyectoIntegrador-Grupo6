@@ -1,0 +1,82 @@
+.datosContainer {
+    padding: 20px;
+}
+
+.datosContainer h2{
+    color:#4A5865 ;
+    padding:0px 0px 20px 10px;
+}
+
+.datosUsuario{
+    box-shadow: -3px 9px 24px 0px rgba(196, 196, 196, 0.48);
+    border-radius: 20px;
+    width: 650px;
+    min-height: 230px;
+    background-color: #FFFFFF;
+}
+
+.datosUsuario .containerInputs{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.datosUsuario .containerInput{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-right: 40px;
+    margin-top: 20px;
+}
+
+.datosUsuario .containerInput input{
+    padding: 8px;
+    width: 120%;
+    border-radius: 5px;
+    border: 1px solid #b3b7ba;
+    font-size: 15px;
+}
+
+.datosUsuario .containerInput input:focus{
+    outline-width: 0.25px;
+    outline-color: #60a1df;
+}
+
+.datosUsuario .containerInput label{
+  color: #4A5865;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+@media (max-width:500px){
+    .containerInputs{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .datosUsuario{
+        width: 300px;   
+        text-align: center;
+        padding: 20px;
+        margin-left: 20px;
+    }
+
+    .datosContainer{
+        text-align: center;
+    }
+    .datosContainer h2{
+        padding: 20px 0px;
+    }
+
+    .datosUsuario .containerInput input{
+        width: 100%;
+        margin-left: 20px;
+    }
+
+    .calendar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 20px;
+        width: 90%;
+    }
+}

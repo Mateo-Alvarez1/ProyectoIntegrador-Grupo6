@@ -1,0 +1,13 @@
+.productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 1200px;
+    gap: 25px;
+    min-height:100vh;
+}
+
+
